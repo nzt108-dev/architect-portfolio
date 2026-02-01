@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { socialLinks } from '@/lib/data';
 
 const footerLinks = [
@@ -31,8 +32,14 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="md:col-span-2">
                         <Link href="/" className="inline-flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[var(--neon-cyan)] to-[var(--neon-purple)] flex items-center justify-center font-bold text-[var(--bg-primary)] text-lg">
-                                N
+                            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[var(--neon-cyan)]">
+                                <Image
+                                    src="/logo.jpg"
+                                    alt="nzt108_dev"
+                                    width={40}
+                                    height={40}
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
                             <span className="font-bold text-xl tracking-tight">
                                 <span className="text-[var(--neon-cyan)]">nzt108</span>

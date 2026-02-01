@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -32,8 +33,14 @@ export default function Header() {
             <div className="container mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-3 group">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[var(--neon-cyan)] to-[var(--neon-purple)] flex items-center justify-center font-bold text-[var(--bg-primary)] text-lg group-hover:shadow-[var(--glow-cyan)] transition-shadow">
-                        N
+                    <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[var(--neon-cyan)] group-hover:shadow-[var(--glow-cyan)] transition-shadow">
+                        <Image
+                            src="/logo.jpg"
+                            alt="nzt108_dev"
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-cover"
+                        />
                     </div>
                     <span className="font-bold text-xl tracking-tight">
                         <span className="text-[var(--neon-cyan)]">nzt108</span>
@@ -48,8 +55,8 @@ export default function Header() {
                             key={link.href}
                             href={link.href}
                             className={`relative text-sm uppercase tracking-widest font-medium transition-all hover:text-[var(--neon-cyan)] ${pathname === link.href
-                                    ? 'text-[var(--neon-cyan)]'
-                                    : 'text-[var(--text-secondary)]'
+                                ? 'text-[var(--neon-cyan)]'
+                                : 'text-[var(--text-secondary)]'
                                 }`}
                         >
                             {link.label}
@@ -98,8 +105,8 @@ export default function Header() {
                                 href={link.href}
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className={`text-lg font-medium transition-colors ${pathname === link.href
-                                        ? 'text-[var(--neon-cyan)]'
-                                        : 'text-[var(--text-secondary)]'
+                                    ? 'text-[var(--neon-cyan)]'
+                                    : 'text-[var(--text-secondary)]'
                                     }`}
                             >
                                 {link.label}

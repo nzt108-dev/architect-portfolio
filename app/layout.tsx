@@ -20,10 +20,15 @@ export const metadata: Metadata = {
   description: "Building digital futures, one architecture at a time. Portfolio of software architecture projects including mobile apps, Telegram bots, and web services.",
   keywords: ["software architect", "portfolio", "next.js", "flutter", "telegram bot", "web development"],
   authors: [{ name: "nzt108_dev" }],
+  icons: {
+    icon: "/favicon.png",
+    apple: "/apple-icon.png",
+  },
   openGraph: {
     title: "nzt108_dev | Software Architect",
     description: "Building digital futures, one architecture at a time.",
     type: "website",
+    images: ["/logo.jpg"],
   },
 };
 
