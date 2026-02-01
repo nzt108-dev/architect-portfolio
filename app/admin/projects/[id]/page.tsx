@@ -11,6 +11,11 @@ export default async function EditProjectPage({ params }: Props) {
 
     const project = await prisma.project.findUnique({
         where: { id },
+        include: {
+            roadmapItems: {
+                orderBy: { order: 'asc' },
+            },
+        },
     })
 
     if (!project) {
@@ -30,10 +35,21 @@ export default async function EditProjectPage({ params }: Props) {
         featured: project.featured,
     }
 
+    const initialRoadmap = project.roadmapItems.map((item) => ({
+        id: item.id,
+        title: item.title,
+        status: item.status as 'done' | 'in-progress' | 'planned',
+        order: item.order,
+    }))
+
     return (
         <div>
             <h1 className="text-3xl font-bold mb-8">Edit Project</h1>
-            <ProjectForm initialData={initialData} isEdit />
+            <ProjectForm
+                initialData={initialData}
+                initialRoadmap={initialRoadmap}
+                isEdit
+            />
         </div>
     )
 }

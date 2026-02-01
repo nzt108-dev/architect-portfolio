@@ -4,6 +4,13 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
+interface RoadmapItem {
+    id?: string
+    title: string
+    status: 'done' | 'in-progress' | 'planned'
+    order: number
+}
+
 interface ProjectFormData {
     title: string
     slug: string
@@ -18,10 +25,11 @@ interface ProjectFormData {
 
 interface Props {
     initialData?: ProjectFormData & { id?: string }
+    initialRoadmap?: RoadmapItem[]
     isEdit?: boolean
 }
 
-export default function ProjectForm({ initialData, isEdit }: Props) {
+export default function ProjectForm({ initialData, initialRoadmap, isEdit }: Props) {
     const router = useRouter()
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [error, setError] = useState('')
@@ -40,6 +48,10 @@ export default function ProjectForm({ initialData, isEdit }: Props) {
         }
     )
 
+    const [roadmapItems, setRoadmapItems] = useState<RoadmapItem[]>(
+        initialRoadmap || []
+    )
+
     // Auto-generate slug from title
     const handleTitleChange = (title: string) => {
         setFormData((prev) => ({
@@ -47,6 +59,49 @@ export default function ProjectForm({ initialData, isEdit }: Props) {
             title,
             slug: isEdit ? prev.slug : title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
         }))
+    }
+
+    // Roadmap handlers
+    const addRoadmapItem = () => {
+        setRoadmapItems((prev) => [
+            ...prev,
+            { title: '', status: 'planned', order: prev.length }
+        ])
+    }
+
+    const updateRoadmapItem = (index: number, field: keyof RoadmapItem, value: string) => {
+        setRoadmapItems((prev) => {
+            const updated = [...prev]
+            if (field === 'status') {
+                updated[index] = { ...updated[index], status: value as RoadmapItem['status'] }
+            } else if (field === 'title') {
+                updated[index] = { ...updated[index], title: value }
+            }
+            return updated
+        })
+    }
+
+    const removeRoadmapItem = (index: number) => {
+        setRoadmapItems((prev) => {
+            const updated = prev.filter((_, i) => i !== index)
+            return updated.map((item, i) => ({ ...item, order: i }))
+        })
+    }
+
+    const moveRoadmapItem = (index: number, direction: 'up' | 'down') => {
+        if (
+            (direction === 'up' && index === 0) ||
+            (direction === 'down' && index === roadmapItems.length - 1)
+        ) return
+
+        setRoadmapItems((prev) => {
+            const updated = [...prev]
+            const targetIndex = direction === 'up' ? index - 1 : index + 1
+            const temp = updated[index]
+            updated[index] = updated[targetIndex]
+            updated[targetIndex] = temp
+            return updated.map((item, i) => ({ ...item, order: i }))
+        })
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -67,6 +122,7 @@ export default function ProjectForm({ initialData, isEdit }: Props) {
                 body: JSON.stringify({
                     ...formData,
                     technologies: formData.technologies.split(',').map((t) => t.trim()).filter(Boolean),
+                    roadmapItems: roadmapItems.filter(item => item.title.trim()),
                 }),
             })
 
@@ -82,6 +138,12 @@ export default function ProjectForm({ initialData, isEdit }: Props) {
         } finally {
             setIsSubmitting(false)
         }
+    }
+
+    const statusColors = {
+        'done': 'bg-green-500/20 border-green-500 text-green-400',
+        'in-progress': 'bg-yellow-500/20 border-yellow-500 text-yellow-400',
+        'planned': 'bg-gray-500/20 border-gray-500 text-gray-400',
     }
 
     return (
@@ -205,6 +267,86 @@ export default function ProjectForm({ initialData, isEdit }: Props) {
                 <label htmlFor="featured" className="text-sm font-medium">
                     Featured on homepage
                 </label>
+            </div>
+
+            {/* Roadmap / Tasks */}
+            <div className="pt-6 border-t border-[var(--border-color)]">
+                <div className="flex items-center justify-between mb-4">
+                    <label className="block text-lg font-semibold">
+                        📋 Roadmap / Tasks
+                    </label>
+                    <button
+                        type="button"
+                        onClick={addRoadmapItem}
+                        className="text-sm px-3 py-1 rounded border border-[var(--neon-cyan)] text-[var(--neon-cyan)] hover:bg-[var(--neon-cyan)]/10 transition-colors"
+                    >
+                        + Add Task
+                    </button>
+                </div>
+
+                {roadmapItems.length === 0 ? (
+                    <p className="text-[var(--text-muted)] text-sm italic">
+                        No tasks yet. Click &quot;Add Task&quot; to add roadmap items.
+                    </p>
+                ) : (
+                    <div className="space-y-3">
+                        {roadmapItems.map((item, index) => (
+                            <div
+                                key={index}
+                                className="flex items-center gap-3 p-3 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)]"
+                            >
+                                {/* Order controls */}
+                                <div className="flex flex-col gap-1">
+                                    <button
+                                        type="button"
+                                        onClick={() => moveRoadmapItem(index, 'up')}
+                                        disabled={index === 0}
+                                        className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] disabled:opacity-30"
+                                    >
+                                        ▲
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => moveRoadmapItem(index, 'down')}
+                                        disabled={index === roadmapItems.length - 1}
+                                        className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] disabled:opacity-30"
+                                    >
+                                        ▼
+                                    </button>
+                                </div>
+
+                                {/* Title input */}
+                                <input
+                                    type="text"
+                                    value={item.title}
+                                    onChange={(e) => updateRoadmapItem(index, 'title', e.target.value)}
+                                    className="flex-grow px-3 py-2 rounded bg-[var(--bg-primary)] border border-[var(--border-color)] text-sm focus:outline-none focus:border-[var(--neon-cyan)]"
+                                    placeholder="Task description..."
+                                />
+
+                                {/* Status select */}
+                                <select
+                                    value={item.status}
+                                    onChange={(e) => updateRoadmapItem(index, 'status', e.target.value)}
+                                    className={`px-3 py-2 rounded border text-sm font-medium ${statusColors[item.status]}`}
+                                >
+                                    <option value="planned">📋 Planned</option>
+                                    <option value="in-progress">🔄 In Progress</option>
+                                    <option value="done">✅ Done</option>
+                                </select>
+
+                                {/* Delete button */}
+                                <button
+                                    type="button"
+                                    onClick={() => removeRoadmapItem(index)}
+                                    className="text-red-400 hover:text-red-300 transition-colors"
+                                >
+                                    ✕
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
 
             {/* Error */}
