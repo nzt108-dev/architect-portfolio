@@ -1,0 +1,128 @@
+import { Project } from '@/types';
+
+// Demo projects data
+export const projects: Project[] = [
+  {
+    id: '1',
+    title: 'Christian Social Network',
+    slug: 'christian-social-network',
+    description: 'Мобильное приложение для христианского сообщества с функциями общения, молитвенных запросов и организации мероприятий.',
+    category: 'mobile',
+    progress: 25,
+    technologies: ['Flutter', 'Firebase', 'Dart', 'Cloud Functions'],
+    githubUrl: 'https://github.com/nzt108_dev/christian-social',
+    demoUrl: null,
+    images: ['/images/project-1.png'],
+    roadmap: [
+      { title: 'UI Design', status: 'done' },
+      { title: 'Auth & Profiles', status: 'in-progress' },
+      { title: 'Chat System', status: 'planned' },
+      { title: 'Events Module', status: 'planned' },
+    ],
+    createdAt: new Date('2024-12-01'),
+  },
+  {
+    id: '2',
+    title: 'Drip Campaign Bot',
+    slug: 'drip-campaign-bot',
+    description: 'SaaS Telegram бот для автоматизированной отправки последовательности сообщений (drip-кампании) подписчикам.',
+    category: 'telegram',
+    progress: 40,
+    technologies: ['Python', 'Telegram API', 'PostgreSQL', 'Redis', 'Docker'],
+    githubUrl: 'https://github.com/nzt108_dev/drip-bot',
+    demoUrl: 'https://t.me/DripCampaignBot',
+    images: ['/images/project-2.png'],
+    roadmap: [
+      { title: 'Core Bot Logic', status: 'done' },
+      { title: 'Campaign Builder', status: 'done' },
+      { title: 'Analytics Dashboard', status: 'in-progress' },
+      { title: 'Payment Integration', status: 'planned' },
+    ],
+    createdAt: new Date('2024-10-15'),
+  },
+  {
+    id: '3',
+    title: 'Landing Builder',
+    slug: 'landing-builder',
+    description: 'Веб-сервис для создания и управления лендингами с drag-and-drop редактором и интеграцией аналитики.',
+    category: 'web',
+    progress: 70,
+    technologies: ['Next.js', 'React', 'Prisma', 'PostgreSQL', 'TypeScript'],
+    githubUrl: 'https://github.com/nzt108_dev/landing-builder',
+    demoUrl: 'https://landing-builder.demo',
+    images: ['/images/project-3.png'],
+    roadmap: [
+      { title: 'Editor Core', status: 'done' },
+      { title: 'Templates System', status: 'done' },
+      { title: 'A/B Testing', status: 'in-progress' },
+      { title: 'Team Collaboration', status: 'planned' },
+    ],
+    createdAt: new Date('2024-08-20'),
+  },
+  {
+    id: '4',
+    title: 'Auth Microservice',
+    slug: 'auth-microservice',
+    description: 'Высокопроизводительный микросервис аутентификации с поддержкой OAuth2, JWT и multi-tenancy.',
+    category: 'web',
+    progress: 90,
+    technologies: ['Go', 'gRPC', 'Redis', 'PostgreSQL', 'Docker', 'Kubernetes'],
+    githubUrl: 'https://github.com/nzt108_dev/auth-service',
+    demoUrl: null,
+    images: ['/images/project-4.png'],
+    roadmap: [
+      { title: 'Core Auth Flow', status: 'done' },
+      { title: 'OAuth Providers', status: 'done' },
+      { title: 'Rate Limiting', status: 'done' },
+      { title: 'Audit Logs', status: 'in-progress' },
+    ],
+    createdAt: new Date('2024-06-10'),
+  },
+  {
+    id: '5',
+    title: 'Portfolio Site',
+    slug: 'portfolio-site',
+    description: 'Персональный сайт-портфолио в киберпанк стиле для демонстрации архитектурных решений и проектов.',
+    category: 'web',
+    progress: 10,
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+    githubUrl: 'https://github.com/nzt108_dev/portfolio',
+    demoUrl: 'https://nzt108.dev',
+    images: ['/images/project-5.png'],
+    roadmap: [
+      { title: 'Design System', status: 'in-progress' },
+      { title: 'Core Pages', status: 'planned' },
+      { title: 'Admin Panel', status: 'planned' },
+      { title: 'GitHub Integration', status: 'planned' },
+    ],
+    createdAt: new Date('2025-01-25'),
+  },
+];
+
+export const categories = [
+  { id: 'all', name: 'All Projects', icon: '🚀' },
+  { id: 'mobile', name: 'Mobile Apps', icon: '📱' },
+  { id: 'telegram', name: 'Telegram Bots', icon: '🤖' },
+  { id: 'web', name: 'Web Services', icon: '🌐' },
+];
+
+export const skills = [
+  { name: 'TypeScript', level: 95, category: 'language' },
+  { name: 'Go', level: 85, category: 'language' },
+  { name: 'Python', level: 90, category: 'language' },
+  { name: 'Dart/Flutter', level: 75, category: 'language' },
+  { name: 'React/Next.js', level: 95, category: 'frontend' },
+  { name: 'Node.js', level: 90, category: 'backend' },
+  { name: 'PostgreSQL', level: 85, category: 'database' },
+  { name: 'Redis', level: 80, category: 'database' },
+  { name: 'Docker', level: 90, category: 'devops' },
+  { name: 'Kubernetes', level: 70, category: 'devops' },
+  { name: 'AWS', level: 75, category: 'cloud' },
+  { name: 'System Design', level: 90, category: 'architecture' },
+];
+
+export const socialLinks = [
+  { name: 'GitHub', url: 'https://github.com/nzt108_dev', icon: 'github' },
+  { name: 'Telegram', url: 'https://t.me/nzt108_dev', icon: 'telegram' },
+  { name: 'LinkedIn', url: 'https://linkedin.com/in/nzt108', icon: 'linkedin' },
+];
