@@ -48,7 +48,7 @@ export default function ContactPage() {
     }
 
     const socialLinks = [
-        { name: 'GitHub', url: 'https://github.com/nzt108_dev', icon: 'github' },
+        { name: 'GitHub', url: 'https://github.com/nzt108-dev', icon: 'github' },
         { name: 'Telegram', url: 'https://t.me/nzt108_dev', icon: 'telegram' },
         { name: 'LinkedIn', url: 'https://linkedin.com/in/nzt108', icon: 'linkedin' },
     ]

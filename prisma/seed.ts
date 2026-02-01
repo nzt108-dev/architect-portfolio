@@ -27,7 +27,7 @@ async function main() {
             category: 'mobile',
             progress: 25,
             technologies: JSON.stringify(['Flutter', 'Firebase', 'Dart', 'Cloud Functions']),
-            githubUrl: 'https://github.com/nzt108_dev/christian-social',
+            githubUrl: 'https://github.com/nzt108-dev/christian-social',
             featured: true,
             order: 1,
             roadmap: [
@@ -44,7 +44,7 @@ async function main() {
             category: 'telegram',
             progress: 40,
             technologies: JSON.stringify(['Python', 'Telegram API', 'PostgreSQL', 'Redis', 'Docker']),
-            githubUrl: 'https://github.com/nzt108_dev/drip-bot',
+            githubUrl: 'https://github.com/nzt108-dev/drip-bot',
             demoUrl: 'https://t.me/DripCampaignBot',
             featured: true,
             order: 2,
@@ -62,7 +62,7 @@ async function main() {
             category: 'web',
             progress: 70,
             technologies: JSON.stringify(['Next.js', 'React', 'Prisma', 'PostgreSQL', 'TypeScript']),
-            githubUrl: 'https://github.com/nzt108_dev/landing-builder',
+            githubUrl: 'https://github.com/nzt108-dev/landing-builder',
             demoUrl: 'https://landing-builder.demo',
             featured: true,
             order: 3,
@@ -80,7 +80,7 @@ async function main() {
             category: 'web',
             progress: 90,
             technologies: JSON.stringify(['Go', 'gRPC', 'Redis', 'PostgreSQL', 'Docker', 'Kubernetes']),
-            githubUrl: 'https://github.com/nzt108_dev/auth-service',
+            githubUrl: 'https://github.com/nzt108-dev/auth-service',
             featured: false,
             order: 4,
             roadmap: [
@@ -97,7 +97,7 @@ async function main() {
             category: 'web',
             progress: 50,
             technologies: JSON.stringify(['Next.js', 'TypeScript', 'Tailwind CSS', 'Prisma', 'Vercel']),
-            githubUrl: 'https://github.com/nzt108_dev/portfolio',
+            githubUrl: 'https://github.com/nzt108-dev/portfolio',
             demoUrl: 'https://nzt108.dev',
             featured: false,
             order: 5,
@@ -151,7 +151,7 @@ async function main() {
 
     // Seed Social Links
     const socialLinks = [
-        { name: 'GitHub', url: 'https://github.com/nzt108_dev', icon: 'github', order: 1 },
+        { name: 'GitHub', url: 'https://github.com/nzt108-dev', icon: 'github', order: 1 },
         { name: 'Telegram', url: 'https://t.me/nzt108_dev', icon: 'telegram', order: 2 },
         { name: 'LinkedIn', url: 'https://linkedin.com/in/nzt108', icon: 'linkedin', order: 3 },
     ]

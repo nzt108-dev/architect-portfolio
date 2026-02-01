@@ -10,7 +10,7 @@ export const projects: Project[] = [
     category: 'mobile',
     progress: 25,
     technologies: ['Flutter', 'Firebase', 'Dart', 'Cloud Functions'],
-    githubUrl: 'https://github.com/nzt108_dev/christian-social',
+    githubUrl: 'https://github.com/nzt108-dev/christian-social',
     demoUrl: null,
     images: ['/images/project-1.png'],
     roadmap: [
@@ -29,7 +29,7 @@ export const projects: Project[] = [
     category: 'telegram',
     progress: 40,
     technologies: ['Python', 'Telegram API', 'PostgreSQL', 'Redis', 'Docker'],
-    githubUrl: 'https://github.com/nzt108_dev/drip-bot',
+    githubUrl: 'https://github.com/nzt108-dev/drip-bot',
     demoUrl: 'https://t.me/DripCampaignBot',
     images: ['/images/project-2.png'],
     roadmap: [
@@ -48,7 +48,7 @@ export const projects: Project[] = [
     category: 'web',
     progress: 70,
     technologies: ['Next.js', 'React', 'Prisma', 'PostgreSQL', 'TypeScript'],
-    githubUrl: 'https://github.com/nzt108_dev/landing-builder',
+    githubUrl: 'https://github.com/nzt108-dev/landing-builder',
     demoUrl: 'https://landing-builder.demo',
     images: ['/images/project-3.png'],
     roadmap: [
@@ -67,7 +67,7 @@ export const projects: Project[] = [
     category: 'web',
     progress: 90,
     technologies: ['Go', 'gRPC', 'Redis', 'PostgreSQL', 'Docker', 'Kubernetes'],
-    githubUrl: 'https://github.com/nzt108_dev/auth-service',
+    githubUrl: 'https://github.com/nzt108-dev/auth-service',
     demoUrl: null,
     images: ['/images/project-4.png'],
     roadmap: [
@@ -86,7 +86,7 @@ export const projects: Project[] = [
     category: 'web',
     progress: 10,
     technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
-    githubUrl: 'https://github.com/nzt108_dev/portfolio',
+    githubUrl: 'https://github.com/nzt108-dev/portfolio',
     demoUrl: 'https://nzt108.dev',
     images: ['/images/project-5.png'],
     roadmap: [
@@ -122,7 +122,7 @@ export const skills = [
 ];
 
 export const socialLinks = [
-  { name: 'GitHub', url: 'https://github.com/nzt108_dev', icon: 'github' },
+  { name: 'GitHub', url: 'https://github.com/nzt108-dev', icon: 'github' },
   { name: 'Telegram', url: 'https://t.me/nzt108_dev', icon: 'telegram' },
   { name: 'LinkedIn', url: 'https://linkedin.com/in/nzt108', icon: 'linkedin' },
 ];
