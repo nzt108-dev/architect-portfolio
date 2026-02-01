@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { getFeaturedProjects, getSkills } from '@/lib/queries'
 import ProjectCard from '@/components/ui/ProjectCard'
 import GlitchText from '@/components/ui/GlitchText'
+import HeroAvatar from '@/components/ui/HeroAvatar'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,54 +17,62 @@ export default async function Home() {
     <div className="container mx-auto px-6">
       {/* Hero Section */}
       <section className="min-h-[80vh] flex flex-col justify-center py-20">
-        <div className="max-w-4xl">
-          {/* Greeting */}
-          <p className="text-[var(--neon-cyan)] font-mono text-lg mb-4 animate-pulse">
-            {'>'} Hello, I&apos;m
-          </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left side - Text content */}
+          <div className="max-w-xl">
+            {/* Greeting */}
+            <p className="text-[var(--neon-cyan)] font-mono text-lg mb-4 animate-pulse">
+              {'>'} Hello, I&apos;m
+            </p>
 
-          {/* Name */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            <GlitchText text="nzt108" className="text-[var(--text-primary)]" />
-            <span className="text-[var(--neon-pink)]">_</span>
-            <span className="text-[var(--text-secondary)]">dev</span>
-          </h1>
+            {/* Name */}
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <GlitchText text="nzt108" className="text-[var(--text-primary)]" />
+              <span className="text-[var(--neon-pink)]">_</span>
+              <span className="text-[var(--text-secondary)]">dev</span>
+            </h1>
 
-          {/* Tagline */}
-          <h2 className="text-2xl md:text-4xl font-semibold mb-8 gradient-text">
-            Software Architect
-          </h2>
+            {/* Tagline */}
+            <h2 className="text-2xl md:text-4xl font-semibold mb-8 gradient-text">
+              Software Architect
+            </h2>
 
-          {/* Description */}
-          <p className="text-[var(--text-secondary)] text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
-            I design and build complete digital solutions from idea to launch.
-            Whether you have a vision or just a spark — let&apos;s turn it into reality.
-          </p>
+            {/* Description */}
+            <p className="text-[var(--text-secondary)] text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
+              I design and build complete digital solutions from idea to launch.
+              Whether you have a vision or just a spark — let&apos;s turn it into reality.
+            </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-4">
-            <Link href="/projects" className="cyber-btn">
-              View Projects
-            </Link>
-            <Link href="/contact" className="cyber-btn cyber-btn-pink">
-              Get in Touch
-            </Link>
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4">
+              <Link href="/projects" className="cyber-btn">
+                View Projects
+              </Link>
+              <Link href="/contact" className="cyber-btn cyber-btn-pink">
+                Get in Touch
+              </Link>
+            </div>
+
+            {/* Stats */}
+            <div className="flex gap-12 mt-16">
+              <div>
+                <div className="text-4xl font-bold text-[var(--neon-cyan)]">5+</div>
+                <div className="text-[var(--text-secondary)] text-sm">Active Projects</div>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-[var(--neon-pink)]">3</div>
+                <div className="text-[var(--text-secondary)] text-sm">Tech Domains</div>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-[var(--neon-purple)]">∞</div>
+                <div className="text-[var(--text-secondary)] text-sm">Ideas to Build</div>
+              </div>
+            </div>
           </div>
 
-          {/* Stats */}
-          <div className="flex gap-12 mt-16">
-            <div>
-              <div className="text-4xl font-bold text-[var(--neon-cyan)]">5+</div>
-              <div className="text-[var(--text-secondary)] text-sm">Active Projects</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-[var(--neon-pink)]">3</div>
-              <div className="text-[var(--text-secondary)] text-sm">Tech Domains</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-[var(--neon-purple)]">∞</div>
-              <div className="text-[var(--text-secondary)] text-sm">Ideas to Build</div>
-            </div>
+          {/* Right side - Avatar */}
+          <div className="hidden lg:flex justify-center items-center">
+            <HeroAvatar />
           </div>
         </div>
 
