@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { getSkills } from '@/lib/queries'
 
 export const dynamic = 'force-dynamic'
@@ -155,8 +156,14 @@ export default async function AboutPage() {
                 <div className="space-y-6">
                     {/* Profile Card */}
                     <div className="cyber-card p-8 text-center neon-border">
-                        <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-[var(--neon-cyan)] to-[var(--neon-purple)] flex items-center justify-center text-5xl font-bold text-[var(--bg-primary)]">
-                            N
+                        <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-2 border-[var(--neon-cyan)] shadow-[var(--glow-cyan)]">
+                            <Image
+                                src="/logo.jpg"
+                                alt="nzt108_dev"
+                                width={128}
+                                height={128}
+                                className="w-full h-full object-cover"
+                            />
                         </div>
                         <h3 className="text-xl font-bold mb-1">nzt108_dev</h3>
                         <p className="text-[var(--neon-cyan)]">Software Architect</p>
