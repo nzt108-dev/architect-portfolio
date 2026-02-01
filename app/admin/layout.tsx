@@ -71,6 +71,9 @@ export default function AdminLayout({
                     <NavLink href="/admin/skills" icon="⚡">
                         Skills
                     </NavLink>
+                    <NavLink href="/admin/contacts" icon="📇">
+                        Contacts
+                    </NavLink>
                     <NavLink href="/admin/messages" icon="✉️">
                         Messages
                     </NavLink>
@@ -117,8 +120,8 @@ function NavLink({
         <Link
             href={href}
             className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive
-                    ? 'bg-[var(--neon-cyan)]/10 text-[var(--neon-cyan)] border border-[var(--neon-cyan)]/30'
-                    : 'text-[var(--text-secondary)] hover:bg-[var(--bg-card-hover)] hover:text-[var(--text-primary)]'
+                ? 'bg-[var(--neon-cyan)]/10 text-[var(--neon-cyan)] border border-[var(--neon-cyan)]/30'
+                : 'text-[var(--text-secondary)] hover:bg-[var(--bg-card-hover)] hover:text-[var(--text-primary)]'
                 }`}
         >
             <span>{icon}</span>

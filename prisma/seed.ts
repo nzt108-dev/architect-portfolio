@@ -154,10 +154,11 @@ async function main() {
         { name: 'GitHub', url: 'https://github.com/nzt108-dev', icon: 'github', order: 1 },
         { name: 'Telegram', url: 'https://t.me/nzt108_dev', icon: 'telegram', order: 2 },
         { name: 'LinkedIn', url: 'https://linkedin.com/in/nzt108', icon: 'linkedin', order: 3 },
+        { name: 'Email', url: 'mailto:nzt108@nzt108.dev', icon: 'email', order: 4 },
     ]
 
     await prisma.socialLink.createMany({ data: socialLinks })
-    console.log('✅ Created 3 social links')
+    console.log('✅ Created 4 social links')
 
     // Seed Site Settings
     const settings = [
