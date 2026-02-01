@@ -16,10 +16,15 @@ export default async function Home() {
   return (
     <div className="container mx-auto px-6">
       {/* Hero Section */}
-      <section className="min-h-[80vh] flex flex-col justify-center py-20">
+      <section className="min-h-[80vh] flex flex-col justify-center py-10 lg:py-20">
+        {/* Mobile Avatar - shown on small screens */}
+        <div className="lg:hidden flex justify-center mb-[-80px] relative z-0">
+          <HeroAvatar />
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Text content */}
-          <div className="max-w-xl">
+          <div className="max-w-xl relative z-10 lg:z-0">
             {/* Greeting */}
             <p className="text-[var(--neon-cyan)] font-mono text-lg mb-4 animate-pulse">
               {'>'} Hello, I&apos;m
@@ -54,7 +59,7 @@ export default async function Home() {
             </div>
 
             {/* Stats */}
-            <div className="flex gap-12 mt-16">
+            <div className="flex gap-8 md:gap-12 mt-16">
               <div>
                 <div className="text-4xl font-bold text-[var(--neon-cyan)]">5+</div>
                 <div className="text-[var(--text-secondary)] text-sm">Active Projects</div>
@@ -70,7 +75,7 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Right side - Avatar */}
+          {/* Right side - Avatar (Desktop only) */}
           <div className="hidden lg:flex justify-center items-center">
             <HeroAvatar />
           </div>
