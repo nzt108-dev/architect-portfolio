@@ -6,6 +6,39 @@ description: How to update project cards on nzt108.dev portfolio site
 
 This skill allows you to create or update project cards on the nzt108.dev portfolio website.
 
+## ⚠️ SECURITY RULES (READ FIRST!)
+
+### ❌ NEVER Include:
+- **Implementation details** (architecture, algorithms, data structures)
+- **API endpoints** or route names
+- **Database schema** or table names
+- **Environment variables** or config values
+- **Security measures** (auth flow, encryption methods)
+- **Third-party service names** (specific payment providers, etc.)
+- **Internal URLs** or staging/dev links
+- **Code snippets** or technical specifics
+- **Business logic** details
+
+### ✅ ONLY Include:
+- **Generic feature names**: "User Authentication" not "JWT with refresh tokens"
+- **High-level status**: "Chat System" not "WebSocket real-time messaging with Redis pub/sub"
+- **Public technologies**: "Flutter", "Next.js" (from public repos or obvious from app)
+- **Public links only**: GitHub (if public), App Store, Play Store, live demo
+- **Vague descriptions**: "Mobile app for community" not "Social network with encrypted messaging"
+
+### Examples of SAFE vs UNSAFE:
+
+| ❌ UNSAFE | ✅ SAFE |
+|-----------|---------|
+| "Implement OAuth2 + PKCE flow" | "User Authentication" |
+| "PostgreSQL with Row Level Security" | "Database Integration" |
+| "Stripe + Apple Pay integration" | "Payment System" |
+| "Redis caching for session management" | "Performance Optimization" |
+| "WebSocket real-time sync" | "Real-time Features" |
+| "GraphQL API with subscriptions" | "API Layer" |
+
+---
+
 ## API Endpoint
 
 ```
@@ -18,77 +51,59 @@ The API key is stored in environment variable `PORTFOLIO_API_KEY`.
 
 ## How to Use
 
-### 1. Gather Project Information
-
-Before making the API call, collect the following information from the current project:
+### 1. Gather Project Information (SAFELY)
 
 #### Required Fields
-- **title**: Project name (e.g., "Christian Social Network")
+- **title**: Project name (public name only)
 
-#### Optional Fields (agent should auto-detect)
-- **slug**: URL-friendly name (auto-generated from title if not provided)
-- **description**: 1-2 sentence summary (public only, no implementation details)
-- **category**: One of `mobile`, `telegram`, or `web`
+#### Optional Fields
+- **slug**: URL-friendly name (auto-generated if not provided)
+- **description**: 1-2 sentence VAGUE summary
+- **category**: `mobile`, `telegram`, or `web`
 - **progress**: 0-100 percentage
-- **technologies**: Array of technology names
-- **githubUrl**: GitHub repository URL
-- **demoUrl**: Live demo URL
-- **featured**: Boolean, show on homepage
-- **roadmapItems**: Array of { title, status } where status is `done`, `in-progress`, or `planned`
+- **technologies**: Array of PUBLIC technology names only
+- **githubUrl**: Only if repository is PUBLIC
+- **demoUrl**: Only LIVE public URLs (no staging/dev)
+- **roadmapItems**: HIGH-LEVEL tasks only
 
-### 2. How to Determine Progress Automatically
+### 2. How to Determine Progress
 
-1. Look for `task.md` or `TODO.md` in the project root
-2. Count completed tasks `[x]` vs total tasks `[ ]` and `[x]`
+1. Look for `task.md` in project root
+2. Count completed `[x]` vs total tasks
 3. Calculate: `(completed / total) * 100`
 4. Round to nearest 5%
 
-Alternative methods:
-- If project has milestones, calculate based on completed milestones
-- If no task tracking exists, estimate based on:
-  - 10-20%: Initial setup, basic structure
-  - 30-50%: Core features in development
-  - 60-80%: Most features done, testing/polish
-  - 90-100%: Production ready
+### 3. How to Detect Technologies (PUBLIC ONLY)
 
-### 3. How to Detect Technologies
+Check dependency files but only include:
+- Main framework (Flutter, Next.js, React, etc.)
+- Primary language (TypeScript, Dart, Python, Go)
+- Public cloud services (Firebase, AWS - generic)
+- Database type (PostgreSQL, MongoDB - just the name)
 
-Check these files in order:
-
-| File | Extract From |
-|------|--------------|
-| `package.json` | `dependencies` and `devDependencies` keys |
-| `pubspec.yaml` | `dependencies` section |
-| `go.mod` | `require` block |
-| `requirements.txt` | Package names |
-| `Cargo.toml` | `[dependencies]` section |
-| `build.gradle` | `dependencies` block |
-
-**Rules:**
-- Include only main technologies (max 6-8)
-- Prioritize: Framework > Language > Database > Tools
-- Use proper capitalization: "Next.js", "Flutter", "PostgreSQL"
-- Skip dev-only tools unless relevant (e.g., skip eslint, prettier)
+**Skip internal/sensitive:**
+- Payment providers
+- Auth services
+- Monitoring tools
+- CI/CD specifics
 
 ### 4. How to Create Roadmap Items
 
-1. Check `task.md` for high-level items
-2. Or check GitHub Issues/Milestones
-3. Or use project README sections
+**RULE: If in doubt, make it MORE vague, not less.**
 
-**Guidelines:**
-- Keep items high-level (e.g., "User Authentication" not "Implement JWT token refresh")
-- Maximum 6-8 items
-- Status mapping:
-  - `done`: Completed features
-  - `in-progress`: Currently being worked on
-  - `planned`: Future features
+Good examples:
+- "Core Features" ✅
+- "User Profiles" ✅
+- "Messaging" ✅
+- "Admin Panel" ✅
+- "Analytics" ✅
+- "Notifications" ✅
 
-⚠️ **SECURITY**: Never include:
-- Implementation details
-- API keys or secrets
-- Internal architecture specifics
-- Security measures details
+Bad examples:
+- "Implement E2E encryption" ❌
+- "Add Stripe webhook handlers" ❌
+- "Setup Redis cluster" ❌
+- "Deploy to K8s" ❌
 
 ### 5. Make the API Request
 
@@ -112,61 +127,43 @@ curl -X POST https://nzt108.dev/api/agent/projects \
   }'
 ```
 
-### 6. Response Format
+---
 
-**Success (create):**
+## How to Add This Skill to a New Project
+
+When user creates a new project, copy this skill:
+
+```bash
+mkdir -p /path/to/new-project/.agent/skills/update-portfolio
+cp /path/to/architect-portfolio/.agent/skills/update-portfolio/SKILL.md \
+   /path/to/new-project/.agent/skills/update-portfolio/
+```
+
+Or user can say: "Add the portfolio update skill to this project"
+
+---
+
+## Response Format
+
+**Success:**
 ```json
 {
   "success": true,
-  "action": "created",
+  "action": "created" | "updated",
   "project": { "id": "...", "title": "...", "slug": "...", "progress": 45 }
 }
 ```
 
-**Success (update):**
-```json
-{
-  "success": true,
-  "action": "updated",
-  "project": { "id": "...", "title": "...", "slug": "...", "progress": 45 }
-}
-```
+## Additional Operations
 
-**Error:**
-```json
-{
-  "error": "Error message"
-}
-```
-
-## Additional API Operations
-
-### List All Projects
+### List Projects
 ```bash
 curl -X GET https://nzt108.dev/api/agent/projects \
   -H "Authorization: Bearer $PORTFOLIO_API_KEY"
 ```
 
-### Delete a Project
+### Delete Project
 ```bash
 curl -X DELETE "https://nzt108.dev/api/agent/projects?slug=project-slug" \
   -H "Authorization: Bearer $PORTFOLIO_API_KEY"
 ```
-
-## Example Workflow
-
-When user says: "Update my portfolio with this project"
-
-1. Read project files to understand what it is
-2. Detect category from project type (Flutter → mobile, Bot → telegram, etc.)
-3. Extract technologies from dependency files
-4. Calculate progress from task tracking
-5. Generate brief, public-safe description
-6. Create roadmap from high-level tasks
-7. Make API call to update portfolio
-8. Confirm success to user
-
-## Environment Variable
-
-The API key should be available as `PORTFOLIO_API_KEY` in your environment.
-If not set, ask the user to provide it or check the Vercel environment variables.
