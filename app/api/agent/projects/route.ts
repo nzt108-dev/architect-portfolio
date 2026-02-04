@@ -55,23 +55,24 @@ export async function POST(request: Request) {
         let project
 
         if (existingProject) {
-            // Update existing project
+            // Update existing project - only update fields that are explicitly provided
+            const updateData: Record<string, unknown> = { title }
+
+            if (description !== undefined) updateData.description = description
+            if (body.category !== undefined) updateData.category = body.category
+            if (body.progress !== undefined) updateData.progress = body.progress
+            if (body.technologies !== undefined) updateData.technologies = JSON.stringify(body.technologies)
+            if (body.githubUrl !== undefined) updateData.githubUrl = body.githubUrl
+            if (body.demoUrl !== undefined) updateData.demoUrl = body.demoUrl
+            if (body.featured !== undefined) updateData.featured = body.featured
+
             project = await prisma.project.update({
                 where: { slug: projectSlug },
-                data: {
-                    title,
-                    description: description || existingProject.description,
-                    category,
-                    progress,
-                    technologies: JSON.stringify(technologies),
-                    githubUrl,
-                    demoUrl,
-                    featured,
-                },
+                data: updateData,
             })
 
-            // Update roadmap items if provided
-            if (roadmapItems.length > 0) {
+            // Update roadmap items only if provided
+            if (roadmapItems && roadmapItems.length > 0) {
                 // Delete existing items
                 await prisma.roadmapItem.deleteMany({
                     where: { projectId: existingProject.id },
