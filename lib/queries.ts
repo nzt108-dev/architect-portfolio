@@ -76,7 +76,7 @@ export async function getFeaturedProjects(): Promise<Project[]> {
             },
         },
         orderBy: { order: 'asc' },
-        take: 3,
+        take: 6,
     })
 
     return projects.map((project) => ({
