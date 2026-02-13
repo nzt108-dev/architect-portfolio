@@ -97,6 +97,25 @@ export const projects: Project[] = [
     ],
     createdAt: new Date('2025-01-25'),
   },
+  {
+    id: '6',
+    title: 'NorCal Deal Engine',
+    slug: 'norcal-deal-engine',
+    description: 'Мобильное приложение для поиска недвижимости в NorCal с AI-скорингом сделок, 3 ролями (Flipper, Agent, Contractor), рыночной аналитикой, конструктором смет и 18+ настраиваемыми фильтрами.',
+    category: 'mobile',
+    progress: 45,
+    technologies: ['Flutter', 'Dart', 'Python', 'FastAPI', 'Supabase', 'Railway', 'Zillow API'],
+    githubUrl: 'https://github.com/nzt108-dev/norcal-deals',
+    demoUrl: null,
+    images: ['/images/project-6.png'],
+    roadmap: [
+      { title: 'Core Scraper & API', status: 'done' },
+      { title: 'Mobile App + Navigation', status: 'done' },
+      { title: 'Role-Specific Settings (18 filters)', status: 'done' },
+      { title: 'Backend Persistence & Cron', status: 'in-progress' },
+    ],
+    createdAt: new Date('2025-02-01'),
+  },
 ];
 
 export const categories = [
