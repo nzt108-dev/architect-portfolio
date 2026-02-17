@@ -295,7 +295,8 @@ body {
 .btn-filled:hover {
   box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
   transform: translateY(-1px);
-  filter: brightness(1.1);
+  filter: brightness(1.15);
+  color: var(--bg-primary);
 }
 
 /* ========================================
