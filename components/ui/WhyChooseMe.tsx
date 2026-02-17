@@ -1,26 +1,28 @@
 'use client'
 
+import GradientIcon from './GradientIcon'
+
 const advantages = [
     {
-        icon: '⚡',
+        iconName: 'zap',
         title: '3-5x Faster',
         description: 'AI-powered workflows and modern tools let me ship in days what agencies deliver in months.',
         accent: 'var(--accent-primary)',
     },
     {
-        icon: '💰',
+        iconName: 'piggy-bank',
         title: 'Up to 70% Cheaper',
         description: 'One person, no overhead. You pay for results, not office rent and layers of management.',
         accent: 'var(--accent-secondary)',
     },
     {
-        icon: '💬',
+        iconName: 'message-circle',
         title: 'Direct Communication',
         description: 'No managers, no middlemen. You talk directly with the person building your product.',
         accent: 'var(--accent-blue)',
     },
     {
-        icon: '🔍',
+        iconName: 'search',
         title: 'Transparent Process',
         description: 'Daily updates, live progress tracking, and full visibility into every step of development.',
         accent: 'var(--accent-green)',
@@ -44,10 +46,10 @@ export default function WhyChooseMe() {
                         className="cyber-card p-6 text-center group"
                     >
                         <div
-                            className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4"
+                            className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
                             style={{ background: `color-mix(in srgb, ${item.accent} 15%, transparent)` }}
                         >
-                            {item.icon}
+                            <GradientIcon name={item.iconName} size={28} />
                         </div>
                         <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
                         <p className="text-[var(--text-secondary)] text-sm leading-relaxed">

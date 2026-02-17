@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import LeadCaptureWidget from '@/components/ui/LeadCaptureWidget'
+import GradientIcon from '@/components/ui/GradientIcon'
 
 export const dynamic = 'force-dynamic'
 
 const services = [
     {
         id: 'mobile',
-        icon: '📱',
+        iconName: 'smartphone',
         title: 'Mobile Apps',
         description: 'Cross-platform iOS & Android apps built with Flutter. One codebase, two platforms, native performance.',
         features: [
@@ -22,7 +23,7 @@ const services = [
     },
     {
         id: 'web',
-        icon: '🌐',
+        iconName: 'globe',
         title: 'Websites & Landing Pages',
         description: 'Fast, responsive, SEO-optimized websites. From simple landing pages to complex web applications.',
         features: [
@@ -38,7 +39,7 @@ const services = [
     },
     {
         id: 'bots',
-        icon: '🤖',
+        iconName: 'bot',
         title: 'Telegram & Discord Bots',
         description: 'Automation bots, e-commerce bots, community management, and custom integrations.',
         features: [
@@ -54,7 +55,7 @@ const services = [
     },
     {
         id: 'saas',
-        icon: '💼',
+        iconName: 'briefcase',
         title: 'SaaS Platforms',
         description: 'Full-stack Software-as-a-Service products with authentication, billing, dashboards, and multi-tenant architecture.',
         features: [
@@ -70,7 +71,7 @@ const services = [
     },
     {
         id: 'api',
-        icon: '⚙️',
+        iconName: 'server',
         title: 'APIs & Backends',
         description: 'Scalable REST/GraphQL APIs, microservices, data pipelines, and cloud infrastructure.',
         features: [
@@ -116,10 +117,10 @@ export default function ServicesPage() {
                             <div className="lg:col-span-2">
                                 <div className="flex items-center gap-4 mb-4">
                                     <div
-                                        className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
+                                        className="w-14 h-14 rounded-2xl flex items-center justify-center"
                                         style={{ background: `color-mix(in srgb, ${service.accent} 15%, transparent)` }}
                                     >
-                                        {service.icon}
+                                        <GradientIcon name={service.iconName} size={28} />
                                     </div>
                                     <div>
                                         <h2 className="text-2xl font-bold">{service.title}</h2>

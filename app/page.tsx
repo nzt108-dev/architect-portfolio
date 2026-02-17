@@ -8,6 +8,7 @@ import ProcessSteps from '@/components/ui/ProcessSteps'
 import ComparisonTable from '@/components/ui/ComparisonTable'
 import FAQ from '@/components/ui/FAQ'
 import LeadCaptureWidget from '@/components/ui/LeadCaptureWidget'
+import GradientIcon from '@/components/ui/GradientIcon'
 
 export const dynamic = 'force-dynamic'
 
@@ -100,18 +101,20 @@ export default async function Home() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {[
-            { icon: '📱', label: 'Mobile Apps', desc: 'iOS & Android' },
-            { icon: '🌐', label: 'Websites', desc: 'Landing & Web Apps' },
-            { icon: '🤖', label: 'Telegram Bots', desc: 'Automation & Commerce' },
-            { icon: '💼', label: 'SaaS Platforms', desc: 'Full-stack Products' },
-            { icon: '⚙️', label: 'APIs & Backends', desc: 'Scalable Infrastructure' },
+            { iconName: 'smartphone', label: 'Mobile Apps', desc: 'iOS & Android' },
+            { iconName: 'globe', label: 'Websites', desc: 'Landing & Web Apps' },
+            { iconName: 'bot', label: 'Telegram Bots', desc: 'Automation & Commerce' },
+            { iconName: 'briefcase', label: 'SaaS Platforms', desc: 'Full-stack Products' },
+            { iconName: 'server', label: 'APIs & Backends', desc: 'Scalable Infrastructure' },
           ].map((item) => (
             <Link
               key={item.label}
               href="/services"
               className="cyber-card p-5 text-center group"
             >
-              <div className="text-3xl mb-3">{item.icon}</div>
+              <div className="flex justify-center mb-3">
+                <GradientIcon name={item.iconName} size={32} />
+              </div>
               <div className="font-medium text-sm group-hover:text-[var(--accent-primary)] transition-colors">
                 {item.label}
               </div>

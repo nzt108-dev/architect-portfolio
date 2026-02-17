@@ -1,33 +1,35 @@
 'use client'
 
+import GradientIcon from './GradientIcon'
+
 const steps = [
     {
         number: '01',
         title: 'Discuss',
         subtitle: 'Free consultation',
         description: 'Tell me about your idea. We\'ll figure out the best approach together.',
-        icon: '📞',
+        iconName: 'phone',
     },
     {
         number: '02',
         title: 'Estimate',
         subtitle: 'Within 24 hours',
         description: 'Get a detailed plan with timeline, tech stack, and transparent pricing.',
-        icon: '📋',
+        iconName: 'clipboard-list',
     },
     {
         number: '03',
         title: 'Build',
         subtitle: 'Daily progress updates',
         description: 'I build your product with regular demos so you see results every step.',
-        icon: '🔨',
+        iconName: 'code',
     },
     {
         number: '04',
         title: 'Launch',
         subtitle: 'Deploy + support',
         description: 'Your product goes live. I provide post-launch support to ensure everything runs smoothly.',
-        icon: '🚀',
+        iconName: 'rocket',
     },
 ]
 
@@ -56,8 +58,8 @@ export default function ProcessSteps() {
                             </div>
 
                             {/* Icon */}
-                            <div className="w-16 h-16 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] flex items-center justify-center text-2xl mx-auto mb-4">
-                                {step.icon}
+                            <div className="w-16 h-16 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] flex items-center justify-center mx-auto mb-4">
+                                <GradientIcon name={step.iconName} size={30} />
                             </div>
 
                             {/* Content */}
