@@ -5,12 +5,12 @@ import { prisma } from '@/lib/prisma'
 export async function POST(request: Request) {
     try {
         const body = await request.json()
-        const { name, email, subject, message } = body
+        const { name, email, subject, message, budget, serviceType } = body
 
         // Validate required fields
-        if (!name || !email || !subject || !message) {
+        if (!email || !subject || !message) {
             return NextResponse.json(
-                { error: 'All fields are required' },
+                { error: 'Email, subject, and message are required' },
                 { status: 400 }
             )
         }
@@ -18,10 +18,12 @@ export async function POST(request: Request) {
         // Save to database
         const submission = await prisma.contactSubmission.create({
             data: {
-                name,
+                name: name || '',
                 email,
                 subject,
                 message,
+                budget: budget || '',
+                serviceType: serviceType || '',
             },
         })
 

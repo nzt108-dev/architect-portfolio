@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
+import { useState } from 'react';
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -8,87 +8,97 @@ export default function ContactForm() {
         email: '',
         subject: '',
         message: '',
-    })
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+        budget: '',
+    });
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        setIsSubmitting(true)
+        e.preventDefault();
+        setStatus('loading');
 
         try {
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            })
+                body: JSON.stringify({
+                    ...formData,
+                    serviceType: formData.subject,
+                }),
+            });
 
             if (response.ok) {
-                setSubmitStatus('success')
-                setFormData({ name: '', email: '', subject: '', message: '' })
+                setStatus('success');
+                setFormData({ name: '', email: '', subject: '', message: '', budget: '' });
             } else {
-                setSubmitStatus('error')
+                setStatus('error');
             }
         } catch {
-            setSubmitStatus('error')
-        } finally {
-            setIsSubmitting(false)
-            setTimeout(() => setSubmitStatus('idle'), 5000)
+            setStatus('error');
         }
-    }
+    };
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-    ) => {
-        setFormData((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-        }))
+    if (status === 'success') {
+        return (
+            <div className="cyber-card p-10 text-center neon-border">
+                <div className="text-5xl mb-4">✅</div>
+                <h3 className="text-2xl font-bold mb-3">Message Sent!</h3>
+                <p className="text-[var(--text-secondary)] mb-6">
+                    Thanks for reaching out. I&apos;ll get back to you within 24 hours with a detailed response.
+                </p>
+                <button
+                    onClick={() => setStatus('idle')}
+                    className="cyber-btn"
+                >
+                    Send Another Message
+                </button>
+            </div>
+        );
     }
 
     return (
-        <form onSubmit={handleSubmit} className="cyber-card p-8">
-            <h2 className="text-xl font-bold mb-6">Send a Message</h2>
-
-            <div className="space-y-6">
-                {/* Name & Email */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label htmlFor="name" className="block text-sm font-medium mb-2">
-                            Your Name
-                        </label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                            className="cyber-input"
-                            placeholder="John Doe"
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="email" className="block text-sm font-medium mb-2">
-                            Your Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                            className="cyber-input"
-                            placeholder="john@example.com"
-                        />
-                    </div>
+        <form onSubmit={handleSubmit} className="cyber-card p-8 space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <label htmlFor="name" className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
+                        Name
+                    </label>
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="cyber-input"
+                        placeholder="Your name"
+                    />
                 </div>
 
-                {/* Subject */}
                 <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                        Subject
+                    <label htmlFor="email" className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
+                        Email
+                    </label>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="cyber-input"
+                        placeholder="your@email.com"
+                    />
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <label htmlFor="subject" className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
+                        Service Type
                     </label>
                     <select
                         id="subject"
@@ -98,74 +108,68 @@ export default function ContactForm() {
                         required
                         className="cyber-input"
                     >
-                        <option value="">Select a topic...</option>
-                        <option value="project">New Project Inquiry</option>
-                        <option value="collaboration">Collaboration</option>
-                        <option value="consulting">Consulting</option>
-                        <option value="other">Other</option>
+                        <option value="">What do you need?</option>
+                        <option value="Mobile App">📱 Mobile App</option>
+                        <option value="Website">🌐 Website / Landing Page</option>
+                        <option value="Telegram Bot">🤖 Telegram Bot</option>
+                        <option value="Discord Bot">🎮 Discord Bot</option>
+                        <option value="SaaS Platform">💼 SaaS Platform</option>
+                        <option value="API / Backend">⚙️ API / Backend</option>
+                        <option value="Consulting">💡 Consulting</option>
+                        <option value="Other">📦 Other</option>
                     </select>
                 </div>
 
-                {/* Message */}
                 <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
-                        Message
+                    <label htmlFor="budget" className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
+                        Budget Range <span className="text-[var(--text-muted)]">(optional)</span>
                     </label>
-                    <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
+                    <select
+                        id="budget"
+                        name="budget"
+                        value={formData.budget}
                         onChange={handleChange}
-                        required
-                        rows={6}
-                        className="cyber-input resize-none"
-                        placeholder="Tell me about your project..."
-                    />
+                        className="cyber-input"
+                    >
+                        <option value="">Select range...</option>
+                        <option value="$500-1k">$500 – $1,000</option>
+                        <option value="$1k-3k">$1,000 – $3,000</option>
+                        <option value="$3k-7k">$3,000 – $7,000</option>
+                        <option value="$7k-15k">$7,000 – $15,000</option>
+                        <option value="$15k+">$15,000+</option>
+                    </select>
                 </div>
-
-                {/* Submit Button */}
-                <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="cyber-btn w-full relative"
-                >
-                    {isSubmitting ? (
-                        <span className="flex items-center justify-center gap-3">
-                            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                                <circle
-                                    className="opacity-25"
-                                    cx="12"
-                                    cy="12"
-                                    r="10"
-                                    stroke="currentColor"
-                                    strokeWidth="4"
-                                    fill="none"
-                                />
-                                <path
-                                    className="opacity-75"
-                                    fill="currentColor"
-                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                                />
-                            </svg>
-                            Sending...
-                        </span>
-                    ) : (
-                        'Send Message'
-                    )}
-                </button>
-
-                {/* Status Messages */}
-                {submitStatus === 'success' && (
-                    <div className="p-4 rounded-lg bg-green-500/20 border border-green-500/40 text-green-400">
-                        ✓ Message sent successfully! I&apos;ll get back to you soon.
-                    </div>
-                )}
-                {submitStatus === 'error' && (
-                    <div className="p-4 rounded-lg bg-red-500/20 border border-red-500/40 text-red-400">
-                        ✕ Something went wrong. Please try again.
-                    </div>
-                )}
             </div>
+
+            <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
+                    Tell Me About Your Project
+                </label>
+                <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="cyber-input resize-none"
+                    placeholder="Describe your idea, goals, and any specific requirements..."
+                />
+            </div>
+
+            <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="btn-filled w-full py-3.5 text-base"
+            >
+                {status === 'loading' ? 'Sending...' : 'Send Message →'}
+            </button>
+
+            {status === 'error' && (
+                <p className="text-red-400 text-sm text-center">
+                    Something went wrong. Please try again or email me directly.
+                </p>
+            )}
         </form>
-    )
+    );
 }

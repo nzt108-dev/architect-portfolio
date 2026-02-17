@@ -11,20 +11,24 @@ datasource db {
 
 // Projects table - main data for portfolio
 model Project {
-  id          String   @id @default(cuid())
-  title       String
-  slug        String   @unique
-  description String
-  category    String   // "mobile" | "telegram" | "web"
-  progress    Int      @default(0) // 0-100
-  technologies String  // JSON array stored as string
-  githubUrl   String?
-  demoUrl     String?
-  images      String   @default("[]") // JSON array stored as string
-  featured    Boolean  @default(false)
-  order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String
+  longDescription String   @default("")
+  category        String   // "mobile" | "telegram" | "web" | "saas" | "discord"
+  progress        Int      @default(0) // 0-100
+  technologies    String   // JSON array stored as string
+  githubUrl       String?
+  demoUrl         String?
+  images          String   @default("[]") // JSON array stored as string
+  screenshots     String   @default("[]") // JSON array of screenshot URLs
+  ideaText        String   @default("") // "The Idea" section text
+  clientBenefit   String   @default("") // What the client gets
+  featured        Boolean  @default(false)
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
   
   // Relation to roadmap items
   roadmapItems RoadmapItem[]
@@ -69,11 +73,31 @@ model SiteSetting {
 
 // Contact form submissions
 model ContactSubmission {
-  id        String   @id @default(cuid())
-  name      String
-  email     String
-  subject   String
-  message   String
-  read      Boolean  @default(false)
-  createdAt DateTime @default(now())
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  subject     String
+  message     String
+  budget      String   @default("")
+  serviceType String   @default("")
+  read        Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+// Services offered
+model Service {
+  id            String   @id @default(cuid())
+  title         String
+  titleRu       String   @default("")
+  slug          String   @unique
+  icon          String   // emoji icon
+  description   String
+  descriptionRu String   @default("")
+  features      String   @default("[]") // JSON array of feature strings
+  featuresRu    String   @default("[]")
+  timeline      String   // e.g. "from 3 days"
+  timelineRu    String   @default("")
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

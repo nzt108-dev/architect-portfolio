@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 
 const navLinks = [
     { href: '/', label: 'Home' },
+    { href: '/services', label: 'Services' },
     { href: '/projects', label: 'Projects' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
@@ -33,7 +34,7 @@ export default function Header() {
             <div className="container mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-3 group">
-                    <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[var(--neon-cyan)] group-hover:shadow-[var(--glow-cyan)] transition-shadow">
+                    <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[var(--accent-primary)] group-hover:border-[var(--accent-secondary)] transition-colors">
                         <Image
                             src="/logo.jpg"
                             alt="nzt108_dev"
@@ -43,7 +44,7 @@ export default function Header() {
                         />
                     </div>
                     <span className="font-bold text-xl tracking-tight">
-                        <span className="text-[var(--neon-cyan)]">nzt108</span>
+                        <span className="text-[var(--accent-primary)]">nzt108</span>
                         <span className="text-[var(--text-secondary)]">_dev</span>
                     </span>
                 </Link>
@@ -54,14 +55,14 @@ export default function Header() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className={`relative text-sm uppercase tracking-widest font-medium transition-all hover:text-[var(--neon-cyan)] ${pathname === link.href
-                                ? 'text-[var(--neon-cyan)]'
+                            className={`relative text-sm uppercase tracking-widest font-medium transition-all hover:text-[var(--accent-primary)] ${pathname === link.href
+                                ? 'text-[var(--accent-primary)]'
                                 : 'text-[var(--text-secondary)]'
                                 }`}
                         >
                             {link.label}
                             {pathname === link.href && (
-                                <span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[var(--neon-cyan)] shadow-[0_0_10px_var(--neon-cyan)]" />
+                                <span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[var(--accent-primary)]" />
                             )}
                         </Link>
                     ))}
@@ -69,8 +70,8 @@ export default function Header() {
 
                 {/* CTA Button */}
                 <div className="hidden md:block">
-                    <Link href="/contact" className="cyber-btn text-xs">
-                        Hire Me
+                    <Link href="/contact" className="btn-filled text-xs">
+                        Get Estimate
                     </Link>
                 </div>
 
@@ -81,15 +82,15 @@ export default function Header() {
                     aria-label="Toggle menu"
                 >
                     <span
-                        className={`w-6 h-0.5 bg-[var(--neon-cyan)] transition-transform ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
+                        className={`w-6 h-0.5 bg-[var(--accent-primary)] transition-transform ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
                             }`}
                     />
                     <span
-                        className={`w-6 h-0.5 bg-[var(--neon-cyan)] transition-opacity ${isMobileMenuOpen ? 'opacity-0' : ''
+                        className={`w-6 h-0.5 bg-[var(--accent-primary)] transition-opacity ${isMobileMenuOpen ? 'opacity-0' : ''
                             }`}
                     />
                     <span
-                        className={`w-6 h-0.5 bg-[var(--neon-cyan)] transition-transform ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
+                        className={`w-6 h-0.5 bg-[var(--accent-primary)] transition-transform ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
                             }`}
                     />
                 </button>
@@ -97,7 +98,7 @@ export default function Header() {
 
             {/* Mobile Menu */}
             {isMobileMenuOpen && (
-                <div className="md:hidden glass mt-4 mx-6 rounded-lg p-6">
+                <div className="md:hidden glass mt-4 mx-6 rounded-xl p-6">
                     <nav className="flex flex-col gap-4">
                         {navLinks.map((link) => (
                             <Link
@@ -105,7 +106,7 @@ export default function Header() {
                                 href={link.href}
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className={`text-lg font-medium transition-colors ${pathname === link.href
-                                    ? 'text-[var(--neon-cyan)]'
+                                    ? 'text-[var(--accent-primary)]'
                                     : 'text-[var(--text-secondary)]'
                                     }`}
                             >
@@ -115,9 +116,9 @@ export default function Header() {
                         <Link
                             href="/contact"
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="cyber-btn text-center text-sm mt-4"
+                            className="btn-filled text-center text-sm mt-4"
                         >
-                            Hire Me
+                            Get Estimate
                         </Link>
                     </nav>
                 </div>

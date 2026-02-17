@@ -7,17 +7,20 @@ const footerLinks = [
         title: 'Navigation',
         links: [
             { label: 'Home', href: '/' },
+            { label: 'Services', href: '/services' },
             { label: 'Projects', href: '/projects' },
             { label: 'About', href: '/about' },
             { label: 'Contact', href: '/contact' },
         ],
     },
     {
-        title: 'Projects',
+        title: 'Services',
         links: [
-            { label: 'Mobile Apps', href: '/projects?category=mobile' },
-            { label: 'Telegram Bots', href: '/projects?category=telegram' },
-            { label: 'Web Services', href: '/projects?category=web' },
+            { label: 'Mobile Apps', href: '/services#mobile' },
+            { label: 'Websites', href: '/services#web' },
+            { label: 'Telegram & Discord Bots', href: '/services#bots' },
+            { label: 'SaaS Platforms', href: '/services#saas' },
+            { label: 'APIs & Backends', href: '/services#api' },
         ],
     },
 ];
@@ -32,7 +35,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="md:col-span-2">
                         <Link href="/" className="inline-flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[var(--neon-cyan)]">
+                            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[var(--accent-primary)]">
                                 <Image
                                     src="/logo.jpg"
                                     alt="nzt108_dev"
@@ -42,22 +45,22 @@ export default function Footer() {
                                 />
                             </div>
                             <span className="font-bold text-xl tracking-tight">
-                                <span className="text-[var(--neon-cyan)]">nzt108</span>
+                                <span className="text-[var(--accent-primary)]">nzt108</span>
                                 <span className="text-[var(--text-secondary)]">_dev</span>
                             </span>
                         </Link>
                         <p className="text-[var(--text-secondary)] max-w-md mb-6">
-                            Building digital futures, one architecture at a time.
-                            Creating scalable, maintainable solutions with modern technologies.
+                            Custom apps, bots, and SaaS platforms — built fast, priced fair.
+                            From idea to launch, one developer does it all.
                         </p>
-                        <div className="flex gap-4">
+                        <div className="flex gap-3">
                             {socialLinks.map((social) => (
                                 <a
                                     key={social.name}
                                     href={social.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-lg border border-[var(--border-color)] flex items-center justify-center text-[var(--text-secondary)] hover:border-[var(--neon-cyan)] hover:text-[var(--neon-cyan)] hover:shadow-[0_0_15px_rgba(0,255,245,0.3)] transition-all"
+                                    className="w-10 h-10 rounded-lg border border-[var(--border-color)] flex items-center justify-center text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-all"
                                     aria-label={social.name}
                                 >
                                     {social.icon === 'github' && (
@@ -91,7 +94,7 @@ export default function Footer() {
                                     <li key={link.href}>
                                         <Link
                                             href={link.href}
-                                            className="text-[var(--text-secondary)] hover:text-[var(--neon-cyan)] transition-colors text-sm"
+                                            className="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors text-sm"
                                         >
                                             {link.label}
                                         </Link>
@@ -108,7 +111,7 @@ export default function Footer() {
                         © {currentYear} nzt108_dev. All rights reserved.
                     </p>
                     <p className="text-[var(--text-muted)] text-sm">
-                        Built with <span className="text-[var(--neon-pink)]">♥</span> using Next.js & Vercel
+                        Built with <span className="text-[var(--accent-primary)]">precision</span> using Next.js
                     </p>
                 </div>
             </div>

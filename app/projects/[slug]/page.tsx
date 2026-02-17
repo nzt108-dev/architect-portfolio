@@ -1,11 +1,8 @@
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
 import { getProjectBySlug, getProjects } from '@/lib/queries'
-import ProgressBar from '@/components/ui/ProgressBar'
+import { notFound } from 'next/navigation'
 
-interface Props {
-    params: Promise<{ slug: string }>
-}
+export const dynamic = 'force-dynamic'
 
 export async function generateStaticParams() {
     const projects = await getProjects()
@@ -14,9 +11,11 @@ export async function generateStaticParams() {
     }))
 }
 
-export const dynamic = 'force-dynamic'
-
-export default async function ProjectDetailPage({ params }: Props) {
+export default async function ProjectDetailPage({
+    params,
+}: {
+    params: Promise<{ slug: string }>
+}) {
     const { slug } = await params
     const project = await getProjectBySlug(slug)
 
@@ -24,65 +23,115 @@ export default async function ProjectDetailPage({ params }: Props) {
         notFound()
     }
 
-    const statusColors = {
-        done: 'var(--neon-green)',
-        'in-progress': 'var(--neon-cyan)',
-        planned: 'var(--text-muted)',
+    const categoryLabels: Record<string, string> = {
+        mobile: '📱 Mobile App',
+        telegram: '🤖 Telegram Bot',
+        web: '🌐 Web Service',
+        saas: '💼 SaaS Platform',
+        discord: '🎮 Discord Bot',
     }
 
-    const statusLabels = {
-        done: 'Completed',
-        'in-progress': 'In Progress',
-        planned: 'Planned',
-    }
+    const statusLabel =
+        project.progress === 100
+            ? 'Completed'
+            : project.progress > 0
+                ? 'In Progress'
+                : 'Planning'
 
     return (
-        <div className="container mx-auto px-6 py-12">
+        <div className="container mx-auto px-6 pt-32 pb-20">
             {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-sm mb-8">
-                <Link href="/projects" className="text-[var(--text-secondary)] hover:text-[var(--neon-cyan)]">
+            <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-8">
+                <Link href="/" className="hover:text-[var(--accent-primary)] transition-colors">
+                    Home
+                </Link>
+                <span>/</span>
+                <Link href="/projects" className="hover:text-[var(--accent-primary)] transition-colors">
                     Projects
                 </Link>
-                <span className="text-[var(--text-muted)]">/</span>
-                <span className="text-[var(--neon-cyan)]">{project.title}</span>
+                <span>/</span>
+                <span className="text-[var(--text-secondary)]">{project.title}</span>
             </nav>
 
-            {/* Header */}
-            <div className="mb-12">
-                <div className="flex items-center gap-4 mb-4">
-                    <span className="px-3 py-1 rounded-full text-sm font-medium bg-[var(--neon-cyan)]20 text-[var(--neon-cyan)] border border-[var(--neon-cyan)]40">
-                        {project.category === 'mobile' && '📱 Mobile App'}
-                        {project.category === 'telegram' && '🤖 Telegram Bot'}
-                        {project.category === 'web' && '🌐 Web Service'}
-                    </span>
-                    <span className="text-[var(--text-secondary)]">•</span>
-                    <span className="text-[var(--text-secondary)]">
-                        {project.progress}% Complete
-                    </span>
-                </div>
-
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
-                    {project.title}
-                </h1>
-
-                <p className="text-[var(--text-secondary)] text-lg max-w-3xl">
-                    {project.description}
-                </p>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
                 {/* Main Content */}
                 <div className="lg:col-span-2 space-y-8">
-                    {/* Progress Section */}
-                    <section className="cyber-card p-6">
-                        <h2 className="text-xl font-semibold mb-4">Development Progress</h2>
-                        <ProgressBar progress={project.progress} showLabel size="lg" />
-                    </section>
+                    {/* Header */}
+                    <div>
+                        <div className="flex items-center gap-3 mb-4">
+                            <span className="skill-badge text-xs">
+                                {categoryLabels[project.category] || project.category}
+                            </span>
+                            <span className={`text-xs font-medium px-3 py-1 rounded-full ${project.progress === 100
+                                ? 'bg-[var(--accent-green)]/15 text-[var(--accent-green)]'
+                                : 'bg-[var(--accent-primary)]/15 text-[var(--accent-primary)]'
+                                }`}>
+                                {statusLabel}
+                            </span>
+                        </div>
+
+                        <h1 className="text-3xl md:text-4xl font-bold mb-4">{project.title}</h1>
+                        <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
+                            {project.longDescription || project.description}
+                        </p>
+                    </div>
+
+                    {/* The Idea */}
+                    {project.ideaText && (
+                        <section className="cyber-card p-6">
+                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <span>💡</span> The Idea
+                            </h2>
+                            <p className="text-[var(--text-secondary)] leading-relaxed">
+                                {project.ideaText}
+                            </p>
+                        </section>
+                    )}
+
+                    {/* Client Benefit */}
+                    {project.clientBenefit && (
+                        <section className="cyber-card p-6 neon-border">
+                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <span>🎯</span> What You Get
+                            </h2>
+                            <p className="text-[var(--text-secondary)] leading-relaxed">
+                                {project.clientBenefit}
+                            </p>
+                        </section>
+                    )}
+
+                    {/* Screenshots Gallery */}
+                    {project.screenshots.length > 0 && (
+                        <section className="cyber-card p-6">
+                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <span>📸</span> Screenshots
+                            </h2>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                {project.screenshots.map((url, i) => (
+                                    <a
+                                        key={i}
+                                        href={url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block rounded-lg overflow-hidden border border-[var(--border-color)] hover:border-[var(--accent-primary)] transition-colors"
+                                    >
+                                        <img
+                                            src={url}
+                                            alt={`${project.title} screenshot ${i + 1}`}
+                                            className="w-full h-auto object-cover"
+                                        />
+                                    </a>
+                                ))}
+                            </div>
+                        </section>
+                    )}
 
                     {/* Technologies */}
                     <section className="cyber-card p-6">
-                        <h2 className="text-xl font-semibold mb-4">Technologies Used</h2>
-                        <div className="flex flex-wrap gap-3">
+                        <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                            <span>⚙️</span> Tech Stack
+                        </h2>
+                        <div className="flex flex-wrap gap-2">
                             {project.technologies.map((tech) => (
                                 <span key={tech} className="skill-badge">
                                     {tech}
@@ -92,27 +141,27 @@ export default async function ProjectDetailPage({ params }: Props) {
                     </section>
 
                     {/* Roadmap */}
-                    {project.roadmap && project.roadmap.length > 0 && (
+                    {project.roadmap.length > 0 && (
                         <section className="cyber-card p-6">
-                            <h2 className="text-xl font-semibold mb-6">Roadmap</h2>
-                            <div className="space-y-4">
-                                {project.roadmap.map((item, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex items-center gap-4 p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)]"
-                                    >
-                                        <div
-                                            className="w-3 h-3 rounded-full"
-                                            style={{ backgroundColor: statusColors[item.status] }}
-                                        />
-                                        <div className="flex-grow">
-                                            <span className="font-medium">{item.title}</span>
-                                        </div>
-                                        <span
-                                            className="text-sm font-medium"
-                                            style={{ color: statusColors[item.status] }}
-                                        >
-                                            {statusLabels[item.status]}
+                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <span>🗺️</span> Roadmap
+                            </h2>
+                            <div className="space-y-3">
+                                {project.roadmap.map((item, i) => (
+                                    <div key={i} className="flex items-center gap-3">
+                                        <div className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${item.status === 'done'
+                                            ? 'bg-[var(--accent-green)]'
+                                            : item.status === 'in-progress'
+                                                ? 'bg-[var(--accent-primary)]'
+                                                : 'bg-[var(--text-muted)]'
+                                            }`} />
+                                        <span className={`text-sm ${item.status === 'done'
+                                            ? 'text-[var(--text-secondary)] line-through'
+                                            : item.status === 'in-progress'
+                                                ? 'text-[var(--accent-primary)]'
+                                                : 'text-[var(--text-muted)]'
+                                            }`}>
+                                            {item.title}
                                         </span>
                                     </div>
                                 ))}
@@ -123,97 +172,67 @@ export default async function ProjectDetailPage({ params }: Props) {
 
                 {/* Sidebar */}
                 <div className="space-y-6">
-                    {/* Links */}
-                    <section className="cyber-card p-6">
-                        <h3 className="text-lg font-semibold mb-4">Links</h3>
-                        <div className="space-y-3">
-                            {project.githubUrl && (
-                                <a
-                                    href={project.githubUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-3 p-3 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--neon-cyan)] transition-all group"
-                                >
-                                    <svg className="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--neon-cyan)]" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                                    </svg>
-                                    <span className="text-[var(--text-secondary)] group-hover:text-[var(--neon-cyan)]">
-                                        View on GitHub
-                                    </span>
-                                </a>
-                            )}
-                            {project.demoUrl && (
-                                <a
-                                    href={project.demoUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-3 p-3 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--neon-pink)] transition-all group"
-                                >
-                                    <svg className="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--neon-pink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                    </svg>
-                                    <span className="text-[var(--text-secondary)] group-hover:text-[var(--neon-pink)]">
-                                        Live Demo
-                                    </span>
-                                </a>
-                            )}
+                    {/* Progress */}
+                    <div className="cyber-card p-6">
+                        <h3 className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-wider mb-3">
+                            Progress
+                        </h3>
+                        <div className="flex items-center gap-4 mb-3">
+                            <span className="text-3xl font-bold text-[var(--accent-primary)]">
+                                {project.progress}%
+                            </span>
                         </div>
-                    </section>
+                        <div className="progress-bar">
+                            <div
+                                className="progress-bar-fill"
+                                style={{ width: `${project.progress}%` }}
+                            />
+                        </div>
+                    </div>
 
-                    {/* Project Info */}
-                    <section className="cyber-card p-6">
-                        <h3 className="text-lg font-semibold mb-4">Project Info</h3>
-                        <dl className="space-y-4">
-                            <div>
-                                <dt className="text-[var(--text-muted)] text-sm">Category</dt>
-                                <dd className="font-medium capitalize">{project.category}</dd>
-                            </div>
-                            <div>
-                                <dt className="text-[var(--text-muted)] text-sm">Started</dt>
-                                <dd className="font-medium">
-                                    {new Date(project.createdAt).toLocaleDateString('en-US', {
-                                        year: 'numeric',
-                                        month: 'long',
-                                    })}
-                                </dd>
-                            </div>
-                            <div>
-                                <dt className="text-[var(--text-muted)] text-sm">Status</dt>
-                                <dd className="font-medium">
-                                    {project.progress === 100 ? (
-                                        <span className="text-[var(--neon-green)]">Completed</span>
-                                    ) : (
-                                        <span className="text-[var(--neon-cyan)]">In Development</span>
-                                    )}
-                                </dd>
-                            </div>
-                        </dl>
-                    </section>
+                    {/* Links */}
+                    <div className="cyber-card p-6 space-y-3">
+                        {project.demoUrl && (
+                            <a
+                                href={project.demoUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-filled w-full text-center text-sm block"
+                            >
+                                🔗 Live Demo
+                            </a>
+                        )}
+                        {project.githubUrl && (
+                            <a
+                                href={project.githubUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="cyber-btn w-full text-center text-sm block"
+                            >
+                                GitHub Repository
+                            </a>
+                        )}
+                    </div>
 
                     {/* CTA */}
                     <div className="cyber-card p-6 neon-border">
-                        <h3 className="text-lg font-semibold mb-2">Interested?</h3>
+                        <h3 className="text-lg font-semibold mb-2">Need Something Similar?</h3>
                         <p className="text-[var(--text-secondary)] text-sm mb-4">
-                            Let&apos;s discuss this project or similar solutions.
+                            I can build a custom solution tailored to your needs. Let&apos;s discuss your project.
                         </p>
-                        <Link href="/contact" className="cyber-btn w-full text-center block">
-                            Contact Me
+                        <Link href="/contact" className="btn-filled w-full text-center text-sm block">
+                            Get Free Estimate →
                         </Link>
                     </div>
-                </div>
-            </div>
 
-            {/* Back Button */}
-            <div className="mt-12">
-                <Link
-                    href="/projects"
-                    className="inline-flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--neon-cyan)] transition-colors"
-                >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-                    </svg>
-                    Back to Projects
-                </Link>
+                    {/* Back */}
+                    <Link
+                        href="/projects"
+                        className="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors text-sm"
+                    >
+                        ← Back to All Projects
+                    </Link>
+                </div>
             </div>
         </div>
     )

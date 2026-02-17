@@ -34,13 +34,13 @@ export default async function ContactPage() {
                                     href={link.url}
                                     target={link.url.startsWith('mailto:') ? undefined : '_blank'}
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-4 p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--neon-cyan)] transition-all group"
+                                    className="flex items-center gap-4 p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] transition-all group"
                                 >
                                     <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${getIconBg(link.icon)}`}>
                                         <SocialIcon icon={link.icon} />
                                     </div>
                                     <div>
-                                        <div className="font-medium group-hover:text-[var(--neon-cyan)]">
+                                        <div className="font-medium group-hover:text-[var(--accent-primary)]">
                                             {link.name}
                                         </div>
                                         <div className="text-[var(--text-muted)] text-sm">
@@ -56,7 +56,7 @@ export default async function ContactPage() {
                     <div className="cyber-card p-6">
                         <h3 className="text-lg font-semibold mb-2">Response Time</h3>
                         <p className="text-[var(--text-secondary)] text-sm">
-                            I typically respond within <span className="text-[var(--neon-cyan)]">24 hours</span> on business days.
+                            I typically respond within <span className="text-[var(--accent-primary)]">24 hours</span> on business days.
                             For urgent matters, reach out via Telegram.
                         </p>
                     </div>

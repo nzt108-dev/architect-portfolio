@@ -33,12 +33,12 @@ export default async function AboutPage() {
                     {/* Bio */}
                     <section>
                         <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                            <span className="text-[var(--neon-cyan)]">{'>'}</span>
+                            <span className="text-[var(--accent-primary)]">{'>'}</span>
                             Who I Am
                         </h2>
                         <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
                             <p>
-                                I&apos;m <span className="text-[var(--neon-cyan)]">nzt108_dev</span> —
+                                I&apos;m <span className="text-[var(--accent-primary)]">nzt108_dev</span> —
                                 a software architect who builds complete digital solutions from zero to launch.
                                 Not just a developer who codes, but a partner who thinks through every aspect
                                 of your project: architecture, technology stack, user experience, and scalability.
@@ -55,7 +55,7 @@ export default async function AboutPage() {
                     {/* What Makes Me Different */}
                     <section>
                         <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                            <span className="text-[var(--neon-pink)]">{'>'}</span>
+                            <span className="text-[var(--accent-secondary)]">{'>'}</span>
                             Why Work With Me
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -97,7 +97,7 @@ export default async function AboutPage() {
                     {/* Skills as Badges */}
                     <section>
                         <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
-                            <span className="text-[var(--neon-purple)]">{'>'}</span>
+                            <span className="text-[var(--accent-secondary)]">{'>'}</span>
                             Technologies
                         </h2>
 
@@ -129,7 +129,7 @@ export default async function AboutPage() {
                     {/* What I Build */}
                     <section>
                         <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                            <span className="text-[var(--neon-cyan)]">{'>'}</span>
+                            <span className="text-[var(--accent-primary)]">{'>'}</span>
                             What I Build
                         </h2>
                         <div className="flex flex-wrap gap-4">
@@ -156,7 +156,7 @@ export default async function AboutPage() {
                 <div className="space-y-6">
                     {/* Profile Card */}
                     <div className="cyber-card p-8 text-center neon-border">
-                        <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-2 border-[var(--neon-cyan)] shadow-[var(--glow-cyan)]">
+                        <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-2 border-[var(--accent-primary)]">
                             <Image
                                 src="/logo.jpg"
                                 alt="nzt108_dev"
@@ -166,7 +166,7 @@ export default async function AboutPage() {
                             />
                         </div>
                         <h3 className="text-xl font-bold mb-1">nzt108_dev</h3>
-                        <p className="text-[var(--neon-cyan)]">Software Architect</p>
+                        <p className="text-[var(--accent-primary)]">Software Architect</p>
                         <p className="text-[var(--text-muted)] text-sm mt-4 italic">
                             &quot;From zero to launch, I&apos;ve got you covered&quot;
                         </p>
@@ -177,15 +177,15 @@ export default async function AboutPage() {
                         <h3 className="text-lg font-semibold mb-4">Quick Facts</h3>
                         <ul className="space-y-3 text-[var(--text-secondary)]">
                             <li className="flex items-center gap-3">
-                                <span className="text-[var(--neon-cyan)]">📍</span>
+                                <span className="text-[var(--accent-primary)]">📍</span>
                                 Remote / Worldwide
                             </li>
                             <li className="flex items-center gap-3">
-                                <span className="text-[var(--neon-cyan)]">💼</span>
+                                <span className="text-[var(--accent-primary)]">💼</span>
                                 Open for projects
                             </li>
                             <li className="flex items-center gap-3">
-                                <span className="text-[var(--neon-cyan)]">🔑</span>
+                                <span className="text-[var(--accent-primary)]">🔑</span>
                                 Full-cycle development
                             </li>
                         </ul>
