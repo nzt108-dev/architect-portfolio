@@ -15,6 +15,10 @@ interface ProjectFormData {
     title: string
     slug: string
     description: string
+    longDescription: string
+    ideaText: string
+    clientBenefit: string
+    screenshots: string
     category: 'mobile' | 'telegram' | 'web'
     progress: number
     technologies: string
@@ -39,6 +43,10 @@ export default function ProjectForm({ initialData, initialRoadmap, isEdit }: Pro
             title: '',
             slug: '',
             description: '',
+            longDescription: '',
+            ideaText: '',
+            clientBenefit: '',
+            screenshots: '',
             category: 'web',
             progress: 0,
             technologies: '',
@@ -122,6 +130,7 @@ export default function ProjectForm({ initialData, initialRoadmap, isEdit }: Pro
                 body: JSON.stringify({
                     ...formData,
                     technologies: formData.technologies.split(',').map((t) => t.trim()).filter(Boolean),
+                    screenshots: JSON.stringify(formData.screenshots.split('\n').map(s => s.trim()).filter(Boolean)),
                     roadmapItems: roadmapItems.filter(item => item.title.trim()),
                 }),
             })
@@ -187,6 +196,51 @@ export default function ProjectForm({ initialData, initialRoadmap, isEdit }: Pro
                     placeholder="Brief description of the project..."
                     required
                 />
+            </div>
+
+            {/* Long Description (Case Study) */}
+            <div>
+                <label className="block text-sm font-medium mb-2">Detailed Description</label>
+                <textarea
+                    value={formData.longDescription}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, longDescription: e.target.value }))}
+                    className="cyber-input min-h-[150px] resize-none"
+                    placeholder="Detailed case study description — what the project does, the problem it solves, and why it matters..."
+                />
+            </div>
+
+            {/* The Idea */}
+            <div>
+                <label className="block text-sm font-medium mb-2">💡 The Idea</label>
+                <textarea
+                    value={formData.ideaText}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, ideaText: e.target.value }))}
+                    className="cyber-input min-h-[100px] resize-none"
+                    placeholder="What inspired this project? What problem does it solve?"
+                />
+            </div>
+
+            {/* Client Benefit */}
+            <div>
+                <label className="block text-sm font-medium mb-2">🎯 What You Get (Client Benefit)</label>
+                <textarea
+                    value={formData.clientBenefit}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, clientBenefit: e.target.value }))}
+                    className="cyber-input min-h-[100px] resize-none"
+                    placeholder="What does the client get? What results were achieved?"
+                />
+            </div>
+
+            {/* Screenshots */}
+            <div>
+                <label className="block text-sm font-medium mb-2">📸 Screenshot URLs (one per line)</label>
+                <textarea
+                    value={formData.screenshots}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, screenshots: e.target.value }))}
+                    className="cyber-input min-h-[100px] resize-none"
+                    placeholder={"https://example.com/screenshot1.png\nhttps://example.com/screenshot2.png"}
+                />
+                <p className="text-xs text-[var(--text-muted)] mt-1">Paste direct image URLs, one per line</p>
             </div>
 
             {/* Category & Progress */}

@@ -22,11 +22,23 @@ export default async function EditProjectPage({ params }: Props) {
         notFound()
     }
 
+    const screenshotUrls = (() => {
+        try {
+            return JSON.parse(project.screenshots || '[]')
+        } catch {
+            return []
+        }
+    })()
+
     const initialData = {
         id: project.id,
         title: project.title,
         slug: project.slug,
         description: project.description,
+        longDescription: project.longDescription || '',
+        ideaText: project.ideaText || '',
+        clientBenefit: project.clientBenefit || '',
+        screenshots: (screenshotUrls as string[]).join('\n'),
         category: project.category as 'mobile' | 'telegram' | 'web',
         progress: project.progress,
         technologies: JSON.parse(project.technologies).join(', '),
