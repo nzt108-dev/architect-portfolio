@@ -58,7 +58,7 @@ export default function QuickPricing() {
                         {pricingOptions.map((item) => (
                             <div
                                 key={item.title}
-                                className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-5 flex flex-col items-center text-center transition-all hover:border-[var(--border-hover)] hover:shadow-[0_0_20px_rgba(99,102,241,0.1)] hover:-translate-y-1 relative group"
+                                className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-5 flex flex-col items-center text-center transition-all hover:border-[var(--border-hover)] hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:-translate-y-1 relative group"
                             >
                                 <div
                                     className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"

@@ -1,23 +1,18 @@
 import Link from 'next/link'
-import { getFeaturedProjects, getSkills } from '@/lib/queries'
+import { getFeaturedProjects } from '@/lib/queries'
 import ProjectCard from '@/components/ui/ProjectCard'
 import GlitchText from '@/components/ui/GlitchText'
 import HeroAvatar from '@/components/ui/HeroAvatar'
 import QuickPricing from '@/components/ui/QuickPricing'
-import WhyChooseMe from '@/components/ui/WhyChooseMe'
 import ProcessSteps from '@/components/ui/ProcessSteps'
 import ComparisonTable from '@/components/ui/ComparisonTable'
 import FAQ from '@/components/ui/FAQ'
 import LeadCaptureWidget from '@/components/ui/LeadCaptureWidget'
-import GradientIcon from '@/components/ui/GradientIcon'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
   const featuredProjects = await getFeaturedProjects()
-  const skills = await getSkills()
-
-  const techStack = skills.slice(0, 11).map((s) => s.name)
 
   return (
     <div className="container mx-auto px-6">
@@ -88,54 +83,8 @@ export default async function Home() {
       {/* Quick Pricing Infographic */}
       <QuickPricing />
 
-      {/* Why Choose Me */}
-      <WhyChooseMe />
-
-      {/* How It Works */}
-      <ProcessSteps />
-
-      {/* Services Preview */}
-      <section className="py-20">
-        <div className="text-center mb-14">
-          <h2 className="section-title gradient-text">What I Build</h2>
-          <p className="section-subtitle mx-auto">
-            From mobile apps to full-stack SaaS — everything you need, under one roof.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          {[
-            { iconName: 'smartphone', label: 'Mobile Apps', desc: 'iOS & Android' },
-            { iconName: 'globe', label: 'Websites', desc: 'Landing & Web Apps' },
-            { iconName: 'bot', label: 'Telegram Bots', desc: 'Automation & Commerce' },
-            { iconName: 'briefcase', label: 'SaaS Platforms', desc: 'Full-stack Products' },
-            { iconName: 'server', label: 'APIs & Backends', desc: 'Scalable Infrastructure' },
-          ].map((item) => (
-            <Link
-              key={item.label}
-              href="/services"
-              className="cyber-card p-5 text-center group"
-            >
-              <div className="flex justify-center mb-3">
-                <GradientIcon name={item.iconName} size={32} />
-              </div>
-              <div className="font-medium text-sm group-hover:text-[var(--accent-primary)] transition-colors">
-                {item.label}
-              </div>
-              <div className="text-[var(--text-muted)] text-xs mt-1">{item.desc}</div>
-            </Link>
-          ))}
-        </div>
-
-        <div className="mt-8 text-center">
-          <Link href="/services" className="cyber-btn">
-            View All Services →
-          </Link>
-        </div>
-      </section>
-
       {/* Featured Projects */}
-      <section className="py-20">
+      <section className="py-20 z-10 relative">
         <div className="mb-12">
           <h2 className="section-title gradient-text">Featured Projects</h2>
           <p className="section-subtitle">
@@ -156,25 +105,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Tech Stack Preview */}
-      <section className="py-20">
-        <div className="cyber-card p-8 md:p-12">
-          <div className="text-center mb-10">
-            <h2 className="section-title">Tech Stack</h2>
-            <p className="section-subtitle mx-auto">
-              Battle-tested technologies for reliable, scalable products
-            </p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            {techStack.map((tech) => (
-              <span key={tech} className="skill-badge">
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* How It Works */}
+      <ProcessSteps />
 
       {/* Comparison */}
       <ComparisonTable />
