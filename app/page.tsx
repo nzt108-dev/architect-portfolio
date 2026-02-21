@@ -17,9 +17,13 @@ export default async function Home() {
   return (
     <div className="container mx-auto px-6">
       {/* Hero Section */}
-      <section className="min-h-[80vh] flex flex-col justify-center py-10 lg:py-20">
+      <section className="relative min-h-[80vh] flex flex-col justify-center py-10 lg:py-20">
+        {/* Background Grid & ambient glow */}
+        <div className="absolute inset-0 premium-grid opacity-30 z-0 pointer-events-none" />
+        <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[30rem] h-[30rem] bg-white opacity-[0.02] blur-[100px] rounded-full pointer-events-none z-0" />
+
         {/* Mobile Avatar */}
-        <div className="lg:hidden flex justify-center mb-[-80px] relative z-0">
+        <div className="lg:hidden flex justify-center mb-[-80px] relative z-10">
           <HeroAvatar />
         </div>
 
@@ -56,20 +60,15 @@ export default async function Home() {
               </Link>
             </div>
 
-            {/* Stats */}
-            <div className="flex gap-8 md:gap-12 mt-16">
-              <div>
-                <div className="text-4xl font-bold text-[var(--accent-primary)]">5+</div>
-                <div className="text-[var(--text-secondary)] text-sm">Active Projects</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-[var(--accent-secondary)]">3</div>
-                <div className="text-[var(--text-secondary)] text-sm">Tech Domains</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-[var(--accent-blue)]">24h</div>
-                <div className="text-[var(--text-secondary)] text-sm">Response Time</div>
-              </div>
+            {/* Availability Status */}
+            <div className="mt-12 flex items-center gap-3 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-full py-2 px-4 w-fit">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              </span>
+              <span className="text-sm font-medium text-[var(--text-primary)]">
+                Available for new projects
+              </span>
             </div>
           </div>
 

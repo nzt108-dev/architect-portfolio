@@ -244,8 +244,8 @@ body {
   font-size: 14px;
   letter-spacing: 0.5px;
   background: transparent;
-  border: 1.5px solid var(--accent-primary);
-  color: var(--accent-primary);
+  border: 1.5px solid var(--border-color);
+  color: var(--text-primary);
   border-radius: 10px;
   cursor: pointer;
   overflow: hidden;
@@ -253,9 +253,9 @@ body {
 }
 
 .cyber-btn:hover {
-  background: var(--accent-primary);
-  color: white;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
   transform: translateY(-1px);
 }
 
@@ -277,9 +277,9 @@ body {
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.5px;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  background: var(--text-primary);
   border: none;
-  color: white;
+  color: var(--bg-primary);
   border-radius: 10px;
   cursor: pointer;
   overflow: hidden;
@@ -287,9 +287,9 @@ body {
 }
 
 .btn-filled:hover {
-  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
   transform: translateY(-1px);
-  filter: brightness(1.15);
+  filter: brightness(0.9);
   color: var(--bg-primary);
 }
 
