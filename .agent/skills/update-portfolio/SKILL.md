@@ -56,7 +56,7 @@ The API key is stored in environment variable `PORTFOLIO_API_KEY`.
 #### Required Fields
 - **title**: Project name (public name only)
 
-#### Optional Fields
+#### Optional Fields — Basic
 - **slug**: URL-friendly name (auto-generated if not provided)
 - **description**: 1-2 sentence VAGUE summary
 - **category**: `mobile`, `telegram`, or `web`
@@ -64,7 +64,16 @@ The API key is stored in environment variable `PORTFOLIO_API_KEY`.
 - **technologies**: Array of PUBLIC technology names only
 - **githubUrl**: Only if repository is PUBLIC
 - **demoUrl**: Only LIVE public URLs (no staging/dev)
-- **roadmapItems**: HIGH-LEVEL tasks only
+- **featured**: Boolean, show on homepage
+
+#### Optional Fields — Case Study (IMPORTANT!)
+- **longDescription**: 3-5 paragraph detailed description of the project — what it does, the problem it solves, and why it matters. Write it as a narrative, not bullet points. This is the main body of the project page.
+- **ideaText**: 1-3 paragraphs explaining the idea behind the project — what problem does it solve, what inspired it, what gap in the market it fills.
+- **clientBenefit**: 1-3 paragraphs explaining what value the project delivers — what does the user/client get, what results were achieved, what makes it special.
+- **screenshots**: Array of public image URLs (e.g. hosted on Imgur, Cloudinary, or the project's own domain). These will be displayed as a gallery on the project detail page. Use direct image links (ending in .png, .jpg, etc.)
+
+#### Optional Fields — Roadmap
+- **roadmapItems**: Array of `{ title, status }` where status is `done`, `in-progress`, or `planned`. HIGH-LEVEL tasks only.
 
 ### 2. How to Determine Progress
 
@@ -105,7 +114,25 @@ Bad examples:
 - "Setup Redis cluster" ❌
 - "Deploy to K8s" ❌
 
-### 5. Make the API Request
+### 5. How to Write Case Study Content
+
+**longDescription** — Write it like a product landing page:
+- What is this project?
+- What problem does it solve?
+- Who is the target audience?
+- What makes it unique?
+
+**ideaText** — Write it like a founder's story:
+- What inspired the project?
+- What pain point did you notice?
+- Why does this matter?
+
+**clientBenefit** — Write it like a sales pitch:
+- What tangible value does the user get?
+- What metrics improved?
+- What's the ROI?
+
+### 6. Make the API Request
 
 ```bash
 curl -X POST https://nzt108.dev/api/agent/projects \
@@ -114,6 +141,13 @@ curl -X POST https://nzt108.dev/api/agent/projects \
   -d '{
     "title": "Project Name",
     "description": "Brief public description",
+    "longDescription": "Detailed 3-5 paragraph case study description...",
+    "ideaText": "What inspired this project and what problem does it solve...",
+    "clientBenefit": "What value does this deliver to users/clients...",
+    "screenshots": [
+      "https://example.com/screenshot1.png",
+      "https://example.com/screenshot2.png"
+    ],
     "category": "web",
     "progress": 45,
     "technologies": ["Next.js", "TypeScript", "PostgreSQL"],

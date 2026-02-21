@@ -27,6 +27,10 @@ export async function POST(request: Request) {
             title,
             slug,
             description,
+            longDescription,
+            ideaText,
+            clientBenefit,
+            screenshots,
             category = 'web',
             progress = 0,
             technologies = [],
@@ -59,6 +63,10 @@ export async function POST(request: Request) {
             const updateData: Record<string, unknown> = { title }
 
             if (description !== undefined) updateData.description = description
+            if (longDescription !== undefined) updateData.longDescription = longDescription
+            if (ideaText !== undefined) updateData.ideaText = ideaText
+            if (clientBenefit !== undefined) updateData.clientBenefit = clientBenefit
+            if (screenshots !== undefined) updateData.screenshots = JSON.stringify(screenshots)
             if (body.category !== undefined) updateData.category = body.category
             if (body.progress !== undefined) updateData.progress = body.progress
             if (body.technologies !== undefined) updateData.technologies = JSON.stringify(body.technologies)
@@ -114,6 +122,10 @@ export async function POST(request: Request) {
                     title,
                     slug: projectSlug,
                     description: description || `${title} project`,
+                    longDescription: longDescription || '',
+                    ideaText: ideaText || '',
+                    clientBenefit: clientBenefit || '',
+                    screenshots: JSON.stringify(screenshots || []),
                     category,
                     progress,
                     technologies: JSON.stringify(technologies),
