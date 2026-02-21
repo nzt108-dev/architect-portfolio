@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { sendTelegramNotification } from '@/lib/telegram'
 
 // POST /api/contact - Handle contact form submission
 export async function POST(request: Request) {
@@ -26,6 +27,9 @@ export async function POST(request: Request) {
                 serviceType: serviceType || '',
             },
         })
+
+        // Send Telegram notification (fire-and-forget, don't block the response)
+        sendTelegramNotification({ name, email, subject, message, budget, serviceType })
 
         return NextResponse.json(
             { message: 'Message sent successfully', id: submission.id },
