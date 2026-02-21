@@ -3,6 +3,7 @@ import { getFeaturedProjects, getSkills } from '@/lib/queries'
 import ProjectCard from '@/components/ui/ProjectCard'
 import GlitchText from '@/components/ui/GlitchText'
 import HeroAvatar from '@/components/ui/HeroAvatar'
+import QuickPricing from '@/components/ui/QuickPricing'
 import WhyChooseMe from '@/components/ui/WhyChooseMe'
 import ProcessSteps from '@/components/ui/ProcessSteps'
 import ComparisonTable from '@/components/ui/ComparisonTable'
@@ -83,6 +84,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* Quick Pricing Infographic */}
+      <QuickPricing />
 
       {/* Why Choose Me */}
       <WhyChooseMe />

@@ -27,16 +27,17 @@ export default function AdminSkillsPage() {
     const [selectedCategory, setSelectedCategory] = useState('language')
     const router = useRouter()
 
-    useEffect(() => {
-        fetchSkills()
-    }, [])
-
     const fetchSkills = async () => {
         const res = await fetch('/api/skills')
         const data = await res.json()
         setSkills(data)
         setIsLoading(false)
     }
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        fetchSkills()
+    }, [])
 
     const addSkill = async (e: React.FormEvent) => {
         e.preventDefault()

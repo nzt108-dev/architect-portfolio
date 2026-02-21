@@ -16,7 +16,7 @@ export default function AdminLayout({
     useEffect(() => {
         // Skip auth check on login page
         if (pathname === '/admin/login') {
-            setIsAuthenticated(true)
+            setTimeout(() => setIsAuthenticated(true), 0)
             return
         }
 
