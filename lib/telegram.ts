@@ -12,27 +12,27 @@ interface ContactData {
 
 export async function sendTelegramNotification(data: ContactData): Promise<void> {
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-        console.warn('Telegram bot token or chat ID not configured, skipping notification')
+        console.warn('[Telegram] Bot token or chat ID not configured, skipping notification')
         return
     }
 
     const lines = [
-        '🔔 *New Lead from nzt108.dev*',
+        '🔔 <b>New Lead from nzt108.dev</b>',
         '',
-        `👤 *Name:* ${escapeMarkdown(data.name || 'Not provided')}`,
-        `📧 *Email:* ${escapeMarkdown(data.email)}`,
-        `📋 *Subject:* ${escapeMarkdown(data.subject)}`,
+        `👤 <b>Name:</b> ${esc(data.name || 'Not provided')}`,
+        `📧 <b>Email:</b> ${esc(data.email)}`,
+        `📋 <b>Subject:</b> ${esc(data.subject)}`,
     ]
 
     if (data.serviceType) {
-        lines.push(`🛠 *Service:* ${escapeMarkdown(data.serviceType)}`)
+        lines.push(`🛠 <b>Service:</b> ${esc(data.serviceType)}`)
     }
 
     if (data.budget) {
-        lines.push(`💰 *Budget:* ${escapeMarkdown(data.budget)}`)
+        lines.push(`💰 <b>Budget:</b> ${esc(data.budget)}`)
     }
 
-    lines.push('', `💬 *Message:*`, escapeMarkdown(data.message))
+    lines.push('', `💬 <b>Message:</b>`, esc(data.message))
 
     const text = lines.join('\n')
 
@@ -44,19 +44,26 @@ export async function sendTelegramNotification(data: ContactData): Promise<void>
             body: JSON.stringify({
                 chat_id: TELEGRAM_CHAT_ID,
                 text,
-                parse_mode: 'MarkdownV2',
+                parse_mode: 'HTML',
             }),
         })
 
+        const result = await res.json()
+
         if (!res.ok) {
-            const err = await res.text()
-            console.error('Telegram API error:', err)
+            console.error('[Telegram] API error:', JSON.stringify(result))
+        } else {
+            console.log('[Telegram] Notification sent successfully')
         }
     } catch (error) {
-        console.error('Failed to send Telegram notification:', error)
+        console.error('[Telegram] Failed to send notification:', error)
     }
 }
 
-function escapeMarkdown(text: string): string {
-    return text.replace(/([_*\[\]()~`>#+\-=|{}.!\\])/g, '\\$1')
+/** Escape HTML special characters */
+function esc(text: string): string {
+    return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
 }
