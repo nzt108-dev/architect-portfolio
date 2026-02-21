@@ -140,6 +140,31 @@ export const projects: Project[] = [
     ],
     createdAt: new Date('2025-02-01'),
   },
+  {
+    id: '7',
+    title: 'Channel Watch',
+    slug: 'channel-watch',
+    description: 'iOS-приложение для YouTube — AI-саммари видео, анализ комментариев, переменная глубина: Quick / Article / Full транскрипт. Бэкенд на FastAPI + Gemini 2.5 Flash, бесплатный парсинг субтитров.',
+    longDescription: '',
+    category: 'mobile',
+    progress: 55,
+    technologies: ['Flutter', 'Dart', 'Python', 'FastAPI', 'Supabase', 'Gemini AI', 'Docker'],
+    githubUrl: 'https://github.com/nzt108-dev/channel-watch',
+    demoUrl: null,
+    images: ['/images/project-7.png'],
+    screenshots: [],
+    ideaText: '',
+    clientBenefit: '',
+    roadmap: [
+      { title: 'Core Feed & Video Detail', status: 'done' },
+      { title: 'AI Summaries (Gemini)', status: 'done' },
+      { title: 'Comment Insights', status: 'done' },
+      { title: 'Summary Depth (Quick/Article/Full)', status: 'done' },
+      { title: 'VPS Deploy & Domain', status: 'in-progress' },
+      { title: 'App Store Release', status: 'planned' },
+    ],
+    createdAt: new Date('2025-02-10'),
+  },
 ];
 
 export const categories = [
