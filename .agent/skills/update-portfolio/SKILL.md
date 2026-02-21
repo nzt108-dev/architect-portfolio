@@ -201,3 +201,67 @@ curl -X GET https://nzt108.dev/api/agent/projects \
 curl -X DELETE "https://nzt108.dev/api/agent/projects?slug=project-slug" \
   -H "Authorization: Bearer $PORTFOLIO_API_KEY"
 ```
+
+---
+
+## Activity Logging (IMPORTANT!)
+
+**After every git push or completed task, log the activity** so the owner can track progress across all projects.
+
+### Log a Push
+```bash
+curl -X POST https://nzt108.dev/api/agent/activity \
+  -H "Authorization: Bearer $PORTFOLIO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "projectSlug": "project-slug",
+    "type": "push",
+    "title": "feat: add payment integration",
+    "details": "Added subscription billing and invoice generation"
+  }'
+```
+
+### Log a Completed Task
+```bash
+curl -X POST https://nzt108.dev/api/agent/activity \
+  -H "Authorization: Bearer $PORTFOLIO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "projectSlug": "project-slug",
+    "type": "task",
+    "title": "Completed user authentication flow"
+  }'
+```
+
+### Log a Deploy
+```bash
+curl -X POST https://nzt108.dev/api/agent/activity \
+  -H "Authorization: Bearer $PORTFOLIO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "projectSlug": "project-slug",
+    "type": "deploy",
+    "title": "Deployed v1.2 to production"
+  }'
+```
+
+### Activity Types
+| Type | When to use |
+|------|-------------|
+| `push` | After a `git push` |
+| `task` | When a significant task/feature is completed |
+| `deploy` | After deployment to production |
+| `milestone` | When a major milestone is reached |
+| `note` | General notes or observations |
+
+### Fields
+- **projectSlug** (required): The slug of the project
+- **type** (required): One of: `push`, `task`, `deploy`, `milestone`, `note`
+- **title** (required): Short summary (use git commit message for pushes)
+- **details** (optional): Additional context
+
+### When to Log
+1. After every `git push` — use the commit message as the title
+2. After completing a significant feature — use "Completed: [feature name]"
+3. After deployment — use "Deployed [version/description]"
+4. When you reach a milestone — use "Milestone: [description]"
