@@ -20,7 +20,7 @@ const pricingOptions = [
     {
         iconName: 'smartphone',
         title: 'Mobile Apps',
-        price: 'from $1,500',
+        price: 'from $3,000',
         time: 'from 3 weeks',
         accent: 'var(--accent-blue)',
     },
