@@ -77,6 +77,9 @@ export default function AdminLayout({
                     <NavLink href="/admin/messages" icon="✉️">
                         Messages
                     </NavLink>
+                    <NavLink href="/admin/activity" icon="📋">
+                        Activity
+                    </NavLink>
                 </nav>
 
                 <div className="pt-6 border-t border-[var(--border-color)] space-y-3">
