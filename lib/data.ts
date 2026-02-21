@@ -142,8 +142,8 @@ export const projects: Project[] = [
   },
   {
     id: '7',
-    title: 'Channel Watch',
-    slug: 'channel-watch',
+    title: 'BriefTube AI',
+    slug: 'brieftube-ai',
     description: 'iOS-приложение для YouTube — AI-саммари видео, анализ комментариев, переменная глубина: Quick / Article / Full транскрипт. Бэкенд на FastAPI + Gemini 2.5 Flash, бесплатный парсинг субтитров.',
     longDescription: '',
     category: 'mobile',
