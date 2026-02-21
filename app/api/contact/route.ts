@@ -28,8 +28,8 @@ export async function POST(request: Request) {
             },
         })
 
-        // Send Telegram notification (fire-and-forget, don't block the response)
-        sendTelegramNotification({ name, email, subject, message, budget, serviceType })
+        // Send Telegram notification
+        await sendTelegramNotification({ name, email, subject, message, budget, serviceType })
 
         return NextResponse.json(
             { message: 'Message sent successfully', id: submission.id },
