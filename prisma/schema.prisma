@@ -74,7 +74,7 @@ model SiteSetting {
   value String
 }
 
-// Contact form submissions
+// Contact form submissions (lead pipeline)
 model ContactSubmission {
   id          String   @id @default(cuid())
   name        String
@@ -84,6 +84,9 @@ model ContactSubmission {
   budget      String   @default("")
   serviceType String   @default("")
   read        Boolean  @default(false)
+  status      String   @default("new")     // "new" | "contacted" | "qualified" | "proposal" | "won" | "lost" | "archived"
+  label       String   @default("")        // "hot" | "warm" | "cold" | "" 
+  notes       String   @default("")        // Internal notes
   createdAt   DateTime @default(now())
 }
 

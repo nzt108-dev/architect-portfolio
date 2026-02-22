@@ -74,8 +74,8 @@ export default function AdminLayout({
                     <NavLink href="/admin/contacts" icon="📇">
                         Contacts
                     </NavLink>
-                    <NavLink href="/admin/messages" icon="✉️">
-                        Messages
+                    <NavLink href="/admin/messages" icon="🔥">
+                        Leads
                     </NavLink>
                     <NavLink href="/admin/crm" icon="🎯">
                         CRM
