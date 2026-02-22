@@ -80,8 +80,14 @@ export default function AdminLayout({
                     <NavLink href="/admin/crm" icon="🎯">
                         CRM
                     </NavLink>
+                    <NavLink href="/admin/finance" icon="💰">
+                        Finance
+                    </NavLink>
                     <NavLink href="/admin/workspaces" icon="🖥️">
                         Workspaces
+                    </NavLink>
+                    <NavLink href="/admin/settings" icon="⚙️">
+                        Settings
                     </NavLink>
                 </nav>
 
