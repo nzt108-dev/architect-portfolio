@@ -265,3 +265,83 @@ curl -X POST https://nzt108.dev/api/agent/activity \
 2. After completing a significant feature — use "Completed: [feature name]"
 3. After deployment — use "Deployed [version/description]"
 4. When you reach a milestone — use "Milestone: [description]"
+
+---
+
+## CRM Task Management (IMPORTANT!)
+
+**After every git push, completed task, or milestone — update the CRM board** so the owner can track tasks visually in a kanban view.
+
+### Create a Task
+```bash
+curl -X POST https://nzt108.dev/api/agent/crm \
+  -H "Authorization: Bearer $PORTFOLIO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "projectSlug": "project-slug",
+    "title": "Implement user auth",
+    "description": "Add login/register flow",
+    "type": "task",
+    "status": "todo",
+    "priority": "high",
+    "dueDate": "2026-03-01"
+  }'
+```
+
+### Update a Task Status
+```bash
+curl -X POST https://nzt108.dev/api/agent/crm \
+  -H "Authorization: Bearer $PORTFOLIO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "projectSlug": "project-slug",
+    "taskId": "existing-task-id",
+    "status": "done"
+  }'
+```
+
+### List Project Tasks
+```bash
+curl -X GET "https://nzt108.dev/api/agent/crm?projectSlug=project-slug" \
+  -H "Authorization: Bearer $PORTFOLIO_API_KEY"
+```
+
+### Task Types
+| Type | When to use |
+|------|-------------|
+| `task` | Regular work items |
+| `milestone` | Major project milestones (MVP, launch, etc.) |
+| `bug` | Bug fixes |
+| `feature` | New feature implementations |
+
+### Task Statuses (Kanban columns)
+| Status | Meaning |
+|--------|---------|
+| `backlog` | Not yet planned |
+| `todo` | Planned for soon |
+| `in-progress` | Currently being worked on |
+| `review` | Needs review or testing |
+| `done` | Completed |
+
+### Priority Levels
+`low`, `medium`, `high`, `urgent`
+
+### Fields
+- **projectSlug** (required): The slug of the project
+- **title** (required for new tasks): Task title
+- **description** (optional): Details about the task
+- **type** (optional): `task`, `milestone`, `bug`, `feature` — default: `task`
+- **status** (optional): `backlog`, `todo`, `in-progress`, `review`, `done` — default: `backlog`
+- **priority** (optional): `low`, `medium`, `high`, `urgent` — default: `medium`
+- **dueDate** (optional): ISO date string
+- **taskId** (optional): If provided, updates existing task instead of creating new
+
+---
+
+## Complete Workflow: What to Do After Every Push
+
+> **IMPORTANT**: Every time you push to GitHub, do ALL THREE steps:
+
+1. **Log activity** — `POST /api/agent/activity` with commit message
+2. **Update portfolio card** — `POST /api/agent/projects` with updated progress & roadmap
+3. **Update CRM tasks** — `POST /api/agent/crm` — mark completed tasks as `done`, create new tasks for next steps, update milestones
