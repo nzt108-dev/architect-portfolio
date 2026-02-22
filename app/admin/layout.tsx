@@ -61,19 +61,23 @@ export default function AdminLayout({
                     </Link>
                 </div>
 
-                <nav className="flex-grow space-y-2">
+                <nav className="flex-grow space-y-1 overflow-y-auto">
+                    {/* Overview */}
                     <NavLink href="/admin" icon="📊">
                         Dashboard
                     </NavLink>
+
+                    {/* Portfolio */}
+                    <SectionLabel>Portfolio</SectionLabel>
                     <NavLink href="/admin/projects" icon="📁">
                         Projects
                     </NavLink>
                     <NavLink href="/admin/skills" icon="⚡">
                         Skills
                     </NavLink>
-                    <NavLink href="/admin/contacts" icon="📇">
-                        Contacts
-                    </NavLink>
+
+                    {/* Business */}
+                    <SectionLabel>Business</SectionLabel>
                     <NavLink href="/admin/messages" icon="🔥">
                         Leads
                     </NavLink>
@@ -83,17 +87,23 @@ export default function AdminLayout({
                     <NavLink href="/admin/calendar" icon="📅">
                         Calendar
                     </NavLink>
-                    <NavLink href="/admin/analytics" icon="📈">
-                        Analytics
-                    </NavLink>
                     <NavLink href="/admin/finance" icon="💰">
                         Finance
                     </NavLink>
-                    <NavLink href="/admin/workspaces" icon="🖥️">
-                        Workspaces
+
+                    {/* Site */}
+                    <SectionLabel>Site</SectionLabel>
+                    <NavLink href="/admin/analytics" icon="📈">
+                        Analytics
                     </NavLink>
                     <NavLink href="/admin/content" icon="📝">
                         Content
+                    </NavLink>
+                    <NavLink href="/admin/contacts" icon="📇">
+                        Contacts
+                    </NavLink>
+                    <NavLink href="/admin/workspaces" icon="🖥️">
+                        Workspaces
                     </NavLink>
                     <NavLink href="/admin/settings" icon="⚙️">
                         Settings
@@ -140,7 +150,7 @@ function NavLink({
     return (
         <Link
             href={href}
-            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive
+            className={`flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all text-sm ${isActive
                 ? 'bg-[var(--neon-cyan)]/10 text-[var(--neon-cyan)] border border-[var(--neon-cyan)]/30'
                 : 'text-[var(--text-secondary)] hover:bg-[var(--bg-card-hover)] hover:text-[var(--text-primary)]'
                 }`}
@@ -148,5 +158,15 @@ function NavLink({
             <span>{icon}</span>
             <span className="font-medium">{children}</span>
         </Link>
+    )
+}
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+    return (
+        <div className="pt-4 pb-1 px-4">
+            <span className="text-[10px] font-semibold uppercase tracking-widest text-[var(--text-muted)]/60">
+                {children}
+            </span>
+        </div>
     )
 }
