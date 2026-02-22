@@ -15,6 +15,7 @@ interface Message {
     status: string
     label: string
     notes: string
+    dealValue: number
     createdAt: string
 }
 
@@ -99,12 +100,9 @@ export default function MessagesPage() {
     const newCount = messages.filter(m => m.status === 'new').length
     const activeCount = messages.filter(m => ['contacted', 'qualified', 'proposal'].includes(m.status)).length
     const wonCount = messages.filter(m => m.status === 'won').length
-    const totalBudget = messages
-        .filter(m => m.status === 'won' && m.budget)
-        .reduce((sum, m) => {
-            const num = parseInt(m.budget.replace(/\D/g, ''))
-            return sum + (isNaN(num) ? 0 : num)
-        }, 0)
+    const totalRevenue = messages
+        .filter(m => m.status === 'won')
+        .reduce((sum, m) => sum + (m.dealValue || 0), 0)
 
     // Filtered messages for list view
     const filteredMessages = messages.filter(m => {
@@ -184,7 +182,7 @@ export default function MessagesPage() {
                 </div>
                 <div className="cyber-card p-3 text-center">
                     <div className="text-2xl font-bold text-[var(--neon-cyan)]">
-                        {totalBudget > 0 ? `$${totalBudget.toLocaleString()}` : '$0'}
+                        {totalRevenue > 0 ? `$${totalRevenue.toLocaleString()}` : '$0'}
                     </div>
                     <div className="text-[var(--text-muted)] text-xs">Revenue</div>
                 </div>
@@ -558,6 +556,7 @@ function MessageDetail({
     onMove: (status: string) => void
 }) {
     const [notes, setNotes] = useState(message.notes || '')
+    const [dealValue, setDealValue] = useState(message.dealValue || 0)
     const [isEditingNotes, setIsEditingNotes] = useState(false)
     const stage = PIPELINE_STAGES.find(s => s.key === message.status) || PIPELINE_STAGES[0]
 
@@ -569,6 +568,10 @@ function MessageDetail({
     const saveNotes = () => {
         onUpdate({ notes })
         setIsEditingNotes(false)
+    }
+
+    const saveDealValue = () => {
+        onUpdate({ dealValue } as Partial<Message>)
     }
 
     return (
@@ -632,22 +635,35 @@ function MessageDetail({
                         </div>
                     </div>
 
-                    {(message.budget || message.serviceType) && (
-                        <div className="grid grid-cols-2 gap-4">
-                            {message.budget && (
-                                <div className="p-3 rounded-lg bg-green-500/5 border border-green-500/20">
-                                    <div className="text-xs text-[var(--text-muted)] mb-1">Budget</div>
-                                    <div className="text-sm font-medium text-green-400">💰 {message.budget}</div>
-                                </div>
-                            )}
-                            {message.serviceType && (
-                                <div className="p-3 rounded-lg bg-[var(--bg-secondary)]">
-                                    <div className="text-xs text-[var(--text-muted)] mb-1">Service Type</div>
-                                    <div className="text-sm">{message.serviceType}</div>
-                                </div>
-                            )}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {message.budget && (
+                            <div className="p-3 rounded-lg bg-green-500/5 border border-green-500/20">
+                                <div className="text-xs text-[var(--text-muted)] mb-1">Budget Range</div>
+                                <div className="text-sm font-medium text-green-400">💰 {message.budget}</div>
+                            </div>
+                        )}
+                        {message.serviceType && (
+                            <div className="p-3 rounded-lg bg-[var(--bg-secondary)]">
+                                <div className="text-xs text-[var(--text-muted)] mb-1">Service Type</div>
+                                <div className="text-sm">{message.serviceType}</div>
+                            </div>
+                        )}
+                        <div className="p-3 rounded-lg bg-[var(--neon-cyan)]/5 border border-[var(--neon-cyan)]/20 col-span-2">
+                            <div className="text-xs text-[var(--text-muted)] mb-1">💵 Deal Value (USD)</div>
+                            <div className="flex items-center gap-2">
+                                <span className="text-sm text-[var(--text-muted)]">$</span>
+                                <input
+                                    type="number"
+                                    value={dealValue || ''}
+                                    onChange={e => setDealValue(parseInt(e.target.value) || 0)}
+                                    onBlur={saveDealValue}
+                                    onKeyDown={e => e.key === 'Enter' && saveDealValue()}
+                                    className="cyber-input text-sm py-1 flex-grow"
+                                    placeholder="0"
+                                />
+                            </div>
                         </div>
-                    )}
+                    </div>
 
                     <div className="p-4 rounded-lg bg-[var(--bg-secondary)]">
                         <div className="text-xs text-[var(--text-muted)] mb-2">Message</div>

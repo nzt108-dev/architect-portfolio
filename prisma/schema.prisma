@@ -87,6 +87,7 @@ model ContactSubmission {
   status      String   @default("new")     // "new" | "contacted" | "qualified" | "proposal" | "won" | "lost" | "archived"
   label       String   @default("")        // "hot" | "warm" | "cold" | "" 
   notes       String   @default("")        // Internal notes
+  dealValue   Int      @default(0)         // Actual deal amount in USD
   createdAt   DateTime @default(now())
 }
 

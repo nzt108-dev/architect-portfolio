@@ -16,6 +16,7 @@ export async function PATCH(request: Request, { params }: Params) {
         if (body.status !== undefined) data.status = body.status
         if (body.label !== undefined) data.label = body.label
         if (body.notes !== undefined) data.notes = body.notes
+        if (body.dealValue !== undefined) data.dealValue = parseInt(body.dealValue) || 0
 
         const updated = await prisma.contactSubmission.update({
             where: { id },

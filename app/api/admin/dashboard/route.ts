@@ -55,21 +55,15 @@ export async function GET() {
                 budget: l.budget, status: l.status, label: l.label, createdAt: l.createdAt.toISOString(),
             }))
 
-        // Revenue from won leads
+        // Revenue from won leads (using dealValue)
         const wonRevenue = allLeads
-            .filter(l => l.status === 'won' && l.budget)
-            .reduce((sum, l) => {
-                const num = parseInt(l.budget.replace(/\D/g, ''))
-                return sum + (isNaN(num) ? 0 : num)
-            }, 0)
+            .filter(l => l.status === 'won')
+            .reduce((sum: number, l) => sum + (l.dealValue || 0), 0)
 
         // Pipeline value (qualified + proposal)
         const pipelineValue = allLeads
-            .filter(l => ['qualified', 'proposal'].includes(l.status) && l.budget)
-            .reduce((sum, l) => {
-                const num = parseInt(l.budget.replace(/\D/g, ''))
-                return sum + (isNaN(num) ? 0 : num)
-            }, 0)
+            .filter(l => ['qualified', 'proposal'].includes(l.status))
+            .reduce((sum: number, l) => sum + (l.dealValue || 0), 0)
 
         // Task stats
         const now = new Date()
