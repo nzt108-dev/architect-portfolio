@@ -27,6 +27,7 @@ model Project {
   clientBenefit   String   @default("") // What the client gets
   featured        Boolean  @default(false)
   order           Int      @default(0)
+  localPath       String   @default("") // Local filesystem path for workspace
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   

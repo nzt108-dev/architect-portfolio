@@ -80,6 +80,9 @@ export default function AdminLayout({
                     <NavLink href="/admin/activity" icon="📋">
                         Activity
                     </NavLink>
+                    <NavLink href="/admin/workspaces" icon="🖥️">
+                        Workspaces
+                    </NavLink>
                 </nav>
 
                 <div className="pt-6 border-t border-[var(--border-color)] space-y-3">
