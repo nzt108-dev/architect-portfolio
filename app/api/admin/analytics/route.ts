@@ -33,7 +33,16 @@ export async function POST(request: Request) {
             request.headers.get('cf-ipcountry') || ''
 
         await prisma.pageView.create({
-            data: { path, referrer: referer, device, browser, country },
+            data: {
+                path,
+                referrer: referer,
+                device,
+                browser,
+                country,
+                utmSource: body.utmSource || '',
+                utmMedium: body.utmMedium || '',
+                utmCampaign: body.utmCampaign || '',
+            },
         })
 
         return NextResponse.json({ ok: true })

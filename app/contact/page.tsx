@@ -3,6 +3,33 @@ import ContactForm from './ContactForm'
 
 export const dynamic = 'force-dynamic'
 
+const FAQ_ITEMS = [
+    {
+        q: 'How does the process work?',
+        a: 'You fill out the form or email me → I reply within 24 hours with questions and a rough estimate → We align on scope and timeline → I start building. All communication via email.',
+    },
+    {
+        q: 'What are your typical rates?',
+        a: 'Projects start at $500 for simple landing pages and go up to $15,000+ for full SaaS platforms. Every project is quoted individually based on scope and complexity.',
+    },
+    {
+        q: 'How long does a project take?',
+        a: 'Landing pages: 3–7 days. Mobile apps: 2–6 weeks. Complex platforms: 1–3 months. I\'ll give you a precise timeline after understanding your requirements.',
+    },
+    {
+        q: 'What technologies do you use?',
+        a: 'Next.js, React, Flutter, Node.js, PostgreSQL, and modern cloud infrastructure. I pick the best stack for each project — not a one-size-fits-all approach.',
+    },
+    {
+        q: 'Do you offer revisions?',
+        a: 'Yes. Every project includes revision rounds built into the timeline. I work iteratively — you see progress at every stage, not just at the end.',
+    },
+    {
+        q: 'Can we communicate via email only?',
+        a: 'Absolutely. I prefer async email communication — it leads to more thoughtful, documented decisions. You\'ll get detailed responses with screenshots and progress updates.',
+    },
+]
+
 export default async function ContactPage() {
     const socialLinks = await getSocialLinks()
 
@@ -57,9 +84,41 @@ export default async function ContactPage() {
                         <h3 className="text-lg font-semibold mb-2">Response Time</h3>
                         <p className="text-[var(--text-secondary)] text-sm">
                             I typically respond within <span className="text-[var(--accent-primary)]">24 hours</span> on business days.
-                            For urgent matters, reach out via Telegram.
+                            All communication happens via email — clear, documented, and efficient.
                         </p>
                     </div>
+
+                    {/* How It Works Mini */}
+                    <div className="cyber-card p-6">
+                        <h3 className="text-lg font-semibold mb-3">How It Works</h3>
+                        <div className="space-y-3 text-sm">
+                            {[
+                                { step: '1', text: 'Fill out the form with your idea' },
+                                { step: '2', text: 'I reply with questions + estimate' },
+                                { step: '3', text: 'We agree on scope & I start building' },
+                                { step: '4', text: 'Regular updates until launch' },
+                            ].map(({ step, text }) => (
+                                <div key={step} className="flex items-center gap-3">
+                                    <span className="w-6 h-6 rounded-full bg-[var(--neon-cyan)]/15 text-[var(--neon-cyan)] text-xs flex items-center justify-center font-bold flex-shrink-0">{step}</span>
+                                    <span className="text-[var(--text-secondary)]">{text}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* FAQ Section */}
+            <div className="max-w-4xl mx-auto mt-24">
+                <h2 className="text-2xl font-bold text-center mb-2">Frequently Asked Questions</h2>
+                <p className="text-[var(--text-muted)] text-center text-sm mb-10">Quick answers to common questions</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {FAQ_ITEMS.map((item, i) => (
+                        <div key={i} className="cyber-card p-5">
+                            <h3 className="font-semibold text-sm mb-2 text-[var(--text-primary)]">{item.q}</h3>
+                            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.a}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

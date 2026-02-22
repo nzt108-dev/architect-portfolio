@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { getUtmParams } from '@/components/analytics/AnalyticsTracker';
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -21,12 +22,14 @@ export default function ContactForm() {
         setStatus('loading');
 
         try {
+            const utm = getUtmParams()
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     ...formData,
                     serviceType: formData.subject,
+                    ...utm,
                 }),
             });
 

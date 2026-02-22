@@ -6,7 +6,7 @@ import { sendTelegramNotification } from '@/lib/telegram'
 export async function POST(request: Request) {
     try {
         const body = await request.json()
-        const { name, email, subject, message, budget, serviceType } = body
+        const { name, email, subject, message, budget, serviceType, utmSource, utmMedium, utmCampaign } = body
 
         // Validate required fields
         if (!email || !subject || !message) {
@@ -25,6 +25,9 @@ export async function POST(request: Request) {
                 message,
                 budget: budget || '',
                 serviceType: serviceType || '',
+                utmSource: utmSource || '',
+                utmMedium: utmMedium || '',
+                utmCampaign: utmCampaign || '',
             },
         })
 

@@ -88,6 +88,9 @@ model ContactSubmission {
   label       String   @default("")        // "hot" | "warm" | "cold" | "" 
   notes       String   @default("")        // Internal notes
   dealValue   Int      @default(0)         // Actual deal amount in USD
+  utmSource   String   @default("")        // utm_source from ad
+  utmMedium   String   @default("")        // utm_medium
+  utmCampaign String   @default("")        // utm_campaign
   createdAt   DateTime @default(now())
 }
 
@@ -146,5 +149,8 @@ model PageView {
   country   String   @default("")  // Geolocation (if available)
   device    String   @default("")  // "desktop" | "mobile" | "tablet"
   browser   String   @default("")  // "Chrome" | "Safari" etc.
+  utmSource   String   @default("")  // utm_source
+  utmMedium   String   @default("")  // utm_medium
+  utmCampaign String   @default("")  // utm_campaign
   createdAt DateTime @default(now())
 }
