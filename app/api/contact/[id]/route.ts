@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { notifyLeadStatusChange } from '@/lib/telegram'
 
 interface Params {
     params: Promise<{ id: string }>
@@ -9,6 +10,9 @@ export async function PATCH(request: Request, { params }: Params) {
     try {
         const { id } = await params
         const body = await request.json()
+
+        // Get current state for notification comparison
+        const current = await prisma.contactSubmission.findUnique({ where: { id } })
 
         // Build update data from provided fields
         const data: Record<string, unknown> = {}
@@ -22,6 +26,15 @@ export async function PATCH(request: Request, { params }: Params) {
             where: { id },
             data,
         })
+
+        // Send Telegram notification if status changed
+        if (current && body.status && body.status !== current.status) {
+            notifyLeadStatusChange(
+                current.name, current.email,
+                current.status, body.status,
+                updated.dealValue
+            ).catch(console.error) // fire and forget
+        }
 
         return NextResponse.json({ success: true, submission: updated })
     } catch (error) {
