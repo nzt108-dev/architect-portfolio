@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 export default function HeroAvatar() {
     return (
-        <div className="relative w-[400px] h-[500px] md:w-[500px] md:h-[600px]">
+        <div className="relative w-full max-w-[280px] h-[350px] sm:max-w-[400px] sm:h-[500px] md:max-w-[500px] md:h-[600px] mx-auto">
             {/* Background glow — subtle indigo */}
             <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/15 via-transparent to-[var(--accent-secondary)]/10 blur-3xl rounded-full" />
 

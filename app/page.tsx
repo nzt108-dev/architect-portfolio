@@ -20,7 +20,7 @@ export default async function Home() {
       <section className="relative min-h-[80vh] flex flex-col justify-center py-10 lg:py-20">
         {/* Background Grid & ambient glow */}
         <div className="absolute inset-0 premium-grid opacity-30 z-0 pointer-events-none" />
-        <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[30rem] h-[30rem] bg-white opacity-[0.02] blur-[100px] rounded-full pointer-events-none z-0" />
+        <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[15rem] h-[15rem] md:w-[30rem] md:h-[30rem] bg-white opacity-[0.02] blur-[100px] rounded-full pointer-events-none z-0" />
 
         {/* Mobile Avatar */}
         <div className="lg:hidden flex justify-center mb-[-80px] relative z-10">
