@@ -38,6 +38,7 @@ export async function POST(request: Request) {
             demoUrl = null,
             featured = false,
             roadmapItems = [],
+            localPath,
         } = body
 
         // Validate required fields
@@ -73,6 +74,7 @@ export async function POST(request: Request) {
             if (body.githubUrl !== undefined) updateData.githubUrl = body.githubUrl
             if (body.demoUrl !== undefined) updateData.demoUrl = body.demoUrl
             if (body.featured !== undefined) updateData.featured = body.featured
+            if (localPath !== undefined) updateData.localPath = localPath
 
             project = await prisma.project.update({
                 where: { slug: projectSlug },
@@ -133,6 +135,7 @@ export async function POST(request: Request) {
                     githubUrl,
                     demoUrl,
                     featured,
+                    localPath: localPath || '',
                     order: newOrder,
                 },
             })
