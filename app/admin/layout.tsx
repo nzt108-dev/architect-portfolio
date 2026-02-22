@@ -83,6 +83,9 @@ export default function AdminLayout({
                     <NavLink href="/admin/calendar" icon="📅">
                         Calendar
                     </NavLink>
+                    <NavLink href="/admin/analytics" icon="📈">
+                        Analytics
+                    </NavLink>
                     <NavLink href="/admin/finance" icon="💰">
                         Finance
                     </NavLink>

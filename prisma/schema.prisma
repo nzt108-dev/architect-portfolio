@@ -137,3 +137,14 @@ model CrmTask {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
+
+// Page view analytics
+model PageView {
+  id        String   @id @default(cuid())
+  path      String           // e.g. "/", "/projects/my-app"
+  referrer  String   @default("")  // Where user came from
+  country   String   @default("")  // Geolocation (if available)
+  device    String   @default("")  // "desktop" | "mobile" | "tablet"
+  browser   String   @default("")  // "Chrome" | "Safari" etc.
+  createdAt DateTime @default(now())
+}
