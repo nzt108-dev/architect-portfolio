@@ -98,10 +98,10 @@ export default function WorkspacesPage() {
 
                             {/* Progress badge */}
                             <span className={`text-xs font-medium px-2 py-1 rounded-md border ${project.progress >= 80
-                                    ? 'bg-green-500/15 text-green-400 border-green-500/30'
-                                    : project.progress >= 40
-                                        ? 'bg-blue-500/15 text-blue-400 border-blue-500/30'
-                                        : 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30'
+                                ? 'bg-green-500/15 text-green-400 border-green-500/30'
+                                : project.progress >= 40
+                                    ? 'bg-blue-500/15 text-blue-400 border-blue-500/30'
+                                    : 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30'
                                 }`}>
                                 {project.progress}%
                             </span>
@@ -140,8 +140,8 @@ export default function WorkspacesPage() {
                             onClick={() => openInAntigravity(project.localPath)}
                             disabled={!project.localPath}
                             className={`w-full py-2.5 rounded-xl text-sm font-medium transition-all ${project.localPath
-                                    ? 'bg-[var(--accent-primary)] text-white hover:brightness-110 active:scale-[0.98] cursor-pointer'
-                                    : 'bg-[var(--bg-secondary)] text-[var(--text-muted)] cursor-not-allowed'
+                                ? 'bg-[var(--accent-primary)] text-black hover:brightness-110 active:scale-[0.98] cursor-pointer'
+                                : 'bg-[var(--bg-secondary)] text-[var(--text-muted)] cursor-not-allowed'
                                 }`}
                         >
                             {project.localPath ? '🚀 Открыть в Antigravity' : '⚠️ Путь не указан'}
