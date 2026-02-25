@@ -1,179 +1,192 @@
 import Link from 'next/link'
 import LeadCaptureWidget from '@/components/ui/LeadCaptureWidget'
-import GradientIcon from '@/components/ui/GradientIcon'
 
 export const dynamic = 'force-dynamic'
 
 const services = [
     {
         id: 'mobile',
-        iconName: 'smartphone',
-        title: 'Mobile Apps',
-        description: 'Cross-platform iOS & Android apps built with Flutter. One codebase, two platforms, native performance.',
+        code: 'APP',
+        title: 'Mobile Applications',
+        description: 'Cross-platform iOS & Android mobile architectures. One unified codebase, dual platforms, uncompromising native performance.',
         features: [
             'Cross-platform (iOS + Android)',
-            'Push notifications & analytics',
-            'Offline-first architecture',
+            'Push notifications & precise telemetry',
+            'Offline-first data architecture',
             'App Store & Google Play deployment',
-            'Backend API integration',
+            'Low-latency backend integration',
         ],
-        timeline: 'From 2 weeks',
-        tech: ['Flutter', 'Dart', 'Firebase', 'Supabase'],
-        accent: 'var(--accent-primary)',
+        timeline: 'ETA: 14+ Days',
+        tech: ['Flutter', 'Dart', 'React Native', 'Swift', 'Kotlin', 'Firebase', 'Supabase', 'SQLite'],
     },
     {
         id: 'web',
-        iconName: 'globe',
+        code: 'WEB',
         title: 'Websites & Landing Pages',
-        description: 'Fast, responsive, SEO-optimized websites. From simple landing pages to complex web applications.',
+        description: 'High-performance, brutalist responsive web properties. From high-conversion landing pages to complex, interactive web applications.',
         features: [
-            'Responsive design (mobile-first)',
-            'SEO optimization',
-            'Performance tuning (Core Web Vitals)',
-            'CMS integration',
-            'Analytics & conversion tracking',
+            'Responsive layouts (Mobile-First)',
+            'Aggressive SEO optimization',
+            'Sub-second Core Web Vitals',
+            'Headless CMS integration',
+            'Advanced conversion tracking & analytics',
         ],
-        timeline: 'From 3 days',
-        tech: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
-        accent: 'var(--accent-blue)',
+        timeline: 'ETA: 3+ Days',
+        tech: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'GSAP', 'Vercel'],
     },
     {
         id: 'bots',
-        iconName: 'bot',
+        code: 'BOT',
         title: 'Telegram & Discord Bots',
-        description: 'Automation bots, e-commerce bots, community management, and custom integrations.',
+        description: 'Autonomous agents, e-commerce automation, community management protocols, and custom webhook integrations.',
         features: [
-            'Payment processing',
-            'User management & analytics',
-            'Automated workflows',
-            'Admin dashboards',
-            'Multi-language support',
+            'Stripe/Crypto payment processing',
+            'User cohort management & analytics',
+            'Self-executing cron workflows',
+            'System admin dashboards',
+            'Multi-language localization',
         ],
-        timeline: 'From 3 days',
-        tech: ['Python', 'Node.js', 'PostgreSQL', 'Redis'],
-        accent: 'var(--accent-secondary)',
+        timeline: 'ETA: 3+ Days',
+        tech: ['Python', 'Node.js', 'Aiogram', 'Telegraf', 'PostgreSQL', 'Redis', 'Docker', 'Webhooks'],
     },
     {
         id: 'saas',
-        iconName: 'briefcase',
+        code: 'SYS',
         title: 'SaaS Platforms',
-        description: 'Full-stack Software-as-a-Service products with authentication, billing, dashboards, and multi-tenant architecture.',
+        description: 'Full-stack Software-as-a-Service infrastructure featuring strict authentication, automated billing, and secure multi-tenant architecture.',
         features: [
-            'Multi-tenant architecture',
-            'Authentication & authorization',
-            'Stripe/payment integration',
-            'Admin panel & analytics',
-            'API & webhook support',
+            'Multi-tenant data isolation',
+            'JWT/OAuth authentication & authorization',
+            'Stripe subscription integration',
+            'Admin control panel & core telemetry',
+            'Extensible API & webhook architecture',
         ],
-        timeline: 'From 2 weeks',
-        tech: ['Next.js', 'Supabase', 'Stripe', 'Vercel'],
-        accent: 'var(--accent-green)',
+        timeline: 'ETA: 14+ Days',
+        tech: ['Next.js', 'React', 'Node.js', 'PostgreSQL', 'Prisma', 'Supabase', 'Stripe', 'AWS', 'Vercel'],
     },
     {
         id: 'api',
-        iconName: 'server',
+        code: 'API',
         title: 'APIs & Backends',
-        description: 'Scalable REST/GraphQL APIs, microservices, data pipelines, and cloud infrastructure.',
+        description: 'Scalable REST and GraphQL endpoints, microservice networks, distributed data pipelines, and raw cloud infrastructure.',
         features: [
-            'REST & GraphQL APIs',
-            'Database design & optimization',
-            'Cloud deployment (AWS, Railway)',
-            'CI/CD pipelines',
-            'Monitoring & logging',
+            'RESTful & GraphQL architectures',
+            'Relational database design & indexing',
+            'Raw cloud deployment (AWS, GCP, Railway)',
+            'Automated CI/CD deployment pipelines',
+            'Real-time system monitoring & logging',
         ],
-        timeline: 'From 1 week',
-        tech: ['Node.js', 'Python', 'PostgreSQL', 'Docker'],
-        accent: 'var(--accent-amber)',
+        timeline: 'ETA: 7+ Days',
+        tech: ['Node.js', 'Python', 'FastAPI', 'Express', 'GraphQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Docker', 'AWS'],
     },
 ]
 
 export default function ServicesPage() {
     return (
-        <div className="container mx-auto px-6 pt-32 pb-20">
-            {/* Hero */}
-            <section className="text-center mb-20">
-                <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                    <span className="gradient-text">What I Build</span>
+        <div className="container mx-auto px-6 py-20 lg:py-32 relative z-10 w-full max-w-7xl">
+            {/* Header */}
+            <div className="mb-20">
+                <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tighter text-[var(--text-primary)]">
+                    Execution <span className="font-[var(--font-dm-serif)] italic text-[var(--accent-primary)]">Protocols.</span>
                 </h1>
-                <p className="text-[var(--text-secondary)] text-lg max-w-2xl mx-auto leading-relaxed">
-                    Digital products from idea to launch. Pick a service below or{' '}
-                    <Link href="/contact" className="text-[var(--accent-primary)] underline">
-                        tell me what you need
+                <p className="font-mono text-[var(--text-secondary)] text-sm md:text-base uppercase tracking-widest max-w-2xl leading-relaxed mt-6">
+                    {'//'} Digital infrastructure from initial concept to live production. Select a specific protocol below or{' '}
+                    <Link href="/contact" className="text-[var(--text-primary)] border-b border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-colors inline-block">
+                        initiate a custom requirement
                     </Link>{' '}
-                    — every project gets a custom approach.
+                    — every deployment is architected precisely for your business logic.
                 </p>
-            </section>
+            </div>
 
             {/* Services Grid */}
-            <section className="space-y-8 mb-20">
-                {services.map((service) => (
-                    <div
-                        key={service.id}
-                        id={service.id}
-                        className="cyber-card p-8 md:p-10 scroll-mt-32"
-                    >
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                            {/* Left - Main info */}
-                            <div className="lg:col-span-2">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <div
-                                        className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                                        style={{ background: `color-mix(in srgb, ${service.accent} 15%, transparent)` }}
+            <section className="space-y-12 mb-24">
+                {services.map((service, index) => {
+                    const numberStr = (index + 1).toString().padStart(2, '0')
+
+                    return (
+                        <div
+                            key={service.id}
+                            id={service.id}
+                            className="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 md:p-12 rounded-[2rem] scroll-mt-32 transition-colors hover:border-[var(--accent-primary)] group shadow-md"
+                        >
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+                                {/* Left - Main info */}
+                                <div className="lg:col-span-2">
+                                    <div className="flex flex-col md:flex-row md:items-start gap-4 mb-6">
+                                        <div className="font-mono text-[var(--text-secondary)] group-hover:text-[var(--accent-primary)] text-3xl font-bold transition-colors">
+                                            [{numberStr}]
+                                        </div>
+                                        <div>
+                                            <div className="flex items-center gap-3 mb-2">
+                                                <h2 className="text-3xl font-bold text-[var(--text-primary)]">{service.title}</h2>
+                                                <span className="font-mono bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--accent-primary)] text-xs px-2 py-1 rounded">
+                                                    {service.code}
+                                                </span>
+                                            </div>
+                                            <div className="font-mono text-[var(--text-muted)] text-xs uppercase tracking-widest mb-4 border-b border-[var(--border-color)] pb-4 inline-block">
+                                                {service.timeline}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p className="text-[var(--text-secondary)] font-mono text-sm leading-relaxed mb-8 max-w-3xl">
+                                        {service.description}
+                                    </p>
+
+                                    {/* Features */}
+                                    <div className="mb-6 border border-[var(--border-color)] bg-[var(--bg-primary)] p-6 rounded-xl">
+                                        <h4 className="font-mono text-[var(--text-primary)] text-xs font-bold uppercase tracking-widest mb-4">
+                                            {'>'} Technical Scope
+                                        </h4>
+                                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
+                                            {service.features.map((feature) => (
+                                                <li key={feature} className="flex items-start gap-3 font-mono text-xs text-[var(--text-secondary)]">
+                                                    <span className="text-[var(--accent-primary)] font-bold mt-0.5">[+]</span>
+                                                    {feature}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                {/* Right - Tech & CTA */}
+                                <div className="flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-[var(--border-color)] pt-8 lg:pt-0 lg:pl-12">
+                                    <div className="mb-8 lg:mb-0">
+                                        <h4 className="font-mono text-[var(--text-primary)] text-xs font-bold uppercase tracking-widest mb-4">
+                                            {'>'} Stack Requirements
+                                        </h4>
+                                        <div className="flex flex-wrap gap-2">
+                                            {service.tech.map((tech) => (
+                                                <span
+                                                    key={tech}
+                                                    className="px-3 py-1.5 font-mono text-xs text-[var(--text-primary)] bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-md"
+                                                >
+                                                    {tech}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <Link
+                                        href="/contact"
+                                        className="mt-8 relative group/btn flex items-center justify-between border border-[var(--accent-primary)] bg-[var(--bg-primary)] px-6 py-4 rounded-xl hover:bg-[var(--bg-card)] transition-colors w-full"
                                     >
-                                        <GradientIcon name={service.iconName} size={28} />
-                                    </div>
-                                    <div>
-                                        <h2 className="text-2xl font-bold">{service.title}</h2>
-                                        <span className="text-[var(--accent-primary)] text-sm font-medium">
-                                            {service.timeline}
+                                        <span className="font-mono text-[var(--text-primary)] text-xs font-bold uppercase tracking-widest">
+                                            Deploy Protocol
                                         </span>
-                                    </div>
+                                        <span className="text-[var(--accent-primary)] group-hover/btn:translate-x-1 transition-transform">
+                                            →
+                                        </span>
+                                    </Link>
                                 </div>
-
-                                <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
-                                    {service.description}
-                                </p>
-
-                                {/* Features */}
-                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                    {service.features.map((feature) => (
-                                        <li key={feature} className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-                                            <span className="text-[var(--accent-green)]">✓</span>
-                                            {feature}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            {/* Right - Tech & CTA */}
-                            <div className="flex flex-col justify-between">
-                                <div>
-                                    <h4 className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-wider mb-3">
-                                        Technologies
-                                    </h4>
-                                    <div className="flex flex-wrap gap-2 mb-6">
-                                        {service.tech.map((tech) => (
-                                            <span key={tech} className="skill-badge text-xs">
-                                                {tech}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <Link
-                                    href="/contact"
-                                    className="btn-filled text-center text-sm"
-                                >
-                                    Get Estimate for {service.title} →
-                                </Link>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    )
+                })}
             </section>
 
             {/* CTA Bottom */}
-            <section className="max-w-xl mx-auto">
+            <section className="max-w-xl mx-auto border border-[var(--border-color)] rounded-[2rem] overflow-hidden">
                 <LeadCaptureWidget />
             </section>
         </div>

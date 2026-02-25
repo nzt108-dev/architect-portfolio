@@ -5,52 +5,64 @@
    ======================================== */
 
 :root {
-  /* Background colors - Pure dark minimal */
-  --bg-primary: #000000;
+  /* Brutalist Dark Palette */
+  --bg-primary: #0A0A0A;
+  /* Deepest black-gray */
   --bg-secondary: #0A0A0A;
-  --bg-card: #111111;
+  /* Matching primary for seamless brutalism */
+  --bg-card: #141414;
+  /* Surface layer for cards/containers */
   --bg-card-hover: #1A1A1A;
+  /* Slight hover lift */
 
-  /* Accent colors — sharp, high contrast */
-  --accent-primary: #FFFFFF;
-  --accent-secondary: #A1A1AA;
+  /* Accent colors */
+  --accent-primary: #E63B2E;
+  /* Signal Red */
+  --accent-secondary: #FF4D4D;
+  /* Lighter Signal Red for hover */
   --accent-blue: #0070F3;
+  /* Kept for legacy compatibility if needed */
   --accent-green: #10B981;
+  /* Kept for legacy compatibility if needed */
   --accent-amber: #F59E0B;
+  /* Kept for legacy compatibility if needed */
 
   /* Legacy aliases for transitional compatibility */
-  --neon-cyan: #FFFFFF;
-  --neon-pink: #A1A1AA;
-  --neon-purple: #A1A1AA;
+  --neon-cyan: #E63B2E;
+  --neon-pink: #FF4D4D;
+  --neon-purple: #FF4D4D;
   --neon-blue: #0070F3;
   --neon-green: #10B981;
 
   /* Text colors */
-  --text-primary: #EDEDED;
+  --text-primary: #E8E4DD;
+  /* Off-white / Paper */
   --text-secondary: #A1A1AA;
   --text-muted: #71717A;
 
   /* Borders */
-  --border-color: rgba(255, 255, 255, 0.1);
-  --border-hover: rgba(255, 255, 255, 0.25);
+  --border-color: rgba(232, 228, 221, 0.1);
+  --border-hover: rgba(230, 59, 46, 0.4);
+  /* Red hover border */
 
-  /* Shadows - softer, less neon */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 20px rgba(255, 255, 255, 0.05);
+  /* Shadows - Minimal/Brutalist */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.8);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.8);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.9);
+  --shadow-glow: 0 0 20px rgba(230, 59, 46, 0.15);
+  /* Red glow */
 
   /* Transitions */
-  --transition-fast: 150ms ease;
-  --transition-normal: 300ms ease;
-  --transition-slow: 500ms ease;
+  --transition-fast: 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-normal: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-slow: 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @theme inline {
   --color-background: var(--bg-primary);
   --color-foreground: var(--text-primary);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-space-mono);
 
   --color-cyber-bg: var(--bg-primary);
   --color-cyber-card: var(--bg-card);
@@ -222,16 +234,14 @@ body {
 .cyber-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 16px;
-  transition: all var(--transition-normal);
+  border-radius: 1.5rem;
+  transition: all var(--transition-fast);
   position: relative;
   overflow: hidden;
 }
 
 .cyber-card:hover {
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
-  transform: translateY(-2px);
+  border-color: var(--accent-primary);
 }
 
 /* ========================================
@@ -241,23 +251,22 @@ body {
 .cyber-btn {
   position: relative;
   padding: 12px 28px;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  background: transparent;
-  border: 1.5px solid var(--border-color);
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
   color: var(--text-primary);
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   overflow: hidden;
-  transition: all var(--transition-normal);
+  transition: all var(--transition-fast);
 }
 
 .cyber-btn:hover {
-  background: var(--text-primary);
-  color: var(--bg-primary);
   border-color: var(--text-primary);
-  transform: translateY(-1px);
 }
 
 .cyber-btn-pink {
@@ -266,32 +275,31 @@ body {
 }
 
 .cyber-btn-pink:hover {
-  background: var(--accent-secondary);
-  color: white;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
 }
 
 /* Filled button variant */
 .btn-filled {
   position: relative;
   padding: 12px 28px;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  background: var(--text-primary);
-  border: none;
-  color: var(--bg-primary);
-  border-radius: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  background: var(--bg-primary);
+  border: 1px solid var(--accent-primary);
+  color: var(--text-primary);
+  border-radius: 12px;
   cursor: pointer;
   overflow: hidden;
-  transition: all var(--transition-normal);
+  transition: all var(--transition-fast);
 }
 
 .btn-filled:hover {
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
-  filter: brightness(0.9);
-  color: var(--bg-primary);
+  background: var(--bg-card);
+  color: var(--accent-primary);
 }
 
 /* ========================================
@@ -319,19 +327,19 @@ body {
 
 .cyber-input {
   width: 100%;
-  padding: 12px 16px;
-  background: var(--bg-secondary);
+  padding: 16px;
+  background: var(--bg-primary);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 12px;
   color: var(--text-primary);
-  font-size: 15px;
-  transition: all var(--transition-normal);
+  font-size: 14px;
+  font-family: var(--font-mono);
+  transition: all var(--transition-fast);
 }
 
 .cyber-input:focus {
   outline: none;
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .cyber-input::placeholder {

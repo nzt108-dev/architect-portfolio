@@ -29,38 +29,41 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="border-t border-[var(--border-color)] mt-20">
-            <div className="container mx-auto px-6 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-                    {/* Brand */}
-                    <div className="md:col-span-2">
-                        <Link href="/" className="inline-flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[var(--accent-primary)]">
-                                <Image
-                                    src="/logo.jpg"
-                                    alt="nzt108_dev"
-                                    width={40}
-                                    height={40}
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-                            <span className="font-bold text-xl tracking-tight">
-                                <span className="text-[var(--accent-primary)]">nzt108</span>
-                                <span className="text-[var(--text-secondary)]">_dev</span>
-                            </span>
-                        </Link>
-                        <p className="text-[var(--text-secondary)] max-w-md mb-6">
-                            Custom apps, bots, and SaaS platforms — built fast, priced fair.
-                            From idea to launch, one developer does it all.
-                        </p>
-                        <div className="flex gap-3">
+        <footer className="mt-32 bg-[var(--bg-card)] rounded-t-[4rem] border-t border-[var(--border-color)] relative z-20 overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+            <div className="container mx-auto px-6 py-20 lg:py-24">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-16 lg:gap-10">
+
+                    {/* Brand & System Status */}
+                    <div className="md:col-span-2 flex flex-col justify-between h-full">
+                        <div>
+                            <Link href="/" className="inline-flex items-center gap-4 mb-6 group">
+                                <div className="w-12 h-12 rounded-full overflow-hidden border border-[var(--border-color)] group-hover:border-[var(--accent-primary)] transition-colors">
+                                    <Image
+                                        src="/logo.jpg"
+                                        alt="nzt108_dev"
+                                        width={48}
+                                        height={48}
+                                        className="w-full h-full object-cover grayscale contrast-125 brightness-110 group-hover:grayscale-0 transition-all duration-500"
+                                    />
+                                </div>
+                                <span className="font-bold text-3xl tracking-tighter">
+                                    nzt108<span className="text-[var(--accent-primary)] font-[var(--font-dm-serif)] italic">_dev</span>
+                                </span>
+                            </Link>
+                            <p className="text-[var(--text-secondary)] font-mono text-sm max-w-sm mb-10 leading-relaxed uppercase tracking-widest">
+                                {'//'} Engineered solutions for complex problems. Architect-level code execution.
+                            </p>
+                        </div>
+
+                        {/* Social Links */}
+                        <div className="flex gap-4">
                             {socialLinks.map((social) => (
                                 <a
                                     key={social.name}
                                     href={social.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-lg border border-[var(--border-color)] flex items-center justify-center text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-all"
+                                    className="w-12 h-12 rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] hover:-translate-y-1 transition-all duration-300 shadow-md"
                                     aria-label={social.name}
                                 >
                                     {social.icon === 'github' && (
@@ -85,18 +88,19 @@ export default function Footer() {
 
                     {/* Links */}
                     {footerLinks.map((section) => (
-                        <div key={section.title}>
-                            <h4 className="font-semibold text-[var(--text-primary)] mb-4">
+                        <div key={section.title} className="flex flex-col">
+                            <h4 className="font-mono text-[var(--text-secondary)] text-sm uppercase tracking-widest mb-6">
                                 {section.title}
                             </h4>
-                            <ul className="space-y-3">
+                            <ul className="space-y-4">
                                 {section.links.map((link) => (
                                     <li key={link.href}>
                                         <Link
                                             href={link.href}
-                                            className="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors text-sm"
+                                            className="text-[var(--text-primary)] hover:text-[var(--accent-primary)] font-medium transition-colors relative inline-block group"
                                         >
                                             {link.label}
+                                            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[var(--accent-primary)] transition-all duration-300 group-hover:w-full" />
                                         </Link>
                                     </li>
                                 ))}
@@ -105,14 +109,22 @@ export default function Footer() {
                     ))}
                 </div>
 
-                {/* Bottom */}
-                <div className="mt-12 pt-8 border-t border-[var(--border-color)] flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-[var(--text-muted)] text-sm">
-                        © {currentYear} nzt108_dev. All rights reserved.
+                {/* Bottom - System Status & Copyright */}
+                <div className="mt-20 pt-8 border-t border-[var(--border-color)] flex flex-col md:flex-row items-center justify-between gap-6">
+                    <p className="text-[var(--text-secondary)] font-mono text-sm tracking-widest">
+                        © {currentYear} NZT108_DEV.
                     </p>
-                    <p className="text-[var(--text-muted)] text-sm">
-                        Built with <span className="text-[var(--accent-primary)]">precision</span> using Next.js
-                    </p>
+
+                    {/* Pulsing System Status */}
+                    <div className="flex items-center gap-3 bg-[var(--bg-primary)] border border-[var(--border-color)] px-4 py-2 rounded-full">
+                        <div className="relative flex items-center justify-center w-3 h-3">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </div>
+                        <span className="font-mono text-xs text-[var(--accent-green)] uppercase tracking-widest">
+                            System Operational
+                        </span>
+                    </div>
                 </div>
             </div>
         </footer>

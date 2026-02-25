@@ -6,27 +6,27 @@ export const dynamic = 'force-dynamic'
 const FAQ_ITEMS = [
     {
         q: 'How does the process work?',
-        a: 'You fill out the form or email me → I reply within 24 hours with questions and a rough estimate → We align on scope and timeline → I start building. All communication via email.',
+        a: 'You push requirements via form or email → I return an assessment with questions and scope constraints within 24H → We lock scope and timeline → Execution begins. Async email communication utilized primarily.',
     },
     {
         q: 'What are your typical rates?',
-        a: 'Projects start at $500 for simple landing pages and go up to $15,000+ for full SaaS platforms. Every project is quoted individually based on scope and complexity.',
+        a: 'Deployments begin at $500 for high-conversion statics, scaling to $15,000+ for enterprise SaaS infrastructure. Pricing is modular and strictly scoped.',
     },
     {
-        q: 'How long does a project take?',
-        a: 'Landing pages: 3–7 days. Mobile apps: 2–6 weeks. Complex platforms: 1–3 months. I\'ll give you a precise timeline after understanding your requirements.',
+        q: 'How long does a deployment take?',
+        a: 'Statics: 3–7 days. Mobile: 2–6 weeks. Complex infrastructure: 1–3 months. A precise ETA is provided post-assessment.',
     },
     {
-        q: 'What technologies do you use?',
-        a: 'Next.js, React, Flutter, Node.js, PostgreSQL, and modern cloud infrastructure. I pick the best stack for each project — not a one-size-fits-all approach.',
+        q: 'What stack do you operate on?',
+        a: 'Next.js, React, Flutter, Node.js, PostgreSQL, and raw cloud infrastructure. Tech is selected strictly based on load requirements and domain constraints.',
     },
     {
-        q: 'Do you offer revisions?',
-        a: 'Yes. Every project includes revision rounds built into the timeline. I work iteratively — you see progress at every stage, not just at the end.',
+        q: 'Do you offer iterations?',
+        a: 'Yes. Milestones include structured iteration blocks. Progress is transparent and continuous; you observe the build at every stage.',
     },
     {
-        q: 'Can we communicate via email only?',
-        a: 'Absolutely. I prefer async email communication — it leads to more thoughtful, documented decisions. You\'ll get detailed responses with screenshots and progress updates.',
+        q: 'Can we communicate async only?',
+        a: 'Preferred. Asynchronous text protocols result in highly documented, precise decision-making. You will receive structured logs, captures, and system updates.',
     },
 ]
 
@@ -34,16 +34,18 @@ export default async function ContactPage() {
     const socialLinks = await getSocialLinks()
 
     return (
-        <div className="container mx-auto px-6 py-12">
+        <div className="container mx-auto px-6 py-20 lg:py-32 relative z-10 w-full max-w-7xl">
             {/* Header */}
-            <div className="mb-16 text-center">
-                <h1 className="section-title gradient-text">Get in Touch</h1>
-                <p className="section-subtitle mx-auto">
-                    Have a project in mind? Let&apos;s discuss how I can help bring your ideas to life.
+            <div className="mb-20">
+                <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tighter text-[var(--text-primary)]">
+                    Communication <span className="font-[var(--font-dm-serif)] italic text-[var(--accent-primary)]">Protocol.</span>
+                </h1>
+                <p className="font-mono text-[var(--text-secondary)] text-sm md:text-base uppercase tracking-widest max-w-2xl leading-relaxed mt-6">
+                    {'//'} Initiate contact for system architecture, project inquiries, or infrastructure consulting.
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-6xl">
                 {/* Contact Form */}
                 <div className="lg:col-span-3">
                     <ContactForm />
@@ -52,8 +54,10 @@ export default async function ContactPage() {
                 {/* Contact Info */}
                 <div className="lg:col-span-2 space-y-6">
                     {/* Direct Contact */}
-                    <div className="cyber-card p-6 neon-border">
-                        <h3 className="text-lg font-semibold mb-4">Direct Contact</h3>
+                    <div className="bg-[var(--bg-card)] border border-[var(--accent-primary)] p-8 rounded-[2rem] shadow-[0_4px_30px_rgba(230,59,46,0.05)]">
+                        <h3 className="font-mono text-[var(--text-primary)] text-xs font-bold uppercase tracking-widest mb-6">
+                            [+] Direct Channels
+                        </h3>
                         <div className="space-y-3">
                             {socialLinks.map((link) => (
                                 <a
@@ -61,16 +65,16 @@ export default async function ContactPage() {
                                     href={link.url}
                                     target={link.url.startsWith('mailto:') ? undefined : '_blank'}
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-4 p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] transition-all group"
+                                    className="flex items-center gap-4 p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--text-primary)] transition-all group"
                                 >
-                                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${getIconBg(link.icon)}`}>
+                                    <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-colors">
                                         <SocialIcon icon={link.icon} />
                                     </div>
                                     <div>
-                                        <div className="font-medium group-hover:text-[var(--accent-primary)]">
+                                        <div className="font-mono text-sm font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors uppercase tracking-widest">
                                             {link.name}
                                         </div>
-                                        <div className="text-[var(--text-muted)] text-sm">
+                                        <div className="font-mono text-[var(--text-muted)] text-[10px] uppercase tracking-widest mt-1">
                                             {getDisplayUrl(link.url)}
                                         </div>
                                     </div>
@@ -80,27 +84,32 @@ export default async function ContactPage() {
                     </div>
 
                     {/* Response Time */}
-                    <div className="cyber-card p-6">
-                        <h3 className="text-lg font-semibold mb-2">Response Time</h3>
-                        <p className="text-[var(--text-secondary)] text-sm">
-                            I typically respond within <span className="text-[var(--accent-primary)]">24 hours</span> on business days.
-                            All communication happens via email — clear, documented, and efficient.
+                    <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 rounded-[2rem]">
+                        <h3 className="font-mono text-[var(--text-primary)] text-xs font-bold uppercase tracking-widest mb-4">
+                            [{'>'}] Global Latency
+                        </h3>
+                        <p className="text-[var(--text-secondary)] font-mono text-xs leading-relaxed">
+                            System SLA guarantees response within <span className="text-[var(--accent-primary)] font-bold block mt-1">24 HOURS (Business Days)</span>.
+                            <br /><br />
+                            Primary communications routed through email for strict documentation and parsing efficiency.
                         </p>
                     </div>
 
                     {/* How It Works Mini */}
-                    <div className="cyber-card p-6">
-                        <h3 className="text-lg font-semibold mb-3">How It Works</h3>
-                        <div className="space-y-3 text-sm">
+                    <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 rounded-[2rem]">
+                        <h3 className="font-mono text-[var(--text-primary)] text-xs font-bold uppercase tracking-widest mb-6">
+                            [~] Operation Sequence
+                        </h3>
+                        <div className="space-y-4">
                             {[
-                                { step: '1', text: 'Fill out the form with your idea' },
-                                { step: '2', text: 'I reply with questions + estimate' },
-                                { step: '3', text: 'We agree on scope & I start building' },
-                                { step: '4', text: 'Regular updates until launch' },
+                                { step: '01', text: 'INITIATE REQUEST VIA FORM' },
+                                { step: '02', text: 'ASSESSMENT + ESTIMATE RETURNED' },
+                                { step: '03', text: 'SCOPE LOCKED & DEPLOYMENT STARTS' },
+                                { step: '04', text: 'CONTINUOUS TELEMETRY UNTIL LAUNCH' },
                             ].map(({ step, text }) => (
-                                <div key={step} className="flex items-center gap-3">
-                                    <span className="w-6 h-6 rounded-full bg-[var(--neon-cyan)]/15 text-[var(--neon-cyan)] text-xs flex items-center justify-center font-bold flex-shrink-0">{step}</span>
-                                    <span className="text-[var(--text-secondary)]">{text}</span>
+                                <div key={step} className="flex items-start gap-4">
+                                    <span className="font-mono text-[var(--accent-primary)] font-bold text-xs mt-0.5">{step}</span>
+                                    <span className="font-mono text-[var(--text-secondary)] text-xs leading-relaxed">{text}</span>
                                 </div>
                             ))}
                         </div>
@@ -109,16 +118,27 @@ export default async function ContactPage() {
             </div>
 
             {/* FAQ Section */}
-            <div className="max-w-4xl mx-auto mt-24">
-                <h2 className="text-2xl font-bold text-center mb-2">Frequently Asked Questions</h2>
-                <p className="text-[var(--text-muted)] text-center text-sm mb-10">Quick answers to common questions</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {FAQ_ITEMS.map((item, i) => (
-                        <div key={i} className="cyber-card p-5">
-                            <h3 className="font-semibold text-sm mb-2 text-[var(--text-primary)]">{item.q}</h3>
-                            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.a}</p>
-                        </div>
-                    ))}
+            <div className="max-w-4xl mx-auto mt-32 border-t border-[var(--border-color)] pt-20">
+                <div className="mb-12">
+                    <h2 className="text-3xl font-bold text-[var(--text-primary)] tracking-tighter mb-4">
+                        Frequently Asked <span className="font-[var(--font-dm-serif)] italic text-[var(--text-secondary)]">Queries</span>.
+                    </h2>
+                    <p className="font-mono text-[var(--text-muted)] text-xs uppercase tracking-widest">
+                        {'>'} INDEXED SYSTEM KNOWLEDGE
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {FAQ_ITEMS.map((item, i) => {
+                        const countStr = (i + 1).toString().padStart(2, '0')
+                        return (
+                            <div key={i} className="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 rounded-2xl group hover:border-[var(--accent-primary)] transition-colors">
+                                <div className="font-mono text-[var(--text-muted)] text-[10px] mb-4 group-hover:text-[var(--accent-primary)] transition-colors">Q_{countStr}</div>
+                                <h3 className="font-bold text-sm mb-4 text-[var(--text-primary)] uppercase tracking-tight">{item.q}</h3>
+                                <p className="font-mono text-xs text-[var(--text-secondary)] leading-relaxed border-l-2 border-[var(--border-color)] pl-4 group-hover:border-[var(--text-primary)] transition-colors">{item.a}</p>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         </div>

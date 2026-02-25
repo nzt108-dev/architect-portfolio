@@ -43,38 +43,42 @@ export default function LeadCaptureWidget() {
 
     if (status === 'success') {
         return (
-            <div className="cyber-card p-8 neon-border text-center">
-                <div className="text-4xl mb-4">✅</div>
-                <h3 className="text-xl font-semibold mb-2">Request Received!</h3>
-                <p className="text-[var(--text-secondary)]">
-                    I&apos;ll get back to you within 24 hours with a detailed estimate.
+            <div className="bg-[var(--bg-card)] border border-[var(--accent-green)] p-12 text-center">
+                <div className="font-mono text-4xl text-[var(--accent-green)] mb-6">[✓]</div>
+                <h3 className="text-xl font-bold mb-3 text-[var(--text-primary)] uppercase tracking-tight">Request Logged</h3>
+                <p className="font-mono text-[var(--text-secondary)] text-sm leading-relaxed">
+                    System payload delivered. I will construct an estimate within 24H.
                 </p>
             </div>
         )
     }
 
     return (
-        <div className="cyber-card p-8 neon-border">
-            <h3 className="text-xl font-semibold mb-2 text-center">Get a Free Estimate</h3>
-            <p className="text-[var(--text-secondary)] text-sm text-center mb-6">
-                Tell me what you need — I&apos;ll respond within 24 hours
-            </p>
+        <div className="bg-[var(--bg-card)] p-8 md:p-10 border-t border-[var(--border-color)] lg:border-t-0">
+            <div className="mb-6">
+                <h3 className="font-mono text-sm font-bold uppercase tracking-widest text-[var(--text-primary)] mb-2">
+                    {'>'} Quick Assessment
+                </h3>
+                <p className="font-mono text-[var(--text-secondary)] text-[10px] uppercase tracking-widest leading-relaxed">
+                    REQUIREMENTS IN, ESTIMATE OUT. {'<'} 24H LATENCY.
+                </p>
+            </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
                 <select
                     value={serviceType}
                     onChange={(e) => setServiceType(e.target.value)}
                     required
-                    className="cyber-input"
+                    className="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] p-4 rounded-xl text-sm font-mono text-[var(--text-primary)] focus:border-[var(--accent-primary)] focus:outline-none transition-colors appearance-none cursor-pointer"
                 >
-                    <option value="">What do you need?</option>
-                    <option value="Mobile App">📱 Mobile App</option>
-                    <option value="Website">🌐 Website / Landing Page</option>
-                    <option value="Telegram Bot">🤖 Telegram Bot</option>
-                    <option value="Discord Bot">🎮 Discord Bot</option>
-                    <option value="SaaS Platform">💼 SaaS Platform</option>
-                    <option value="API / Backend">⚙️ API / Backend</option>
-                    <option value="Other">📦 Other</option>
+                    <option value="">SELECT_PROTOCOL...</option>
+                    <option value="Mobile App">[APP] Mobile Architecture</option>
+                    <option value="Website">[WEB] Raw Platform</option>
+                    <option value="Telegram Bot">[BOT] Telegram Autonomous</option>
+                    <option value="Discord Bot">[BOT] Discord Automation</option>
+                    <option value="SaaS Platform">[SYS] Enterprise SaaS</option>
+                    <option value="API / Backend">[API] Infrastructure Data</option>
+                    <option value="Other">[OTH] Custom Payload</option>
                 </select>
 
                 <input
@@ -82,20 +86,22 @@ export default function LeadCaptureWidget() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="cyber-input"
-                    placeholder="Your email address"
+                    className="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] p-4 rounded-xl text-sm font-mono text-[var(--text-primary)] focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+                    placeholder="ENTER_ROUTING_ADDRESS@DOMAIN.COM"
                 />
 
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="btn-filled w-full py-3"
+                    className="w-full bg-[var(--bg-primary)] border border-[var(--accent-primary)] text-[var(--text-primary)] font-mono text-sm font-bold uppercase tracking-widest p-4 rounded-xl hover:bg-[var(--bg-card)] hover:text-[var(--accent-primary)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden"
                 >
-                    {isSubmitting ? 'Sending...' : 'Get Free Estimate →'}
+                    <span className="relative z-10">{isSubmitting ? 'TRANSMITTING...' : 'INITIATE_REQUEST'}</span>
                 </button>
 
                 {status === 'error' && (
-                    <p className="text-red-400 text-sm text-center">Something went wrong. Please try again.</p>
+                    <p className="font-mono text-[var(--accent-primary)] text-[10px] uppercase tracking-widest text-center mt-4">
+                        [ERROR] REQUEST FAILED.
+                    </p>
                 )}
             </form>
         </div>

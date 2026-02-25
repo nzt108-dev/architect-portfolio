@@ -20,18 +20,18 @@ export default function ProjectsFilter({ categories, activeCategory }: Props) {
     }
 
     return (
-        <div className="flex flex-wrap gap-3 mb-10">
+        <div className="flex flex-wrap gap-4 mb-12">
             {categories.map((category) => (
                 <button
                     key={category.id}
                     onClick={() => handleCategoryChange(category.id)}
-                    className={`px-5 py-2.5 rounded-lg font-medium text-sm transition-all ${activeCategory === category.id
-                            ? 'bg-[var(--neon-cyan)] text-[var(--bg-primary)] shadow-[var(--glow-cyan)]'
-                            : 'bg-[var(--bg-card)] text-[var(--text-secondary)] border border-[var(--border-color)] hover:border-[var(--neon-cyan)] hover:text-[var(--neon-cyan)]'
+                    className={`px-6 py-3 rounded-xl font-mono text-xs uppercase tracking-widest transition-all border ${activeCategory === category.id
+                        ? 'bg-[var(--accent-primary)] border-[var(--accent-primary)] text-white shadow-[4px_4px_0_0_var(--text-primary)] translate-y-[-2px] translate-x-[-2px]'
+                        : 'bg-[var(--bg-card)] text-[var(--text-secondary)] border-[var(--border-color)] hover:border-[var(--text-primary)] hover:text-[var(--text-primary)]'
                         }`}
                 >
-                    <span className="mr-2">{category.icon}</span>
-                    {category.name}
+                    <span className="mr-2 opacity-50">{category.icon}</span>
+                    [{category.name}]
                 </button>
             ))}
         </div>

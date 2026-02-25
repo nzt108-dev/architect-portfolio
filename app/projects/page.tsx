@@ -14,12 +14,14 @@ export default async function ProjectsPage({ searchParams }: Props) {
     const projects = await getProjects(activeCategory)
 
     return (
-        <div className="container mx-auto px-6 py-12">
+        <div className="container mx-auto px-6 py-20 lg:py-32 relative z-10 w-full max-w-7xl">
             {/* Header */}
-            <div className="mb-12">
-                <h1 className="section-title gradient-text">Projects</h1>
-                <p className="section-subtitle">
-                    Explore my ongoing and completed projects across different domains.
+            <div className="mb-20">
+                <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tighter text-[var(--text-primary)]">
+                    Project <span className="font-[var(--font-dm-serif)] italic text-[var(--accent-primary)]">Archive.</span>
+                </h1>
+                <p className="font-mono text-[var(--text-secondary)] text-sm md:text-base uppercase tracking-widest">
+                    {'//'} Executed protocols and production deployments.
                 </p>
             </div>
 
@@ -30,8 +32,9 @@ export default async function ProjectsPage({ searchParams }: Props) {
             />
 
             {/* Projects Count */}
-            <div className="mb-6 text-[var(--text-secondary)]">
-                Showing <span className="text-[var(--neon-cyan)] font-semibold">{projects.length}</span> project{projects.length !== 1 ? 's' : ''}
+            <div className="mb-8 font-mono text-[var(--text-secondary)] text-sm uppercase tracking-widest flex items-center gap-3">
+                <span>Total Nodes: <span className="text-[var(--text-primary)] font-bold">[{projects.length}]</span></span>
+                <span className="w-full h-[1px] bg-[var(--border-color)] flex-1"></span>
             </div>
 
             {/* Projects Grid */}
@@ -43,9 +46,9 @@ export default async function ProjectsPage({ searchParams }: Props) {
 
             {/* Empty State */}
             {projects.length === 0 && (
-                <div className="text-center py-20">
-                    <p className="text-[var(--text-muted)] text-lg">
-                        No projects found in this category.
+                <div className="text-center py-32 border border-dashed border-[var(--border-color)] rounded-[2rem] bg-[var(--bg-card)]">
+                    <p className="font-mono text-[var(--text-muted)] text-sm uppercase tracking-widest">
+                        {'>'} NO DEPLOYMENTS FOUND IN THIS REGION.
                     </p>
                 </div>
             )}
