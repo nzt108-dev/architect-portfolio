@@ -25,12 +25,13 @@ const AI_MODEL = 'anthropic/claude-3-haiku'
 
 export async function GET(req: Request) {
     try {
-        // Optional Security Check
-        const { searchParams } = new URL(req.url)
-        const secret = searchParams.get('secret')
-        // In production, ensure you pass ?secret=YOUR_CRON_SECRET
-        if (process.env.CRON_SECRET && secret !== process.env.CRON_SECRET) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+        // Recommended Security Check for Vercel Cron Jobs
+        const authHeader = req.headers.get('authorization')
+        if (
+            process.env.CRON_SECRET &&
+            authHeader !== `Bearer ${process.env.CRON_SECRET}`
+        ) {
+            return new NextResponse('Unauthorized', { status: 401 })
         }
 
         if (!process.env.OPENROUTER_API_KEY) {
