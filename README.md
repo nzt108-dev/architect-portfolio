@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NZT108 | High-Performance Architecture
 
-## Getting Started
+The `nzt108.dev` portfolio is a cinematic, highly-optimized digital instrument built for lead generation, performance tracking, and autonomous SEO growth.
 
-First, run the development server:
+## Architecture & Stack
+- **Framework**: Next.js 15 (App Router, Turbopack)
+- **Styling**: Tailwind CSS v4, GSAP 3 (ScrollTrigger), custom inline SVG Noise (`<feTurbulence>`)
+- **Database**: Turso (LibSQL) + Prisma ORM
+- **Aesthetic**: **Dark Brutalist Signal** (Raw precision, heavy contrast, monospace data)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Core Capabilities
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1. Global Performance UI
+- 100dvh cinematic Hero section with immersive scrolling.
+- Global SVG noise filter at `0.05` opacity to remove flat digital gradients.
+- GSAP-powered micro-interactions and scroll-linked reveals.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2. Marketing & Tracking Infrastructure
+- **Meta Pixel**: Integrated globally for raw conversion tracking (`PageView`, `Lead`, `Contact`).
+- **UTM Engine**: Custom admin `/admin/analytics/utm` link generator for tracking ad campaign efficacy.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. AI SEO Autopilot Engine
+An autonomous content pipeline deployed via Vercel Cron Jobs.
+- Parses tech news via RSS natively at the Edge.
+- Triggers **Claude 3.5 Haiku** via `OpenRouter` to generate 100% unique, Dark Brutalist SEO articles.
+- Formats and injects data directly into the SQLite database.
+- Renders highly structured Semantic HTML at `/blog/[slug]`, injecting Google-friendly Schema.org JSON-LD definitions.
 
-## Learn More
+### 4. Admin Command Center
+A secure dashboard (`/admin`) to manage Projects, Services, Content, and review the autonomous Blog generation telemetry.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Built for extreme reliability, deep analytics, and uncompromising aesthetics.*
