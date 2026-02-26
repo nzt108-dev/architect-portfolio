@@ -13,10 +13,11 @@ const RSS_FEEDS = [
     'https://news.ycombinator.com/rss',
 ]
 
-// OpenRouter Initialization
+// Initialize OpenAI client for OpenRouter
+// We use a fallback dummy key during build time to prevent Vercel build failures
 const openai = new OpenAI({
     baseURL: 'https://openrouter.ai/api/v1',
-    apiKey: process.env.OPENROUTER_API_KEY,
+    apiKey: process.env.OPENROUTER_API_KEY || 'dummy-key-for-build',
 })
 
 // Default AI Model (Claude 3.5 Haiku is excellent for fast, cheap, high-quality text)
