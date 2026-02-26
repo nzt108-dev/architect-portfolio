@@ -36,6 +36,10 @@ export default function ContactForm() {
             if (response.ok) {
                 setStatus('success');
                 setFormData({ name: '', email: '', subject: '', message: '', budget: '' });
+                if (typeof window !== 'undefined' && (window as any).fbq) {
+                    (window as any).fbq('track', 'Lead');
+                    (window as any).fbq('track', 'Contact');
+                }
             } else {
                 setStatus('error');
             }

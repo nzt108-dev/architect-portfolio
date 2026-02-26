@@ -30,6 +30,9 @@ export default function LeadCaptureWidget() {
                 setStatus('success')
                 setEmail('')
                 setServiceType('')
+                if (typeof window !== 'undefined' && (window as any).fbq) {
+                    (window as any).fbq('track', 'Lead');
+                }
             } else {
                 setStatus('error')
             }

@@ -21,11 +21,27 @@ export function getUtmParams(): { utmSource: string; utmMedium: string; utmCampa
     return { utmSource, utmMedium, utmCampaign }
 }
 
+import Script from 'next/script'
+
 /** Wrapper with Suspense boundary (required by Next.js for useSearchParams) */
 export function AnalyticsTracker() {
     return (
         <Suspense fallback={null}>
             <TrackerInner />
+            <Script id="meta-pixel" strategy="afterInteractive">
+                {`
+                !function(f,b,e,v,n,t,s)
+                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '855170140857689');
+                fbq('track', 'PageView');
+                `}
+            </Script>
         </Suspense>
     )
 }
