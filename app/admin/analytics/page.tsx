@@ -12,6 +12,8 @@ interface AnalyticsData {
     byDevice: Record<string, number>
     byBrowser: Record<string, number>
     topCountries: { country: string; count: number }[]
+    topUtmSources?: { source: string; count: number }[]
+    topUtmCampaigns?: { campaign: string; count: number }[]
 }
 
 const PERIOD_OPTIONS = [
@@ -228,6 +230,43 @@ export default function AnalyticsPage() {
                                 <div key={c.country} className="flex items-center justify-between text-sm py-1">
                                     <span>{c.country}</span>
                                     <span className="text-green-400 font-medium">{c.count}</span>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* ── Marketing & Campaigns ──────────────────── */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                <div className="cyber-card p-5">
+                    <h2 className="font-semibold mb-4">🎯 UTM Sources</h2>
+                    {!data.topUtmSources || data.topUtmSources.length === 0 ? (
+                        <p className="text-sm text-[var(--text-muted)] py-4 text-center">No campaign tracking data yet. Generate links via the UTM Tool.</p>
+                    ) : (
+                        <div className="space-y-2">
+                            {data.topUtmSources.map((s, i) => (
+                                <div key={s.source} className="flex items-center gap-3 p-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-all">
+                                    <span className="text-xs text-[var(--text-muted)] w-5">{i + 1}.</span>
+                                    <span className="text-sm flex-grow truncate">{s.source}</span>
+                                    <span className="text-sm font-medium text-[var(--neon-cyan)] flex-shrink-0">{s.count}</span>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <div className="cyber-card p-5">
+                    <h2 className="font-semibold mb-4">📢 Top Campaigns</h2>
+                    {!data.topUtmCampaigns || data.topUtmCampaigns.length === 0 ? (
+                        <p className="text-sm text-[var(--text-muted)] py-4 text-center">No active campaigns tracked.</p>
+                    ) : (
+                        <div className="space-y-2">
+                            {data.topUtmCampaigns.map((c, i) => (
+                                <div key={c.campaign} className="flex items-center gap-3 p-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-all">
+                                    <span className="text-xs text-[var(--text-muted)] w-5">{i + 1}.</span>
+                                    <span className="text-sm flex-grow truncate">{c.campaign}</span>
+                                    <span className="text-sm font-medium text-purple-400 flex-shrink-0">{c.count}</span>
                                 </div>
                             ))}
                         </div>

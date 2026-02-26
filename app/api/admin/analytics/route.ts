@@ -119,6 +119,31 @@ export async function GET(request: Request) {
             views.map(v => `${v.createdAt.toISOString().split('T')[0]}-${v.device}-${v.browser}`)
         ).size
 
+        // UTM Tracking 
+        const byUtmSource: Record<string, number> = {}
+        const byUtmCampaign: Record<string, number> = {}
+        const byUtmMedium: Record<string, number> = {}
+
+        views.forEach(v => {
+            if (v.utmSource) {
+                byUtmSource[v.utmSource] = (byUtmSource[v.utmSource] || 0) + 1
+            }
+            if (v.utmCampaign) {
+                byUtmCampaign[v.utmCampaign] = (byUtmCampaign[v.utmCampaign] || 0) + 1
+            }
+            if (v.utmMedium) {
+                byUtmMedium[v.utmMedium] = (byUtmMedium[v.utmMedium] || 0) + 1
+            }
+        })
+
+        const topUtmSources = Object.entries(byUtmSource)
+            .sort((a, b) => b[1] - a[1])
+            .map(([source, count]) => ({ source, count }))
+
+        const topUtmCampaigns = Object.entries(byUtmCampaign)
+            .sort((a, b) => b[1] - a[1])
+            .map(([campaign, count]) => ({ campaign, count }))
+
         return NextResponse.json({
             totalViews,
             uniqueVisitors,
@@ -129,6 +154,8 @@ export async function GET(request: Request) {
             byDevice,
             byBrowser,
             topCountries,
+            topUtmSources,
+            topUtmCampaigns,
         })
     } catch (error) {
         console.error('Analytics GET error:', error)
