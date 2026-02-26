@@ -8,7 +8,6 @@ import ProcessSteps from '@/components/ui/ProcessSteps'
 import ComparisonTable from '@/components/ui/ComparisonTable'
 import FAQ from '@/components/ui/FAQ'
 import LeadCaptureWidget from '@/components/ui/LeadCaptureWidget'
-import DashboardFeatures from '@/components/ui/DashboardFeatures'
 
 export const dynamic = 'force-dynamic'
 
@@ -26,11 +25,8 @@ export default async function Home() {
         {/* Quick Pricing Infographic */}
         <QuickPricing />
 
-        {/* Interactive Functional Artifacts (Replaces static project grid) */}
-        <DashboardFeatures />
-
         {/* Featured Projects - Restored and Brutalist */}
-        <section className="py-32 border-t border-[var(--border-color)]">
+        <section className="py-16 border-t border-[var(--border-color)] mt-12">
           <div className="mb-16">
             <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tighter">
               Featured <span className="font-[var(--font-dm-serif)] italic text-[var(--accent-primary)]">Artifacts.</span>
@@ -48,7 +44,7 @@ export default async function Home() {
 
           <div className="mt-16 text-center">
             <Link href="/projects" className="cyber-btn flex inline-flex items-center justify-center uppercase tracking-widest text-sm px-8 py-4">
-              Initialize Project Archive →
+              View All Case Studies →
             </Link>
           </div>
         </section>

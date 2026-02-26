@@ -88,24 +88,17 @@ export default function HeroV2() {
                 {/* Left Content - Pure Terminal Vibe */}
                 <div className="w-full lg:w-[60%] flex flex-col justify-center h-full">
 
-                    {/* Top HUD bar */}
-                    <div className="hud-element flex flex-wrap items-center gap-4 mb-12 font-mono text-xs text-[var(--text-secondary)] uppercase tracking-widest border-b border-[var(--border-color)] pb-4">
-                        <span className="text-[var(--accent-primary)] animate-pulse">● REC</span>
-                        <span>UPLINK: SECURE</span>
-                        <span>PORT: 8080</span>
-                        <span>IP: 192.168.1.1</span>
-                        <span className="ml-auto bg-[var(--bg-card)] border border-[var(--border-color)] px-2 py-1">v2.0.4b</span>
-                    </div>
+                    {/* Top HUD bar removed to prevent user confusion */}
 
                     {/* Massive Typography - Brutalist Stencil Look */}
                     <h1 className="hud-element flex flex-col mb-8 pointer-events-none">
                         <span className="text-[var(--text-secondary)] font-mono text-xl md:text-2xl tracking-widest uppercase mb-4 h-8">
                             <GlitchLine text="> TECHNICAL_PARTNER_" delay={500} />
                         </span>
-                        <span className="text-[4rem] md:text-[6rem] lg:text-[7.5rem] font-bold tracking-tighter text-[var(--text-primary)] leading-[0.85] uppercase">
+                        <span className="text-[3.5rem] md:text-[6rem] lg:text-[7.5rem] font-bold tracking-tighter text-[var(--text-primary)] leading-[0.85] uppercase">
                             Digital
                         </span>
-                        <span className="text-[4.5rem] md:text-[6.5rem] lg:text-[8rem] font-[var(--font-dm-serif)] italic text-[var(--accent-primary)] leading-[0.85] -ml-2">
+                        <span className="text-[4rem] md:text-[6.5rem] lg:text-[8rem] font-[var(--font-dm-serif)] italic text-[var(--accent-primary)] leading-[0.85] -ml-2">
                             Instrument.
                         </span>
                     </h1>
@@ -119,7 +112,7 @@ export default function HeroV2() {
                     {/* Interactive Terminal CTA */}
                     <div className="hud-element flex flex-col sm:flex-row gap-4 mt-auto lg:mt-0">
                         <Link href="/contact" className="group relative bg-[var(--bg-card)] border border-[var(--accent-primary)] px-8 py-5 flex items-center justify-center gap-4 hover:bg-[var(--accent-primary)]/10 transition-colors">
-                            <span className="font-mono text-[var(--text-secondary)] text-sm group-hover:text-[var(--text-primary)] transition-colors">{'>'} start_project</span>
+                            <span className="font-mono text-[var(--text-secondary)] text-sm group-hover:text-[var(--text-primary)] transition-colors">{'>'} request_assessment</span>
                             <div className="w-2 h-4 bg-[var(--accent-primary)] animate-pulse" />
                         </Link>
 

@@ -74,8 +74,8 @@ export default function ProcessSteps() {
     }, [])
 
     return (
-        <section ref={containerRef} className="py-32 relative bg-[var(--bg-primary)]">
-            <div className="mb-24 px-6 lg:px-12 max-w-7xl mx-auto">
+        <section ref={containerRef} className="py-16 relative bg-[var(--bg-primary)]">
+            <div className="mb-16 px-6 lg:px-12 max-w-7xl mx-auto">
                 <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tighter">
                     Standard <span className="font-[var(--font-dm-serif)] italic text-[var(--accent-primary)]">Protocol.</span>
                 </h2>

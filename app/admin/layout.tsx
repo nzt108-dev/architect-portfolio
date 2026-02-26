@@ -96,6 +96,9 @@ export default function AdminLayout({
                     <NavLink href="/admin/analytics" icon="📈">
                         Analytics
                     </NavLink>
+                    <NavLink href="/admin/analytics/utm" icon="🔗">
+                        UTM Generator
+                    </NavLink>
                     <NavLink href="/admin/content" icon="📝">
                         Content
                     </NavLink>

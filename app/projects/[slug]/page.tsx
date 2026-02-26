@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getProjectBySlug, getProjects } from '@/lib/queries'
 import { notFound } from 'next/navigation'
+import ImageGallery from '@/components/ui/ImageGallery'
 
 export const dynamic = 'force-dynamic'
 
@@ -112,26 +113,7 @@ export default async function ProjectDetailPage({
                                 <span className="font-mono text-[var(--accent-primary)] text-sm tracking-widest">[ VISUALS ]</span>
                                 Interface Capture
                             </h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                                {project.screenshots.map((url, i) => (
-                                    <a
-                                        key={i}
-                                        href={url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="block rounded-xl overflow-hidden border border-[var(--border-color)] hover:border-[var(--accent-primary)] transition-all group"
-                                    >
-                                        <div className="relative aspect-[4/3] w-full">
-                                            <div className="absolute inset-0 bg-[var(--accent-primary)]/10 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
-                                            <img
-                                                src={url}
-                                                alt={`${project.title} Interface ${i + 1}`}
-                                                className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-500"
-                                            />
-                                        </div>
-                                    </a>
-                                ))}
-                            </div>
+                            <ImageGallery images={project.screenshots} title={project.title} />
                         </section>
                     )}
 

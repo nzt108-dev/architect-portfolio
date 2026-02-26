@@ -16,17 +16,27 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-[2rem] h-full flex flex-col overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.8)] transition-all duration-300 hover:border-[var(--accent-primary)] hover:-translate-y-1 relative">
 
                 {/* Image / Thumbnail Container */}
-                <div className="relative h-48 border-b border-[var(--border-color)] bg-[var(--bg-primary)] overflow-hidden">
+                <div className="relative h-48 border-b border-[var(--border-color)] bg-[var(--bg-primary)] overflow-hidden flex items-center justify-center p-4">
                     {project.screenshots?.length > 0 ? (
-                        <>
-                            <img
-                                src={project.screenshots[0]}
-                                alt={project.title}
-                                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 origin-center scale-100 group-hover:scale-105"
-                            />
+                        <div className="relative w-full h-full flex items-center justify-center p-4 gap-2">
+                            {project.screenshots.slice(0, 3).map((img, i) => {
+                                // Add slight rotation and overlapping scale for the multi-image gallery feel
+                                const isMultiple = project.screenshots.length > 1
+                                const rotation = isMultiple ? (i === 0 ? '-rotate-6' : i === 1 ? 'rotate-2 z-10 scale-110' : 'rotate-6') : 'rotate-0'
+
+                                return (
+                                    <div key={i} className={`relative flex-1 h-full max-h-full transition-all duration-500 origin-center group-hover:scale-105 ${rotation}`}>
+                                        <img
+                                            src={img}
+                                            alt={`${project.title} screenshot ${i + 1}`}
+                                            className={`w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 drop-shadow-2xl ${isMultiple ? 'opacity-80 group-hover:opacity-100' : ''}`}
+                                        />
+                                    </div>
+                                )
+                            })}
                             {/* Scanning line effect on hover */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent opacity-80" />
-                        </>
+                            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent opacity-50 pointer-events-none" />
+                        </div>
                     ) : (
                         <div className="w-full h-full flex items-center justify-center premium-grid opacity-30">
                             <span className="font-mono text-[var(--text-secondary)] text-xs uppercase tracking-widest">NO_SIGNAL</span>
