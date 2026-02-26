@@ -38,8 +38,8 @@ export default function Header() {
                     }`}
             >
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-3 group px-2">
-                    <div className="w-9 h-9 overflow-hidden rounded-full border border-[var(--accent-primary)] transition-transform duration-300 group-hover:scale-105">
+                <Link href="/" className="flex items-center gap-3 group px-2 relative z-50 cursor-pointer pointer-events-auto" aria-label="Go to homepage">
+                    <div className="w-9 h-9 overflow-hidden rounded-full border border-[var(--accent-primary)] transition-transform duration-300 group-hover:scale-105 flex-shrink-0">
                         <Image
                             src="/logo.jpg"
                             alt="nzt108_dev"
