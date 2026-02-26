@@ -16,9 +16,9 @@ model Project {
   slug            String   @unique
   description     String
   longDescription String   @default("")
-  category        String   // "mobile" | "telegram" | "web" | "saas" | "discord"
+  category        String // "mobile" | "telegram" | "web" | "saas" | "discord"
   progress        Int      @default(0) // 0-100
-  technologies    String   // JSON array stored as string
+  technologies    String // JSON array stored as string
   githubUrl       String?
   demoUrl         String?
   images          String   @default("[]") // JSON array stored as string
@@ -30,18 +30,18 @@ model Project {
   localPath       String   @default("") // Local filesystem path for workspace
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  
+
   // Relations
-  roadmapItems   RoadmapItem[]
-  activityLogs   ActivityLog[]
-  crmTasks       CrmTask[]
+  roadmapItems RoadmapItem[]
+  activityLogs ActivityLog[]
+  crmTasks     CrmTask[]
 }
 
 // Roadmap items for each project
 model RoadmapItem {
   id        String   @id @default(cuid())
   title     String
-  status    String   // "done" | "in-progress" | "planned"
+  status    String // "done" | "in-progress" | "planned"
   order     Int      @default(0)
   projectId String
   project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
@@ -53,7 +53,7 @@ model RoadmapItem {
 model Skill {
   id       String @id @default(cuid())
   name     String
-  level    Int    // 0-100
+  level    Int // 0-100
   category String // "language" | "frontend" | "backend" | "database" | "devops" | "cloud" | "architecture"
   order    Int    @default(0)
 }
@@ -84,13 +84,13 @@ model ContactSubmission {
   budget      String   @default("")
   serviceType String   @default("")
   read        Boolean  @default(false)
-  status      String   @default("new")     // "new" | "contacted" | "qualified" | "proposal" | "won" | "lost" | "archived"
-  label       String   @default("")        // "hot" | "warm" | "cold" | "" 
-  notes       String   @default("")        // Internal notes
-  dealValue   Int      @default(0)         // Actual deal amount in USD
-  utmSource   String   @default("")        // utm_source from ad
-  utmMedium   String   @default("")        // utm_medium
-  utmCampaign String   @default("")        // utm_campaign
+  status      String   @default("new") // "new" | "contacted" | "qualified" | "proposal" | "won" | "lost" | "archived"
+  label       String   @default("") // "hot" | "warm" | "cold" | "" 
+  notes       String   @default("") // Internal notes
+  dealValue   Int      @default(0) // Actual deal amount in USD
+  utmSource   String   @default("") // utm_source from ad
+  utmMedium   String   @default("") // utm_medium
+  utmCampaign String   @default("") // utm_campaign
   createdAt   DateTime @default(now())
 }
 
@@ -100,12 +100,12 @@ model Service {
   title         String
   titleRu       String   @default("")
   slug          String   @unique
-  icon          String   // emoji icon
+  icon          String // emoji icon
   description   String
   descriptionRu String   @default("")
   features      String   @default("[]") // JSON array of feature strings
   featuresRu    String   @default("[]")
-  timeline      String   // e.g. "from 3 days"
+  timeline      String // e.g. "from 3 days"
   timelineRu    String   @default("")
   order         Int      @default(0)
   createdAt     DateTime @default(now())
@@ -117,7 +117,7 @@ model ActivityLog {
   id        String   @id @default(cuid())
   projectId String?
   project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  type      String   // "push" | "task" | "note" | "deploy" | "milestone"
+  type      String // "push" | "task" | "note" | "deploy" | "milestone"
   title     String
   details   String   @default("")
   author    String   @default("agent") // "agent" | "manual"
@@ -131,26 +131,57 @@ model CrmTask {
   project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
   title       String
   description String    @default("")
-  type        String    @default("task")    // "task" | "milestone" | "bug" | "feature"
+  type        String    @default("task") // "task" | "milestone" | "bug" | "feature"
   status      String    @default("backlog") // "backlog" | "todo" | "in-progress" | "review" | "done"
-  priority    String    @default("medium")  // "low" | "medium" | "high" | "urgent"
+  priority    String    @default("medium") // "low" | "medium" | "high" | "urgent"
   dueDate     DateTime?
   order       Int       @default(0)
-  author      String    @default("agent")   // "agent" | "manual"
+  author      String    @default("agent") // "agent" | "manual"
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
 
 // Page view analytics
 model PageView {
-  id        String   @id @default(cuid())
-  path      String           // e.g. "/", "/projects/my-app"
-  referrer  String   @default("")  // Where user came from
-  country   String   @default("")  // Geolocation (if available)
-  device    String   @default("")  // "desktop" | "mobile" | "tablet"
-  browser   String   @default("")  // "Chrome" | "Safari" etc.
-  utmSource   String   @default("")  // utm_source
-  utmMedium   String   @default("")  // utm_medium
-  utmCampaign String   @default("")  // utm_campaign
-  createdAt DateTime @default(now())
+  id          String   @id @default(cuid())
+  path        String // e.g. "/", "/projects/my-app"
+  referrer    String   @default("") // Where user came from
+  country     String   @default("") // Geolocation (if available)
+  device      String   @default("") // "desktop" | "mobile" | "tablet"
+  browser     String   @default("") // "Chrome" | "Safari" etc.
+  utmSource   String   @default("") // utm_source
+  utmMedium   String   @default("") // utm_medium
+  utmCampaign String   @default("") // utm_campaign
+  createdAt   DateTime @default(now())
+}
+
+// Blog Topics/Categories
+model Topic {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String    @default("")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  articles    Article[]
+}
+
+// Blog Articles for AI SEO
+model Article {
+  id              String    @id @default(cuid())
+  title           String
+  slug            String    @unique
+  description     String // Short summary
+  content         String // Markdown/HTML content
+  metaTitle       String    @default("")
+  metaDescription String    @default("")
+  keywords        String    @default("") // Comma separated
+  imageUrl        String    @default("")
+  status          String    @default("DRAFT") // "DRAFT" | "PUBLISHED"
+  publishedAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  topicId String?
+  topic   Topic?  @relation(fields: [topicId], references: [id], onDelete: SetNull)
 }

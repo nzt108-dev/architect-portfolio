@@ -102,6 +102,9 @@ export default function AdminLayout({
                     <NavLink href="/admin/content" icon="📝">
                         Content
                     </NavLink>
+                    <NavLink href="/admin/blog" icon="🤖">
+                        AI Blog
+                    </NavLink>
                     <NavLink href="/admin/contacts" icon="📇">
                         Contacts
                     </NavLink>
