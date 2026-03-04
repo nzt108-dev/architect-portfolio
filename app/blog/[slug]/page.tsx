@@ -105,12 +105,15 @@ export default async function BlogPostPage({ params }: Props) {
             <div
                 className="prose prose-invert prose-lg max-w-none 
                 prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-[var(--text-primary)]
-                prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:border-b prose-h2:border-[var(--border-color)] prose-h2:pb-4
-                prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4
-                prose-p:text-[var(--text-secondary)] prose-p:leading-loose prose-p:font-mono prose-p:text-base
+                prose-h2:text-3xl prose-h2:mt-20 prose-h2:mb-6 prose-h2:border-l-[3px] prose-h2:border-[var(--accent-primary)] prose-h2:pl-5 prose-h2:pb-0
+                prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-[var(--accent-primary)] prose-h3:uppercase prose-h3:tracking-widest prose-h3:font-mono prose-h3:text-sm
+                prose-p:text-[var(--text-secondary)] prose-p:leading-loose prose-p:font-mono prose-p:text-base prose-p:mb-6
                 prose-a:text-[var(--accent-primary)] prose-a:no-underline hover:prose-a:underline
-                prose-li:text-[var(--text-secondary)] prose-li:font-mono prose-li:text-base
-                prose-strong:text-[var(--text-primary)]
+                prose-li:text-[var(--text-secondary)] prose-li:font-mono prose-li:text-base prose-li:mb-2
+                prose-ul:my-6 prose-ul:pl-4
+                prose-strong:text-[var(--text-primary)] prose-strong:font-bold
+                prose-blockquote:border-l-[3px] prose-blockquote:border-[var(--accent-primary)] prose-blockquote:bg-[var(--bg-card)] prose-blockquote:rounded-r-2xl prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:my-10 prose-blockquote:not-italic
+                prose-blockquote:text-[var(--text-primary)] prose-blockquote:font-[var(--font-dm-serif)]
                 prose-code:text-[var(--accent-primary)] prose-code:bg-[var(--bg-card)] prose-code:px-2 prose-code:py-0.5 prose-code:rounded
                 prose-pre:bg-[#0a0a0a] prose-pre:border prose-pre:border-[var(--border-color)]"
                 dangerouslySetInnerHTML={{ __html: article.content }}
