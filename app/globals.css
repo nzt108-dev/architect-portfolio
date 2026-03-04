@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@plugin "@tailwindcss/typography";
 /* ========================================
    PREMIUM DARK TECH DESIGN SYSTEM - nzt108_dev
    ======================================== */
