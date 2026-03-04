@@ -21,7 +21,7 @@ const openai = new OpenAI({
 })
 
 // Default AI Model (Claude 3.5 Haiku is excellent for fast, cheap, high-quality text)
-const AI_MODEL = 'anthropic/claude-3-haiku'
+const AI_MODEL = 'anthropic/claude-haiku-4.5'
 
 export async function GET(req: Request) {
     try {
