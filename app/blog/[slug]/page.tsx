@@ -110,7 +110,7 @@ export default async function BlogPostPage({ params }: Props) {
                 prose-p:text-[var(--text-secondary)] prose-p:leading-loose prose-p:font-mono prose-p:text-base prose-p:mb-6
                 prose-a:text-[var(--accent-primary)] prose-a:no-underline hover:prose-a:underline
                 prose-li:text-[var(--text-secondary)] prose-li:font-mono prose-li:text-base prose-li:mb-2
-                prose-ul:my-6 prose-ul:pl-4
+                prose-ul:my-6 prose-ul:pl-4 prose-ul:list-disc
                 prose-strong:text-[var(--text-primary)] prose-strong:font-bold
                 prose-blockquote:border-l-[3px] prose-blockquote:border-[var(--accent-primary)] prose-blockquote:bg-[var(--bg-card)] prose-blockquote:rounded-r-2xl prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:my-10 prose-blockquote:not-italic
                 prose-blockquote:text-[var(--text-primary)] prose-blockquote:font-[var(--font-dm-serif)]
