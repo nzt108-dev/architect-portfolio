@@ -91,8 +91,8 @@ export default function TermsOfService() {
                     <h2 className="mb-3 font-sans text-xl font-semibold text-[var(--color-text)]">10. Contact</h2>
                     <p>
                         For questions, contact us at{" "}
-                        <a href="mailto:support@nzt108.dev" className="text-[var(--color-accent)] hover:underline">
-                            support@nzt108.dev
+                        <a href="mailto:nzt108@gmail.com" className="text-[var(--color-accent)] hover:underline">
+                            nzt108@gmail.com
                         </a>
                     </p>
                 </section>
