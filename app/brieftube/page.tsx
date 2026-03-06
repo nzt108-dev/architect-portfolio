@@ -38,7 +38,7 @@ export default function BriefTubeLanding() {
                 <div className="flex flex-wrap items-center justify-center gap-4">
                     <a
                         href="#features"
-                        className="rounded-xl bg-gradient-to-r from-red-600 to-orange-500 px-8 py-3 font-semibold text-white shadow-lg shadow-red-500/20 transition hover:shadow-red-500/40 hover:scale-[1.02]"
+                        className="rounded-xl bg-gradient-to-r from-red-600 to-orange-500 px-8 py-3 font-bold text-white text-lg shadow-lg shadow-red-500/20 transition hover:shadow-red-500/40 hover:scale-[1.02]"
                     >
                         Learn More
                     </a>
