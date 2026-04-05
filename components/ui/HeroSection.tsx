@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ArrowRight, MessageCircle, CheckCircle2, Clock, Shield, DollarSign } from 'lucide-react'
+import { trackFBEvent } from '@/components/analytics/AnalyticsTracker'
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -42,6 +43,7 @@ export default function HeroSection() {
   }, [])
 
   const scrollToEstimate = () => {
+    trackFBEvent('InitiateCheckout', { content_name: 'Hero CTA' })
     const el = document.getElementById('cta-section')
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
@@ -92,6 +94,7 @@ export default function HeroSection() {
             href="https://t.me/nzt108_dev"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackFBEvent('Contact', { content_name: 'Telegram Hero' })}
             className="btn-secondary px-8 py-4 text-base rounded-2xl w-full sm:w-auto"
           >
             <MessageCircle size={18} />

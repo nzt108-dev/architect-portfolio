@@ -5,6 +5,7 @@ import Link from 'next/link'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Smartphone, Globe, Bot, Layers, ArrowRight } from 'lucide-react'
+import { trackFBEvent } from '@/components/analytics/AnalyticsTracker'
 
 const services = [
   {
@@ -83,7 +84,8 @@ export default function ServicesBento() {
     }
   }, [])
 
-  const scrollToEstimate = () => {
+  const scrollToEstimate = (serviceName?: string) => {
+    trackFBEvent('InitiateCheckout', { content_name: serviceName || 'Service Card' })
     const el = document.getElementById('cta-section')
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
@@ -109,7 +111,7 @@ export default function ServicesBento() {
               <div
                 key={service.title}
                 className="bento-item bento-card group cursor-pointer"
-                onClick={scrollToEstimate}
+                onClick={() => scrollToEstimate(service.title)}
               >
                 {/* Icon */}
                 <div

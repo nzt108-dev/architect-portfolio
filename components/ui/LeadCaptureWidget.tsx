@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Send, CheckCircle, MessageCircle } from 'lucide-react'
+import { trackFBEvent } from '@/components/analytics/AnalyticsTracker'
 
 export default function LeadCaptureWidget() {
   const [email, setEmail] = useState('')
@@ -31,9 +32,7 @@ export default function LeadCaptureWidget() {
         setStatus('success')
         setEmail('')
         setServiceType('')
-        if (typeof window !== 'undefined' && (window as any).fbq) {
-          (window as any).fbq('track', 'Lead');
-        }
+        trackFBEvent('Lead', { content_name: serviceType })
       } else {
         setStatus('error')
       }
@@ -120,6 +119,7 @@ export default function LeadCaptureWidget() {
             href="https://t.me/nzt108_dev"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackFBEvent('Contact', { content_name: 'Telegram' })}
             className="flex items-center gap-1.5 text-xs text-[var(--accent-primary)] hover:text-[var(--accent-secondary)] transition-colors font-medium"
           >
             <MessageCircle size={14} />
@@ -127,9 +127,10 @@ export default function LeadCaptureWidget() {
           </a>
           <span className="text-[var(--text-muted)]">·</span>
           <a
-            href="https://wa.me/message"
+            href="https://wa.me/19162415519"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackFBEvent('Contact', { content_name: 'WhatsApp' })}
             className="flex items-center gap-1.5 text-xs text-[var(--accent-green)] hover:text-[var(--accent-green)]/80 transition-colors font-medium"
           >
             <MessageCircle size={14} />

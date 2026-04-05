@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowRight } from 'lucide-react'
+import { trackFBEvent } from '@/components/analytics/AnalyticsTracker'
 
 export default function StickyMobileCTA() {
   const [isVisible, setIsVisible] = useState(false)
@@ -35,6 +36,7 @@ export default function StickyMobileCTA() {
   }, [])
 
   const scrollToEstimate = () => {
+    trackFBEvent('InitiateCheckout', { content_name: 'Sticky Mobile CTA' })
     const el = document.getElementById('cta-section')
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
