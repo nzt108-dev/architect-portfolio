@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getSkills } from '@/lib/queries'
+import { ArrowRight, Zap, Target, Users, Code } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
 
@@ -17,120 +18,108 @@ export default async function AboutPage() {
         { id: 'architecture', name: 'Architecture' },
     ]
 
+    const advantages = [
+        {
+            icon: Target,
+            title: 'End-to-End Delivery',
+            description: 'From concept to production. No handoffs, no gaps — I own the entire lifecycle.',
+        },
+        {
+            icon: Code,
+            title: 'Architecture First',
+            description: 'Clean code that scales. Systems designed to grow with your user base and business.',
+        },
+        {
+            icon: Users,
+            title: 'Technical Partner',
+            description: 'Not just a coder. I help refine ideas into actionable engineering roadmaps.',
+        },
+        {
+            icon: Zap,
+            title: 'Modern Stack',
+            description: 'Battle-tested technologies ensuring speed, security, and long-term maintainability.',
+        },
+    ]
+
     return (
-        <div className="container mx-auto px-6 py-20 lg:py-32 relative z-10 w-full max-w-7xl">
+        <div className="container mx-auto px-6 py-20 lg:py-32 relative z-10 w-full max-w-6xl">
             {/* Header */}
-            <div className="mb-20">
-                <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tighter text-[var(--text-primary)]">
-                    System <span className="font-[var(--font-dm-serif)] italic text-[var(--accent-primary)]">Architect.</span>
+            <div className="mb-16">
+                <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight text-[var(--text-primary)]">
+                    About Me
                 </h1>
-                <p className="font-mono text-[var(--text-secondary)] text-sm md:text-base uppercase tracking-widest">
-                    {'//'} From idea to production — architecting digital solutions end-to-end.
+                <p className="text-[var(--text-secondary)] text-lg">
+                    Full-stack developer building digital products from idea to launch.
                 </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
                 {/* Main Content */}
-                <div className="lg:col-span-2 space-y-20">
+                <div className="lg:col-span-2 space-y-16">
 
                     {/* Bio */}
                     <section>
-                        <h2 className="text-2xl font-bold mb-8 flex items-center gap-4 text-[var(--text-primary)]">
-                            <span className="font-mono text-[var(--accent-primary)] text-sm tracking-widest">[ IDENTITY ]</span>
-                            Who I Am
-                        </h2>
-                        <div className="space-y-6 text-[var(--text-secondary)] leading-relaxed text-lg font-mono">
+                        <h2 className="text-xl font-bold mb-6 text-[var(--text-primary)]">Who I Am</h2>
+                        <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
                             <p>
-                                I&apos;m <span className="text-[var(--text-primary)] font-bold">nzt108_dev</span> —
-                                a software architect who builds complete digital solutions from zero to launch.
-                                Not just a developer who writes code, but a technical partner who engineers every aspect
-                                of your business product: application architecture, technology stack, user experience, and scalability.
+                                I&apos;m a software developer who builds complete digital products from zero to launch.
+                                Not just writing code — I handle architecture, tech stack selection, UX, and scalability.
                             </p>
                             <p>
-                                <span className="text-[var(--text-primary)] font-bold">Have a business idea?</span> I&apos;ll help you
-                                structure the requirements, select the optimal tech stack, and build it predictably.
-                                <span className="text-[var(--text-primary)] font-bold"> Don&apos;t have a spec yet?</span> Let&apos;s
-                                engineer one together — scalable platforms begin with precise blueprints.
+                                <strong className="text-[var(--text-primary)]">Have a business idea?</strong> I&apos;ll help you
+                                structure requirements, pick the right stack, and build it predictably.{' '}
+                                <strong className="text-[var(--text-primary)]">Don&apos;t have a spec yet?</strong> Let&apos;s
+                                create one together — great products start with clear blueprints.
                             </p>
                         </div>
                     </section>
 
-                    {/* What Makes Me Different */}
+                    {/* Advantages */}
                     <section>
-                        <h2 className="text-2xl font-bold mb-8 flex items-center gap-4 text-[var(--text-primary)]">
-                            <span className="font-mono text-[var(--accent-primary)] text-sm tracking-widest">[ ADVANTAGE ]</span>
-                            Execution Protocols
-                        </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                            <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 rounded-[2rem] shadow-md transition-colors hover:border-[var(--accent-primary)]">
-                                <div className="font-mono text-[var(--accent-primary)] text-sm mb-4 font-bold tracking-widest">[01]</div>
-                                <h3 className="text-xl font-bold mb-3 text-[var(--text-primary)]">End-to-End Delivery</h3>
-                                <p className="text-[var(--text-secondary)] font-mono text-sm leading-relaxed">
-                                    From initial systems concept to deployed production environment. No handoffs, no gaps — I own the entire development lifecycle.
-                                </p>
-                            </div>
-
-                            <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 rounded-[2rem] shadow-md transition-colors hover:border-[var(--accent-primary)]">
-                                <div className="font-mono text-[var(--accent-primary)] text-sm mb-4 font-bold tracking-widest">[02]</div>
-                                <h3 className="text-xl font-bold mb-3 text-[var(--text-primary)]">Architecture First</h3>
-                                <p className="text-[var(--text-secondary)] font-mono text-sm leading-relaxed">
-                                    Clean foundational code that scales. I design system logic that grows alongside your user base and business requirements.
-                                </p>
-                            </div>
-
-                            <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 rounded-[2rem] shadow-md transition-colors hover:border-[var(--accent-primary)]">
-                                <div className="font-mono text-[var(--accent-primary)] text-sm mb-4 font-bold tracking-widest">[03]</div>
-                                <h3 className="text-xl font-bold mb-3 text-[var(--text-primary)]">Technical Partner</h3>
-                                <p className="text-[var(--text-secondary)] font-mono text-sm leading-relaxed">
-                                    Stuck on what to build? I help refine vague business ideas into concrete, actionable engineering roadmaps.
-                                </p>
-                            </div>
-
-                            <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 rounded-[2rem] shadow-md transition-colors hover:border-[var(--accent-primary)]">
-                                <div className="font-mono text-[var(--accent-primary)] text-sm mb-4 font-bold tracking-widest">[04]</div>
-                                <h3 className="text-xl font-bold mb-3 text-[var(--text-primary)]">Modern Stack</h3>
-                                <p className="text-[var(--text-secondary)] font-mono text-sm leading-relaxed">
-                                    Utilizing battle-tested, high-performance technologies that ensure application speed, security, and long-term maintainability.
-                                </p>
-                            </div>
-
+                        <h2 className="text-xl font-bold mb-6 text-[var(--text-primary)]">What Sets Me Apart</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {advantages.map((item) => {
+                                const Icon = item.icon
+                                return (
+                                    <div key={item.title} className="bg-[var(--bg-card)] border border-[var(--border-color)] p-6 rounded-xl transition-all duration-200 hover:border-[var(--border-hover)] hover:shadow-sm">
+                                        <div className="w-10 h-10 rounded-xl bg-[var(--accent-light)] flex items-center justify-center mb-4">
+                                            <Icon size={20} className="text-[var(--accent-primary)]" />
+                                        </div>
+                                        <h3 className="text-base font-bold mb-2 text-[var(--text-primary)]">{item.title}</h3>
+                                        <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
+                                            {item.description}
+                                        </p>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </section>
 
                     {/* What I Build */}
                     <section>
-                        <h2 className="text-2xl font-bold mb-8 flex items-center gap-4 text-[var(--text-primary)]">
-                            <span className="font-mono text-[var(--accent-primary)] text-sm tracking-widest">[ OUTPUTS ]</span>
-                            Deliverables
-                        </h2>
-                        <div className="flex flex-wrap gap-4">
+                        <h2 className="text-xl font-bold mb-6 text-[var(--text-primary)]">What I Build</h2>
+                        <div className="flex flex-wrap gap-2">
                             {[
-                                { id: 'APP', label: 'Mobile Applications' },
-                                { id: 'BOT', label: 'Telegram & Discord Bots' },
-                                { id: 'WEB', label: 'SaaS Platforms' },
-                                { id: 'API', label: 'Microservices & Backends' },
-                                { id: 'SYS', label: 'Cloud Infrastructure' },
+                                'Mobile Applications',
+                                'Telegram & Discord Bots',
+                                'SaaS Platforms',
+                                'Microservices & Backends',
+                                'Cloud Infrastructure',
                             ].map((item) => (
-                                <div
-                                    key={item.id}
-                                    className="flex items-center gap-4 px-6 py-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--text-secondary)] transition-colors"
+                                <span
+                                    key={item}
+                                    className="badge text-sm"
                                 >
-                                    <span className="font-mono text-[var(--accent-primary)] text-xs font-bold tracking-widest">[{item.id}]</span>
-                                    <span className="text-[var(--text-primary)] font-bold text-sm tracking-wide">{item.label}</span>
-                                </div>
+                                    {item}
+                                </span>
                             ))}
                         </div>
                     </section>
 
-                    {/* Skills as Badges */}
+                    {/* Skills */}
                     <section>
-                        <h2 className="text-2xl font-bold mb-8 flex items-center gap-4 text-[var(--text-primary)]">
-                            <span className="font-mono text-[var(--accent-primary)] text-sm tracking-widest">[ STACK ]</span>
-                            Technologies
-                        </h2>
-
-                        <div className="space-y-8 p-8 border border-[var(--border-color)] bg-[var(--bg-card)] rounded-[2rem]">
+                        <h2 className="text-xl font-bold mb-6 text-[var(--text-primary)]">Tech Stack</h2>
+                        <div className="space-y-6 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-6">
                             {skillCategories.map((category) => {
                                 const categorySkills = skills.filter(
                                     (s) => s.category === category.id
@@ -138,15 +127,15 @@ export default async function AboutPage() {
                                 if (categorySkills.length === 0) return null
 
                                 return (
-                                    <div key={category.id} className="border-b border-[var(--border-color)] pb-6 last:border-0 last:pb-0">
-                                        <h3 className="text-xs font-bold mb-4 text-[var(--text-secondary)] font-mono uppercase tracking-widest">
-                                            {'>'} {category.name}
+                                    <div key={category.id} className="border-b border-[var(--border-color)] pb-4 last:border-0 last:pb-0">
+                                        <h3 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-3">
+                                            {category.name}
                                         </h3>
-                                        <div className="flex flex-wrap gap-3">
+                                        <div className="flex flex-wrap gap-1.5">
                                             {categorySkills.map((skill) => (
                                                 <span
                                                     key={skill.name}
-                                                    className="px-3 py-1.5 font-mono text-xs text-[var(--text-primary)] bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-md hover:border-[var(--accent-primary)] transition-colors"
+                                                    className="skill-badge"
                                                 >
                                                     {skill.name}
                                                 </span>
@@ -160,70 +149,67 @@ export default async function AboutPage() {
                 </div>
 
                 {/* Sidebar */}
-                <div className="space-y-6">
-
+                <div className="space-y-5">
                     {/* Profile Card */}
-                    <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 text-center rounded-[2rem] shadow-lg relative overflow-hidden group">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-[var(--accent-primary)]" />
-                        <div className="w-40 h-40 mx-auto mb-8 rounded-full overflow-hidden border border-[var(--border-color)] group-hover:border-[var(--accent-primary)] transition-colors duration-500">
+                    <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-6 text-center rounded-2xl shadow-sm">
+                        <div className="w-32 h-32 mx-auto mb-5 rounded-2xl overflow-hidden border border-[var(--border-color)]">
                             <Image
                                 src="/logo.jpg"
-                                alt="nzt108_dev"
-                                width={160}
-                                height={160}
-                                className="w-full h-full object-cover grayscale contrast-125 brightness-110 group-hover:grayscale-0 transition-all duration-700"
+                                alt="nzt108.dev"
+                                width={128}
+                                height={128}
+                                className="w-full h-full object-cover"
                             />
                         </div>
-                        <h3 className="text-2xl font-bold mb-2 tracking-tight">nzt108_dev</h3>
-                        <p className="font-mono text-[var(--accent-primary)] text-sm uppercase tracking-widest mb-6">Software Architect</p>
+                        <h3 className="text-xl font-bold mb-1 tracking-tight">nzt108.dev</h3>
+                        <p className="text-[var(--accent-primary)] text-sm font-medium mb-5">Full-Stack Developer</p>
 
-                        <div className="pt-6 border-t border-[var(--border-color)] font-mono text-xs text-[var(--text-secondary)] text-left space-y-3">
+                        <div className="text-sm text-[var(--text-secondary)] space-y-2 text-left border-t border-[var(--border-color)] pt-4">
                             <div className="flex justify-between">
-                                <span className="uppercase tracking-widest">Status:</span>
-                                <span className="text-[var(--accent-green)]">Online</span>
+                                <span>Status</span>
+                                <span className="text-[var(--accent-green)] font-medium">Available</span>
                             </div>
                             <div className="flex justify-between">
-                                <span className="uppercase tracking-widest">Location:</span>
-                                <span>Worldwide</span>
+                                <span>Location</span>
+                                <span className="text-[var(--text-primary)]">Remote / Worldwide</span>
                             </div>
                             <div className="flex justify-between">
-                                <span className="uppercase tracking-widest">Availability:</span>
-                                <span>Accepting Projects</span>
+                                <span>Response</span>
+                                <span className="text-[var(--text-primary)]">Within 24h</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Quick Facts */}
-                    <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 rounded-[2rem] shadow-lg">
-                        <h3 className="font-mono text-xs text-[var(--text-secondary)] uppercase tracking-widest mb-6">{'>'} Telemetry</h3>
-                        <ul className="space-y-4 font-mono text-[var(--text-primary)] text-sm">
-                            <li className="flex items-start gap-4">
-                                <span className="text-[var(--accent-primary)] font-bold mt-0.5">[+]</span>
+                    <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-6 rounded-2xl">
+                        <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-4">Quick Facts</h3>
+                        <ul className="space-y-3 text-sm text-[var(--text-secondary)]">
+                            <li className="flex items-center gap-3">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]" />
                                 Full-cycle product development
                             </li>
-                            <li className="flex items-start gap-4">
-                                <span className="text-[var(--accent-primary)] font-bold mt-0.5">[+]</span>
-                                Specialized in React & Node ecosystems
+                            <li className="flex items-center gap-3">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]" />
+                                React, Node.js & Flutter specialist
                             </li>
-                            <li className="flex items-start gap-4">
-                                <span className="text-[var(--accent-primary)] font-bold mt-0.5">[+]</span>
-                                Focus on low-latency and scalability
+                            <li className="flex items-center gap-3">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]" />
+                                Performance & scalability focus
                             </li>
                         </ul>
                     </div>
 
                     {/* CTA */}
-                    <div className="bg-[var(--bg-card)] border border-[var(--accent-primary)] p-8 rounded-[2rem] shadow-[0_0_20px_rgba(230,59,46,0.1)] hover:bg-[var(--bg-card)] transition-colors">
-                        <h3 className="text-xl font-bold mb-3 text-[var(--text-primary)]">Ready to Build?</h3>
-                        <p className="text-[var(--text-secondary)] font-mono text-xs leading-relaxed mb-6">
-                            Whether you have a confirmed technical spec or just a spark of an idea — let&apos;s start engineering.
+                    <div className="bg-[var(--bg-card)] border border-[var(--accent-primary)]/30 p-6 rounded-2xl">
+                        <h3 className="text-lg font-bold mb-2 text-[var(--text-primary)]">Ready to Build?</h3>
+                        <p className="text-[var(--text-secondary)] text-sm mb-4">
+                            Have an idea or technical spec? Let&apos;s make it happen.
                         </p>
-                        <Link href="/contact" className="group relative bg-[var(--bg-primary)] border border-[var(--border-color)] px-6 py-4 flex items-center justify-center gap-3 hover:border-[var(--accent-primary)] hover:bg-[var(--accent-primary)]/10 transition-colors rounded-xl w-full">
-                            <span className="font-mono text-[var(--text-primary)] text-xs uppercase tracking-widest">Init Payload</span>
-                            <div className="w-1 h-3 bg-[var(--accent-primary)] animate-pulse" />
+                        <Link href="/contact" className="btn-primary w-full py-3 rounded-xl text-sm text-center">
+                            Get in Touch
+                            <ArrowRight size={14} />
                         </Link>
                     </div>
-
                 </div>
             </div>
         </div>

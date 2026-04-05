@@ -1,55 +1,64 @@
 'use client'
 
+import { Check, X, Minus } from 'lucide-react'
+
 export default function ComparisonTable() {
     return (
         <section className="py-20 relative z-10">
-            <div className="mb-14">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tighter">
-                    Vendor <span className="font-[var(--font-dm-serif)] italic text-[var(--accent-primary)]">Comparison.</span>
+            <div className="mb-12">
+                <h2 className="section-title">
+                    Why work with me?
                 </h2>
-                <p className="text-[var(--text-secondary)] font-mono uppercase tracking-widest text-sm">
-                    {'//'} Analysis of development resource allocation.
+                <p className="section-subtitle">
+                    See how I compare to traditional alternatives.
                 </p>
             </div>
 
-            <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.8)]">
+            <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl overflow-hidden shadow-sm">
                 <div className="overflow-x-auto">
                     <table className="w-full min-w-[700px] text-left border-collapse">
                         <thead>
-                            <tr className="border-b border-[var(--border-color)] bg-[var(--bg-primary)]/50">
-                                <th className="p-6 font-mono text-[var(--text-secondary)] text-xs uppercase tracking-widest w-1/4">
-                                    Metric Unit
+                            <tr className="border-b border-[var(--border-color)]">
+                                <th className="p-5 text-sm text-[var(--text-secondary)] font-medium w-1/4">
+                                    Feature
                                 </th>
-                                <th className="p-6 font-mono text-[var(--accent-primary)] text-xs uppercase tracking-widest border-l border-r border-[var(--border-color)] bg-[var(--accent-primary)]/5">
-                                    Architect (Me)
+                                <th className="p-5 text-sm font-semibold text-[var(--accent-primary)] border-l border-r border-[var(--border-color)] bg-[var(--accent-light)]">
+                                    nzt108.dev
                                 </th>
-                                <th className="p-6 font-mono text-[var(--text-secondary)] text-xs uppercase tracking-widest w-1/4">
-                                    Traditional Agency
+                                <th className="p-5 text-sm text-[var(--text-secondary)] font-medium w-1/4">
+                                    Agency
                                 </th>
-                                <th className="p-6 font-mono text-[var(--text-secondary)] text-xs uppercase tracking-widest w-1/4">
+                                <th className="p-5 text-sm text-[var(--text-secondary)] font-medium w-1/4">
                                     Freelance Platform
                                 </th>
                             </tr>
                         </thead>
-                        <tbody className="font-mono text-sm">
+                        <tbody className="text-sm">
                             {rows.map((row, i) => (
                                 <tr
                                     key={row.feature}
-                                    className={`group hover:bg-[var(--bg-primary)]/30 transition-colors ${i < rows.length - 1 ? 'border-b border-[var(--border-color)]' : ''}`}
+                                    className={`hover:bg-[var(--bg-secondary)]/50 transition-colors ${i < rows.length - 1 ? 'border-b border-[var(--border-color)]' : ''}`}
                                 >
-                                    <td className="p-6 text-[var(--text-primary)]">
+                                    <td className="p-5 text-[var(--text-primary)] font-medium">
                                         {row.feature}
                                     </td>
-                                    <td className="p-6 border-l border-r border-[var(--border-color)] bg-[var(--accent-primary)]/5 group-hover:bg-[var(--accent-primary)]/10 transition-colors">
-                                        <span className="text-[var(--text-primary)]">
-                                            {row.me}
-                                        </span>
+                                    <td className="p-5 border-l border-r border-[var(--border-color)] bg-[var(--accent-light)]">
+                                        <div className="flex items-center gap-2">
+                                            <Check size={16} className="text-[var(--accent-green)]" />
+                                            <span className="text-[var(--text-primary)]">{row.me}</span>
+                                        </div>
                                     </td>
-                                    <td className="p-6 text-[var(--text-secondary)]">
-                                        {row.agency}
+                                    <td className="p-5 text-[var(--text-secondary)]">
+                                        <div className="flex items-center gap-2">
+                                            {row.agencyIcon === 'minus' ? <Minus size={16} className="text-[var(--accent-amber)]" /> : <X size={16} className="text-red-400" />}
+                                            <span>{row.agency}</span>
+                                        </div>
                                     </td>
-                                    <td className="p-6 text-[var(--text-secondary)]">
-                                        {row.freelance}
+                                    <td className="p-5 text-[var(--text-secondary)]">
+                                        <div className="flex items-center gap-2">
+                                            {row.freelanceIcon === 'minus' ? <Minus size={16} className="text-[var(--accent-amber)]" /> : <X size={16} className="text-red-400" />}
+                                            <span>{row.freelance}</span>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
@@ -63,33 +72,43 @@ export default function ComparisonTable() {
 
 const rows = [
     {
-        feature: 'Capital Overhead',
-        me: '[OK] Transparent & Fixed',
-        agency: '[ERR] High Agency Markup',
-        freelance: '[WARN] Variable / Hidden',
+        feature: 'Pricing',
+        me: 'Fixed & transparent',
+        agency: 'High markup',
+        agencyIcon: 'x',
+        freelance: 'Variable / hidden',
+        freelanceIcon: 'minus',
     },
     {
-        feature: 'Execution Velocity',
-        me: '[OK] Days to Weeks',
-        agency: '[WARN] Weeks to Months',
-        freelance: '[ERR] Unpredictable',
+        feature: 'Delivery Speed',
+        me: 'Days to weeks',
+        agency: 'Weeks to months',
+        agencyIcon: 'minus',
+        freelance: 'Unpredictable',
+        freelanceIcon: 'x',
     },
     {
-        feature: 'Code Architecture',
-        me: '[OK] Scalable Foundation',
-        agency: '[WARN] Scope Dependent',
-        freelance: '[ERR] Often Legacy/Fragile',
+        feature: 'Code Quality',
+        me: 'Scalable architecture',
+        agency: 'Scope dependent',
+        agencyIcon: 'minus',
+        freelance: 'Often fragile',
+        freelanceIcon: 'x',
     },
     {
-        feature: 'Communication Sync',
-        me: '[OK] Direct to Engineer',
-        agency: '[WARN] Filtered via PM',
-        freelance: '[ERR] Asynchronous / Delayed',
+        feature: 'Communication',
+        me: 'Direct to engineer',
+        agency: 'Filtered via PM',
+        agencyIcon: 'minus',
+        freelance: 'Async / delayed',
+        freelanceIcon: 'x',
     },
     {
-        feature: 'System Maintenance',
-        me: '[OK] Included by design',
-        agency: '[ERR] High Retainer Fee',
-        freelance: '[ERR] No Guarantee',
+        feature: 'Post-launch Support',
+        me: 'Included',
+        agency: 'Expensive retainer',
+        agencyIcon: 'x',
+        freelance: 'No guarantee',
+        freelanceIcon: 'x',
     },
 ]

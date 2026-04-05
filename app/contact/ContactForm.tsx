@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { getUtmParams } from '@/components/analytics/AnalyticsTracker';
+import { Send, CheckCircle } from 'lucide-react';
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -50,34 +51,37 @@ export default function ContactForm() {
 
     if (status === 'success') {
         return (
-            <div className="bg-[var(--bg-card)] border border-[var(--accent-green)] p-12 text-center rounded-[2rem] shadow-[0_4px_30px_rgba(46,230,133,0.05)]">
-                <div className="font-mono text-5xl text-[var(--accent-green)] mb-6">[✓]</div>
-                <h3 className="text-2xl font-bold mb-4 text-[var(--text-primary)] uppercase tracking-tight">Transmission Complete</h3>
-                <p className="font-mono text-[var(--text-secondary)] text-sm mb-8 leading-relaxed">
-                    System payload delivered. Awaiting manual assessment. Expected latency: {'<'} 24H.
+            <div className="bg-[var(--bg-card)] border border-[var(--accent-green)] p-10 text-center rounded-2xl">
+                <CheckCircle size={48} className="text-[var(--accent-green)] mx-auto mb-4" />
+                <h3 className="text-xl font-bold mb-2 text-[var(--text-primary)]">Message Sent!</h3>
+                <p className="text-[var(--text-secondary)] text-sm mb-6">
+                    Thanks for reaching out. I&apos;ll get back to you within 24 hours.
                 </p>
                 <button
                     onClick={() => setStatus('idle')}
-                    className="font-mono text-xs uppercase tracking-widest text-[var(--text-primary)] border border-[var(--border-color)] px-6 py-3 rounded-lg hover:border-[var(--accent-green)] transition-colors"
+                    className="btn-secondary text-sm py-2.5 rounded-xl"
                 >
-                    Init New Transmission
+                    Send Another Message
                 </button>
             </div>
         );
     }
 
     return (
-        <form onSubmit={handleSubmit} className="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 md:p-10 rounded-[2rem] space-y-6">
-            <div className="mb-8 border-b border-[var(--border-color)] pb-4">
-                <h2 className="font-mono text-[var(--text-primary)] text-sm font-bold uppercase tracking-widest">
-                    {'>'} Initialize Payload
+        <form onSubmit={handleSubmit} className="bg-[var(--bg-card)] border border-[var(--border-color)] p-6 md:p-8 rounded-2xl space-y-5">
+            <div className="mb-2">
+                <h2 className="text-lg font-bold text-[var(--text-primary)]">
+                    Send a Message
                 </h2>
+                <p className="text-sm text-[var(--text-muted)]">
+                    Tell me about your project and I&apos;ll reply with an estimate.
+                </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label htmlFor="name" className="block font-mono text-[10px] uppercase tracking-widest font-bold mb-3 text-[var(--text-secondary)]">
-                        [ID] Identity
+                    <label htmlFor="name" className="block text-sm font-medium text-[var(--text-primary)] mb-1.5">
+                        Name
                     </label>
                     <input
                         id="name"
@@ -86,14 +90,14 @@ export default function ContactForm() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] p-4 rounded-xl text-sm font-mono text-[var(--text-primary)] focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
-                        placeholder="ENTER_NAME"
+                        className="input"
+                        placeholder="Your name"
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="email" className="block font-mono text-[10px] uppercase tracking-widest font-bold mb-3 text-[var(--text-secondary)]">
-                        [COMM] Routing Address
+                    <label htmlFor="email" className="block text-sm font-medium text-[var(--text-primary)] mb-1.5">
+                        Email
                     </label>
                     <input
                         id="email"
@@ -102,16 +106,16 @@ export default function ContactForm() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] p-4 rounded-xl text-sm font-mono text-[var(--text-primary)] focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
-                        placeholder="NAME@DOMAIN.COM"
+                        className="input"
+                        placeholder="your@email.com"
                     />
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label htmlFor="subject" className="block font-mono text-[10px] uppercase tracking-widest font-bold mb-3 text-[var(--text-secondary)]">
-                        [REQ] Protocol Type
+                    <label htmlFor="subject" className="block text-sm font-medium text-[var(--text-primary)] mb-1.5">
+                        Service
                     </label>
                     <select
                         id="subject"
@@ -119,32 +123,32 @@ export default function ContactForm() {
                         value={formData.subject}
                         onChange={handleChange}
                         required
-                        className="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] p-4 rounded-xl text-sm font-mono text-[var(--text-primary)] focus:border-[var(--accent-primary)] focus:outline-none transition-colors appearance-none cursor-pointer"
+                        className="input appearance-none cursor-pointer"
                     >
-                        <option value="">SELECT_PROTOCOL...</option>
-                        <option value="Mobile App">[APP] Mobile Architecture</option>
-                        <option value="Website">[WEB] Raw Platform</option>
-                        <option value="Telegram Bot">[BOT] Telegram Autonomous</option>
-                        <option value="Discord Bot">[BOT] Discord Automation</option>
-                        <option value="SaaS Platform">[SYS] Enterprise SaaS</option>
-                        <option value="API / Backend">[API] Infrastructure Data</option>
-                        <option value="Consulting">[CON] Strategy Consulting</option>
-                        <option value="Other">[OTH] Custom Payload</option>
+                        <option value="">Select a service...</option>
+                        <option value="Mobile App">Mobile App</option>
+                        <option value="Website">Website</option>
+                        <option value="Telegram Bot">Telegram Bot</option>
+                        <option value="Discord Bot">Discord Bot</option>
+                        <option value="SaaS Platform">SaaS Platform</option>
+                        <option value="API / Backend">API / Backend</option>
+                        <option value="Consulting">Consulting</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
 
                 <div>
-                    <label htmlFor="budget" className="block font-mono text-[10px] uppercase tracking-widest font-bold mb-3 text-[var(--text-secondary)]">
-                        [CAP] Capital Allocation <span className="opacity-50">(OPTIONAL)</span>
+                    <label htmlFor="budget" className="block text-sm font-medium text-[var(--text-primary)] mb-1.5">
+                        Budget <span className="text-[var(--text-muted)]">(optional)</span>
                     </label>
                     <select
                         id="budget"
                         name="budget"
                         value={formData.budget}
                         onChange={handleChange}
-                        className="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] p-4 rounded-xl text-sm font-mono text-[var(--text-primary)] focus:border-[var(--accent-primary)] focus:outline-none transition-colors appearance-none cursor-pointer"
+                        className="input appearance-none cursor-pointer"
                     >
-                        <option value="">DEFINE_RANGE...</option>
+                        <option value="">Select range...</option>
                         <option value="$500-1k">$500 – $1,000</option>
                         <option value="$1k-3k">$1,000 – $3,000</option>
                         <option value="$3k-7k">$3,000 – $7,000</option>
@@ -155,8 +159,8 @@ export default function ContactForm() {
             </div>
 
             <div>
-                <label htmlFor="message" className="block font-mono text-[10px] uppercase tracking-widest font-bold mb-3 text-[var(--text-secondary)]">
-                    [DATA] Specification Overview
+                <label htmlFor="message" className="block text-sm font-medium text-[var(--text-primary)] mb-1.5">
+                    Project Details
                 </label>
                 <textarea
                     id="message"
@@ -164,23 +168,24 @@ export default function ContactForm() {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={5}
-                    className="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] p-4 rounded-xl text-sm font-mono text-[var(--text-primary)] focus:border-[var(--accent-primary)] focus:outline-none transition-colors resize-none"
-                    placeholder="DEFINE_BUSINESS_LOGIC_AND_CONSTRAINTS..."
+                    rows={4}
+                    className="input resize-none"
+                    placeholder="Describe your project, goals, and any specific requirements..."
                 />
             </div>
 
             <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="w-full bg-[var(--bg-primary)] border border-[var(--accent-primary)] text-[var(--text-primary)] font-mono text-sm font-bold uppercase tracking-widest p-5 rounded-xl hover:bg-[var(--bg-card)] hover:text-[var(--accent-primary)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden"
+                className="btn-primary w-full py-3.5 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
-                <span className="relative z-10">{status === 'loading' ? 'TRANSMITTING...' : 'EXECUTE_PAYLOAD'}</span>
+                {status === 'loading' ? 'Sending...' : 'Send Message'}
+                {status !== 'loading' && <Send size={16} />}
             </button>
 
             {status === 'error' && (
-                <p className="font-mono text-[var(--accent-primary)] text-[10px] uppercase tracking-widest text-center mt-4">
-                    [ERROR] TRANSMISSION FAILED. PLEASE EXPORT DIRECTLY VIA EMAIL.
+                <p className="text-red-500 text-sm text-center">
+                    Something went wrong. Please try again or email me directly.
                 </p>
             )}
         </form>

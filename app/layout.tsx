@@ -1,41 +1,52 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, DM_Serif_Display, Space_Mono } from "next/font/google";
+import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import Background from "@/components/layout/Background";
 import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const dmSerifDisplay = DM_Serif_Display({
-  variable: "--font-dm-serif",
-  weight: "400",
-  style: "italic",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-});
-
-const spaceMono = Space_Mono({
-  variable: "--font-space-mono",
   weight: ["400", "700"],
+  style: ["normal", "italic"],
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "nzt108_dev | Software Architect",
-  description: "Building digital futures, one architecture at a time. Portfolio of software architecture projects including mobile apps, Telegram bots, and web services.",
-  keywords: ["software architect", "portfolio", "next.js", "flutter", "telegram bot", "web development"],
-  authors: [{ name: "nzt108_dev" }],
+  title: "nzt108.dev — Apps, Websites & Bots That Ship Fast",
+  description:
+    "Full-stack development from idea to launch. Mobile apps, websites, Telegram bots, and SaaS platforms. Fixed pricing, fast delivery, direct communication.",
+  keywords: [
+    "mobile app developer",
+    "web developer",
+    "telegram bot developer",
+    "saas development",
+    "flutter developer",
+    "react developer",
+    "freelance developer",
+    "app development",
+  ],
+  authors: [{ name: "nzt108.dev" }],
   icons: {
     icon: "/favicon.png",
     apple: "/apple-icon.png",
   },
   openGraph: {
-    title: "nzt108_dev | Software Architect",
-    description: "Building digital futures, one architecture at a time.",
+    title: "nzt108.dev — Apps, Websites & Bots That Ship Fast",
+    description:
+      "Full-stack development from idea to launch. Fixed pricing, fast delivery.",
     type: "website",
     images: ["/logo.jpg"],
   },
@@ -49,11 +60,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${dmSerifDisplay.variable} ${spaceMono.variable} antialiased`}
+        className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} antialiased`}
       >
-        {/* Global Noise Overlay */}
+        {/* Global Noise Overlay — subtle texture */}
         <svg
-          className="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.05]"
+          className="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.03]"
           xmlns="http://www.w3.org/2000/svg"
         >
           <filter id="noiseFilter">
@@ -67,10 +78,9 @@ export default function RootLayout({
           <rect width="100%" height="100%" filter="url(#noiseFilter)" />
         </svg>
 
-        <Background />
         <AnalyticsTracker />
         <Header />
-        <main className="relative z-10 min-h-screen pt-24 font-sans">
+        <main className="relative z-10 min-h-screen font-sans">
           {children}
         </main>
         <Footer />
