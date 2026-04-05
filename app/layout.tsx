@@ -48,7 +48,21 @@ export const metadata: Metadata = {
     description:
       "Full-stack development from idea to launch. Fixed pricing, fast delivery.",
     type: "website",
-    images: ["/logo.jpg"],
+    url: "https://nzt108.dev",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "nzt108.dev — I Build Apps That Make Money",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "nzt108.dev — Apps, Websites & Bots That Ship Fast",
+    description: "Full-stack development from idea to launch. Fixed pricing, fast delivery.",
+    images: ["/og-image.png"],
   },
 };
 
