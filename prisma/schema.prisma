@@ -18,7 +18,7 @@ model Project {
   longDescription String   @default("")
   category        String // "mobile" | "telegram" | "web" | "saas" | "discord"
   progress        Int      @default(0) // 0-100
-  technologies    String // JSON array stored as string
+  technologies    String // JSON array stored as string (marketing names for public site)
   githubUrl       String?
   demoUrl         String?
   images          String   @default("[]") // JSON array stored as string
@@ -30,6 +30,16 @@ model Project {
   localPath       String   @default("") // Local filesystem path for workspace
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+
+  // Mission Control fields (internal admin dashboard)
+  status          String   @default("active")  // active | paused | done | idea
+  stack           String   @default("[]")       // JSON array — real tech stack ["Flutter", "FastAPI"]
+  services        String   @default("[]")       // JSON array — services used ["Firebase", "Docker"]
+  deployUrl       String   @default("")         // Production URL
+  backendUrl      String   @default("")         // Backend/API URL
+  lastCommitHash  String   @default("")
+  lastCommitMsg   String   @default("")
+  lastCommitDate  DateTime?
 
   // Relations
   roadmapItems RoadmapItem[]

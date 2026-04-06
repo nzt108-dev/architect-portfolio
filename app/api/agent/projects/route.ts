@@ -76,6 +76,16 @@ export async function POST(request: Request) {
             if (body.featured !== undefined) updateData.featured = body.featured
             if (localPath !== undefined) updateData.localPath = localPath
 
+            // Mission Control fields
+            if (body.status !== undefined) updateData.status = body.status
+            if (body.stack !== undefined) updateData.stack = JSON.stringify(body.stack)
+            if (body.services !== undefined) updateData.services = JSON.stringify(body.services)
+            if (body.deployUrl !== undefined) updateData.deployUrl = body.deployUrl
+            if (body.backendUrl !== undefined) updateData.backendUrl = body.backendUrl
+            if (body.lastCommitHash !== undefined) updateData.lastCommitHash = body.lastCommitHash
+            if (body.lastCommitMsg !== undefined) updateData.lastCommitMsg = body.lastCommitMsg
+            if (body.lastCommitDate !== undefined) updateData.lastCommitDate = body.lastCommitDate ? new Date(body.lastCommitDate) : null
+
             project = await prisma.project.update({
                 where: { slug: projectSlug },
                 data: updateData,
@@ -137,6 +147,15 @@ export async function POST(request: Request) {
                     featured,
                     localPath: localPath || '',
                     order: newOrder,
+                    // Mission Control fields
+                    status: body.status || 'active',
+                    stack: JSON.stringify(body.stack || []),
+                    services: JSON.stringify(body.services || []),
+                    deployUrl: body.deployUrl || '',
+                    backendUrl: body.backendUrl || '',
+                    lastCommitHash: body.lastCommitHash || '',
+                    lastCommitMsg: body.lastCommitMsg || '',
+                    lastCommitDate: body.lastCommitDate ? new Date(body.lastCommitDate) : null,
                 },
             })
 
