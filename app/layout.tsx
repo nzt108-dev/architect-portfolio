@@ -73,6 +73,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="theme-color" content="#0a0e17" />
+        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+      </head>
       <body
         className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} antialiased`}
       >
@@ -98,6 +106,17 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                  navigator.serviceWorker.register('/sw.js').catch(() => {});
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   );

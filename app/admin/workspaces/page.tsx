@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
+import { useRouter } from 'next/navigation'
 
 /* ───── Types ───── */
 interface LastCommit {
@@ -231,11 +232,12 @@ function ProjectCard({
     index: number
     onOpenIDE: (path: string) => void
 }) {
+    const router = useRouter()
     const icon = CATEGORY_ICONS[p.category] || '📁'
     const displayTitle = p.title.replace(/— PRD$/i, '').trim()
 
     return (
-        <div className={`mc-card mc-card--${p.status}`} style={{ animationDelay: `${index * 0.03}s` }}>
+        <div className={`mc-card mc-card--${p.status}`} style={{ animationDelay: `${index * 0.03}s`, cursor: 'pointer' }} onClick={() => router.push(`/admin/workspaces/${p.slug}`)}>
             {/* Top accent line */}
             <div className="mc-card-accent" />
 

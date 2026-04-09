@@ -1,3 +1,16 @@
+# nzt108.dev — Project Rules
+
+## 📂 Workspace — CRITICAL
+
+**Все проекты лежат ТОЛЬКО в `/Users/nzt108/Projects/`**.
+
+- Рабочая директория: `/Users/nzt108/Projects/architect-portfolio`
+- **НЕ использовать** `/Users/nzt108/.gemini/antigravity/scratch/` — это deprecated
+- Любые файлы проекта (код, конфиги, ассеты) создавать ТОЛЬКО внутри `/Users/nzt108/Projects/architect-portfolio/`
+- Ключ портфолио `PORTFOLIO_API_KEY` — брать из `.env` в корне этого проекта
+
+---
+
 # Cinematic Landing Page Builder
 
 ## Role

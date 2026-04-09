@@ -45,6 +45,7 @@ model Project {
   roadmapItems RoadmapItem[]
   activityLogs ActivityLog[]
   crmTasks     CrmTask[]
+  agentSuggestions AgentSuggestion[]
 }
 
 // Roadmap items for each project
@@ -194,4 +195,23 @@ model Article {
 
   topicId String?
   topic   Topic?  @relation(fields: [topicId], references: [id], onDelete: SetNull)
+}
+
+// AI Agent Suggestions for Mission Control
+model AgentSuggestion {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  type        String   // "optimization" | "feature" | "bug" | "security" | "refactor"
+  title       String
+  description String   // Markdown description
+  impact      String   @default("medium") // "low" | "medium" | "high" | "critical"
+  effort      String   @default("medium") // "trivial" | "small" | "medium" | "large"
+  status      String   @default("pending") // "pending" | "approved" | "rejected" | "implemented"
+  aiModel     String   @default("") // Which AI model suggested this
+  reasoning   String   @default("") // Why the agent suggests this
+  codeSnippet String   @default("") // Example code (if any)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  reviewedAt  DateTime?
 }
