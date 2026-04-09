@@ -40,6 +40,7 @@ model Project {
   lastCommitHash  String   @default("")
   lastCommitMsg   String   @default("")
   lastCommitDate  DateTime?
+  dataFlowHtml    String   @default("") // Self-contained HTML data flow map
 
   // Relations
   roadmapItems RoadmapItem[]

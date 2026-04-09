@@ -50,3 +50,4 @@ prisma/dev.db-journal
 prisma/migrate-turso.ts
 prisma/check-tables.ts
 prisma/init.sql
+data-flow-map.html

@@ -25,6 +25,7 @@ interface ProjectDetail {
     stack: string[]; services: string[]; technologies: string[]
     githubUrl: string | null; demoUrl: string | null; deployUrl: string; backendUrl: string
     localPath: string; lastCommit: { hash: string; message: string; date: string | null } | null
+    dataFlowHtml: string
     roadmapItems: RoadmapItem[]
     activityLogs: ActivityLog[]
     crmTasks: CrmTask[]
@@ -149,6 +150,7 @@ export default function ProjectDetailPage() {
             <div className="pd-tabs">
                 {[
                     { key: 'overview', label: '📊 Overview' },
+                    { key: 'dataflow', label: '🔄 Data Flow' },
                     { key: 'tasks', label: `📋 Tasks (${project.crmTasks.length})` },
                     { key: 'agent', label: `🤖 Agent (${project.agentSuggestions.length})` },
                     { key: 'activity', label: `📜 Activity (${project.activityLogs.length})` },
@@ -165,6 +167,7 @@ export default function ProjectDetailPage() {
 
             {/* Tab Content */}
             {activeTab === 'overview' && <OverviewTab project={project} />}
+            {activeTab === 'dataflow' && <DataFlowTab html={project.dataFlowHtml} title={project.title} />}
             {activeTab === 'tasks' && <TasksTab tasks={project.crmTasks} />}
             {activeTab === 'agent' && <AgentTab suggestions={project.agentSuggestions} />}
             {activeTab === 'activity' && <ActivityTab logs={project.activityLogs} />}
@@ -368,6 +371,45 @@ function AgentTab({ suggestions }: { suggestions: AgentSuggestion[] }) {
     )
 }
 
+/* ───── Data Flow Tab ───── */
+function DataFlowTab({ html, title }: { html: string; title: string }) {
+    const [isFullscreen, setIsFullscreen] = useState(false)
+
+    if (!html) {
+        return (
+            <div className="mt-4 cyber-card p-10 text-center">
+                <span className="text-4xl block mb-3">🔄</span>
+                <p className="text-[var(--text-muted)] text-sm">No Data Flow Map yet</p>
+                <p className="text-[var(--text-muted)] text-xs mt-2 font-mono">
+                    Run <code className="text-[var(--neon-cyan)]">/push</code> from the project to generate one
+                </p>
+            </div>
+        )
+    }
+
+    return (
+        <div className={`mt-4 ${isFullscreen ? 'df-fullscreen' : ''}`}>
+            <div className="df-toolbar">
+                <span className="df-toolbar-label">🔄 Data Flow Map — {title}</span>
+                <button
+                    className="df-toolbar-btn"
+                    onClick={() => setIsFullscreen(!isFullscreen)}
+                >
+                    {isFullscreen ? '✕ Close' : '⛶ Fullscreen'}
+                </button>
+            </div>
+            <div className="df-frame-wrapper">
+                <iframe
+                    srcDoc={html}
+                    className="df-iframe"
+                    sandbox="allow-scripts allow-same-origin"
+                    title={`Data Flow Map — ${title}`}
+                />
+            </div>
+        </div>
+    )
+}
+
 /* ───── Activity Tab ───── */
 function ActivityTab({ logs }: { logs: ActivityLog[] }) {
     const icons: Record<string, string> = {
@@ -477,6 +519,42 @@ const styles = `
     border-radius: 14px; transition: all 0.2s ease;
 }
 .cyber-card:hover { border-color: var(--border-hover); }
+
+/* Data Flow iframe */
+.df-toolbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 16px; background: var(--bg-card); border: 1px solid var(--border-color);
+    border-radius: 12px 12px 0 0; border-bottom: none;
+}
+.df-toolbar-label {
+    font-size: 0.82rem; font-weight: 600; color: var(--text-primary);
+}
+.df-toolbar-btn {
+    font-size: 0.75rem; font-weight: 500; padding: 6px 14px;
+    background: rgba(34,211,238,0.1); color: #22d3ee;
+    border: 1px solid rgba(34,211,238,0.25); border-radius: 8px;
+    cursor: pointer; transition: all 0.2s;
+}
+.df-toolbar-btn:hover { background: rgba(34,211,238,0.2); }
+.df-frame-wrapper {
+    border: 1px solid var(--border-color); border-radius: 0 0 12px 12px;
+    overflow: hidden; background: #fff;
+}
+.df-iframe {
+    width: 100%; min-height: 70vh; border: none; display: block;
+}
+.df-fullscreen {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 9999; background: var(--bg-primary); padding: 0;
+    margin: 0 !important;
+}
+.df-fullscreen .df-toolbar {
+    border-radius: 0; border-left: none; border-right: none; border-top: none;
+}
+.df-fullscreen .df-frame-wrapper {
+    border-radius: 0; border: none; height: calc(100vh - 46px);
+}
+.df-fullscreen .df-iframe { min-height: 100%; height: 100%; }
 
 @media (max-width: 768px) {
     .pd-header { padding: 1rem; }
