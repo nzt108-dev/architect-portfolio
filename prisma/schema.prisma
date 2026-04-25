@@ -41,12 +41,27 @@ model Project {
   lastCommitMsg   String   @default("")
   lastCommitDate  DateTime?
   dataFlowHtml    String   @default("") // Self-contained HTML data flow map
+  sentrySlug      String   @default("") // Sentry project slug for error tracking
 
   // Relations
-  roadmapItems RoadmapItem[]
-  activityLogs ActivityLog[]
-  crmTasks     CrmTask[]
+  roadmapItems    RoadmapItem[]
+  activityLogs    ActivityLog[]
+  crmTasks        CrmTask[]
   agentSuggestions AgentSuggestion[]
+  projectServices ProjectService[]
+}
+
+// Infrastructure services per project (databases, APIs, hosting, etc.)
+model ProjectService {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String
+  category  String   // "database" | "hosting" | "api" | "auth" | "storage" | "monitoring" | "cicd" | "other"
+  url       String   @default("")
+  account   String   @default("")
+  notes     String   @default("")
+  createdAt DateTime @default(now())
 }
 
 // Roadmap items for each project

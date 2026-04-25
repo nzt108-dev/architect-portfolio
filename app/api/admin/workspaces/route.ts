@@ -21,9 +21,13 @@ export async function GET() {
                 services: true,
                 deployUrl: true,
                 backendUrl: true,
+                sentrySlug: true,
                 lastCommitHash: true,
                 lastCommitMsg: true,
                 lastCommitDate: true,
+                projectServices: {
+                    orderBy: [{ category: 'asc' }, { name: 'asc' }],
+                },
                 activityLogs: {
                     select: {
                         createdAt: true,
@@ -53,6 +57,8 @@ export async function GET() {
             services: safeParseJSON(p.services),
             deployUrl: p.deployUrl || '',
             backendUrl: p.backendUrl || '',
+            sentrySlug: p.sentrySlug || '',
+            projectServices: p.projectServices,
             lastCommit: p.lastCommitHash ? {
                 hash: p.lastCommitHash,
                 message: p.lastCommitMsg,
