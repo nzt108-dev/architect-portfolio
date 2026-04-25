@@ -49,27 +49,35 @@ interface SentryResult {
 
 /* ───── Constants ───── */
 const CATEGORIES = [
-    { key: 'database',   label: 'Database',    icon: '🗄️',  color: '#3b82f6' },
-    { key: 'hosting',    label: 'Hosting',     icon: '🚀',  color: '#10b981' },
-    { key: 'api',        label: 'APIs',        icon: '🔌',  color: '#f59e0b' },
-    { key: 'auth',       label: 'Auth',        icon: '🔐',  color: '#8b5cf6' },
-    { key: 'storage',    label: 'Storage',     icon: '💾',  color: '#ec4899' },
-    { key: 'monitoring', label: 'Monitoring',  icon: '📊',  color: '#06b6d4' },
-    { key: 'cicd',       label: 'CI/CD',       icon: '⚙️',  color: '#f97316' },
-    { key: 'other',      label: 'Other',       icon: '📦',  color: '#64748b' },
+    { key: 'database',   label: 'Database',   icon: '🗄️',  color: '#3b82f6' },
+    { key: 'frontend',   label: 'Frontend',   icon: '🌐',  color: '#10b981' },
+    { key: 'backend',    label: 'Backend',    icon: '⚡',  color: '#06b6d4' },
+    { key: 'auth',       label: 'Auth',       icon: '🔐',  color: '#8b5cf6' },
+    { key: 'storage',    label: 'Storage',    icon: '💾',  color: '#ec4899' },
+    { key: 'ai_llm',     label: 'AI / LLM',   icon: '🧠',  color: '#f59e0b' },
+    { key: 'messaging',  label: 'Messaging',  icon: '💬',  color: '#22d3ee' },
+    { key: 'payments',   label: 'Payments',   icon: '💳',  color: '#a3e635' },
+    { key: 'email',      label: 'Email',      icon: '📧',  color: '#fb923c' },
+    { key: 'analytics',  label: 'Analytics',  icon: '📊',  color: '#f472b6' },
+    { key: 'monitoring', label: 'Monitoring', icon: '🔍',  color: '#34d399' },
+    { key: 'cicd',       label: 'CI/CD',      icon: '⚙️',  color: '#94a3b8' },
 ] as const
 
 type CategoryKey = typeof CATEGORIES[number]['key']
 
 const SERVICE_PRESETS: Record<CategoryKey, string[]> = {
     database:   ['Turso', 'Supabase', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Firestore', 'PlanetScale', 'Neon', 'SQLite'],
-    hosting:    ['Vercel', 'Railway', 'Fly.io', 'Heroku', 'DigitalOcean', 'AWS', 'GCP', 'Firebase Hosting', 'GitHub Pages', 'Cloudflare Pages', 'VPS'],
-    api:        ['OpenAI', 'Anthropic', 'Gemini', 'Twilio', 'YouTube API', 'Telegram API', 'Stripe', 'SendGrid', 'OpenRouter', 'ElevenLabs', 'Zillow API', 'Google Maps'],
-    auth:       ['NextAuth', 'Supabase Auth', 'Firebase Auth', 'Clerk', 'Auth0', 'JWT'],
+    frontend:   ['Vercel', 'Netlify', 'GitHub Pages', 'Cloudflare Pages', 'Firebase Hosting', 'App Store', 'Google Play'],
+    backend:    ['Railway', 'Fly.io', 'Heroku', 'DigitalOcean', 'VPS', 'AWS EC2', 'GCP Cloud Run', 'Render', 'Firebase Functions'],
+    auth:       ['NextAuth', 'Supabase Auth', 'Firebase Auth', 'Clerk', 'Auth0', 'JWT', 'Custom'],
     storage:    ['Supabase Storage', 'Firebase Storage', 'AWS S3', 'Cloudflare R2', 'Vercel Blob', 'UploadThing'],
-    monitoring: ['Sentry', 'BetterStack', 'Datadog', 'LogRocket', 'PostHog', 'Grafana', 'Uptime Kuma'],
-    cicd:       ['GitHub Actions', 'Vercel CI', 'Railway CI', 'CircleCI', 'Jenkins', 'GitLab CI'],
-    other:      ['Figma', 'Notion', 'Linear', 'Jira', 'Discord', 'Slack'],
+    ai_llm:     ['OpenAI', 'Anthropic', 'Gemini', 'OpenRouter', 'ElevenLabs', 'Groq', 'Mistral', 'YouTube Data API'],
+    messaging:  ['Telegram Bot API', 'Twilio', 'FCM', 'WhatsApp API', 'Discord API', 'Slack API', 'Vonage'],
+    payments:   ['Stripe', 'PayPal', 'LiqPay', 'Robokassa', 'YooKassa', 'Telegram Stars'],
+    email:      ['SendGrid', 'Resend', 'Postmark', 'Mailgun', 'Amazon SES', 'Brevo'],
+    analytics:  ['Microsoft Clarity', 'Google Analytics', 'PostHog', 'Plausible', 'Mixpanel', 'Amplitude'],
+    monitoring: ['Sentry', 'BetterStack', 'Datadog', 'LogRocket', 'Uptime Kuma', 'Grafana'],
+    cicd:       ['GitHub Actions', 'Vercel CI', 'Railway CI', 'CircleCI', 'GitLab CI'],
 }
 
 const CATEGORY_ICONS: Record<string, string> = {
