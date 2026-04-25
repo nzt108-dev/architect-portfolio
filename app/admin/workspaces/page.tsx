@@ -61,6 +61,8 @@ const CATEGORIES = [
     { key: 'analytics',  label: 'Analytics',  icon: '📊',  color: '#f472b6' },
     { key: 'monitoring', label: 'Monitoring', icon: '🔍',  color: '#34d399' },
     { key: 'cicd',       label: 'CI/CD',      icon: '⚙️',  color: '#94a3b8' },
+    { key: 'ext_api',    label: 'Ext. APIs',  icon: '🔌',  color: '#a78bfa' },
+    { key: 'other',      label: 'Other',      icon: '📦',  color: '#64748b' },
 ] as const
 
 type CategoryKey = typeof CATEGORIES[number]['key']
@@ -77,7 +79,9 @@ const SERVICE_PRESETS: Record<CategoryKey, string[]> = {
     email:      ['SendGrid', 'Resend', 'Postmark', 'Mailgun', 'Amazon SES', 'Brevo'],
     analytics:  ['Microsoft Clarity', 'Google Analytics', 'PostHog', 'Plausible', 'Mixpanel', 'Amplitude'],
     monitoring: ['Sentry', 'BetterStack', 'Datadog', 'LogRocket', 'Uptime Kuma', 'Grafana'],
-    cicd:       ['GitHub Actions', 'Vercel CI', 'Railway CI', 'CircleCI', 'GitLab CI'],
+    cicd:       ['GitHub Actions', 'Vercel CI', 'Railway CI', 'CircleCI', 'GitLab CI', 'Turbo Remote Cache'],
+    ext_api:    ['CSLB', 'Google Maps API', 'Zillow API', 'YouTube Data API', 'Twitter API', 'LinkedIn API'],
+    other:      ['DMCA Agent', 'Cloudflare', 'Figma', 'Notion', 'Linear', 'Slack'],
 }
 
 const CATEGORY_ICONS: Record<string, string> = {
